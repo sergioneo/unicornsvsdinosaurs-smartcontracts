@@ -19,7 +19,8 @@ contract BeastBase is AccessControl {
 
     /*** DATA TYPES ***/
 
-    // TODO: Describe
+    // This attributes are the beats base to play the different challenge,
+    // each challenge will use different combination of atributes. 
     struct Attrs {
         uint8 strength;
         uint8 dexterity;
@@ -31,11 +32,13 @@ contract BeastBase is AccessControl {
     // TODO: Describe
     struct Beast {
         uint256 genes; // first bite represent the type ( uni or dino )
-        uint64 birthTime;
-        uint64 coolDown;
+        uint64 birthTime; // The timestamp from the block when this cat came into existence.
+        uint64 breedingCoolDown;
+        uint64 challengeCoolDown;
         uint32 sireId;
         uint32 matronId;
         uint32 breedWithId;
+        uint16 generation;
         Attrs attrs;
     }
 
@@ -103,10 +106,12 @@ contract BeastBase is AccessControl {
         Beast memory _beast = Beast({
             genes: _genes,
             birthTime: uint64(now),
-            coolDown: 0,
+            breedingCoolDown: 0,
+            challengeCoolDown: 0,
             matronId: uint32(_matronId),
             sireId: uint32(_sireId),
             breedWithId: 0,
+            generation: uint16(_generation)
             attrs: Attrs({
               strength: 1,
               dexterity: 1,
