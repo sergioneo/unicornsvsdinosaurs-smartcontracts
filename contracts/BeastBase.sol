@@ -33,8 +33,8 @@ contract BeastBase is AccessControl {
         uint256 genes; // first bite represent the type ( uni or dino )
         uint64 birthTime;
         uint64 coolDown;
-        uint32 dadId;
-        uint32 momId;
+        uint32 sireId;
+        uint32 matronId;
         uint32 breedWithId;
         Attrs attrs;
     }
@@ -104,8 +104,8 @@ contract BeastBase is AccessControl {
             genes: _genes,
             birthTime: uint64(now),
             coolDown: 0,
-            momId: uint32(_matronId),
-            dadId: uint32(_sireId),
+            matronId: uint32(_matronId),
+            sireId: uint32(_sireId),
             breedWithId: 0,
             attrs: Attrs({
               strength: 1,
