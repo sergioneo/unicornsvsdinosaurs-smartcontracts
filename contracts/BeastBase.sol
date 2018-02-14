@@ -32,6 +32,7 @@ contract BeastBase is AccessControl {
     // TODO: Describe
     struct Beast {
         uint256 genes; // first bite represent the type ( uni or dino )
+        uint64 experience; // the experience the beast has.
         uint64 birthTime; // The timestamp from the block when this cat came into existence.
         uint64 breedingCoolDown;
         uint64 challengeCoolDown;
@@ -39,6 +40,7 @@ contract BeastBase is AccessControl {
         uint32 matronId;
         uint32 breedWithId;
         uint16 generation;
+        uint8 level; // the level of the beast, based on experience.
         Attrs attrs;
     }
 
@@ -105,13 +107,15 @@ contract BeastBase is AccessControl {
 
         Beast memory _beast = Beast({
             genes: _genes,
+            experience: 0,
             birthTime: uint64(now),
             breedingCoolDown: 0,
             challengeCoolDown: 0,
             matronId: uint32(_matronId),
             sireId: uint32(_sireId),
             breedWithId: 0,
-            generation: uint16(_generation)
+            generation: uint16(_generation),
+            level: 0,
             attrs: Attrs({
               strength: 1,
               dexterity: 1,
