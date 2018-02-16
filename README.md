@@ -43,7 +43,7 @@ $ truffle migrate
 
 Start the truffle console
 ```
-> truffle console
+$ truffle console
 ```
 
 Create the reference to contract
