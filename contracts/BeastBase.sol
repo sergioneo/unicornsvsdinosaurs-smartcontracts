@@ -19,7 +19,7 @@ contract BeastBase is AccessControl {
 
     /*** DATA TYPES ***/
 
-    // This attributes are the beats base to play the different challenge,
+    // @dev This attributes are the beats base to play the different challenge,
     // each challenge will use different combination of atributes. 
     struct Attrs {
         uint8 strength;
@@ -115,7 +115,7 @@ contract BeastBase is AccessControl {
             sireId: uint32(_sireId),
             breedWithId: 0,
             generation: uint16(_generation),
-            level: 0,
+            level: 1,
             attrs: Attrs({
               strength: 1,
               dexterity: 1,
@@ -134,8 +134,8 @@ contract BeastBase is AccessControl {
         Birth(
             _owner,
             newBeastId,
-            uint256(_beast.momId),
-            uint256(_beast.dadId),
+            uint256(_beast.matronId),
+            uint256(_beast.sireId),
             _beast.genes
         );
 
