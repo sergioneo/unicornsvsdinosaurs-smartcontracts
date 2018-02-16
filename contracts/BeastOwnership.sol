@@ -1,8 +1,8 @@
 pragma solidity ^0.4.18;
 
 import './BeastBase.sol';
-import './ERC721Metadata.sol';
-import './ERC721.sol';
+import './token/ERC721Metadata.sol';
+import './token/ERC721.sol';
 
 contract BeastOwnership  is BeastBase, ERC721 {
 

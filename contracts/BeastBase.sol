@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import './AccessControl.sol';
+import './util/AccessControl.sol';
 
 /// @title Base contract for CryptoKitties. Holds all common structs, events and base variables.
 /// @author Axiom Zen (https://www.axiomzen.co)

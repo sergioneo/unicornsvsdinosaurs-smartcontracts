@@ -1,7 +1,7 @@
 pragma solidity ^0.4.18;
 
-import './ERC721.sol';
-import './Pausable.sol';
+import '../token/ERC721.sol';
+import '../util/Pausable.sol';
 import './ClockAuctionBase.sol';
 
 /// @title Clock auction for non-fungible tokens.
