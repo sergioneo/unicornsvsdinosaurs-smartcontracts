@@ -8,6 +8,7 @@
 [The Hitchhiker’s Guide to Smart Contracts in Ethereum](https://blog.zeppelin.solutions/the-hitchhikers-guide-to-smart-contracts-in-ethereum-848f08001f05)
 
 ## Simple reference to debug with truffle
+[DEBUGGING A SMART CONTRACT](http://truffleframework.com/tutorials/debugging-a-smart-contract)
 
 ## Test
 ### 1. testrpc ( local ethereum blockchain )
