@@ -1,8 +1,8 @@
 pragma solidity ^0.4.18;
 
-import './BeastOwnership.sol';
+import './BeastAuction.sol';
 
-contract BeastMinting is BeastOwnership {
+contract BeastMinting is BeastAuction {
 
   // Limits the number of cats the contract owner can ever create.
   uint256 public constant PROMO_CREATION_LIMIT = 5000;

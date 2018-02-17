@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
 
-import './ERC721.sol';
+import '../token/ERC721.sol';
 
 /// @title Auction Core
 /// @dev Contains models, variables, and internal methods for the auction.
