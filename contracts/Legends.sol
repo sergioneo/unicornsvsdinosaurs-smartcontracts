@@ -34,9 +34,9 @@ contract Legends is BeastMinting {
         //);
     }
 
-    function getLegend(uint256 _legendId) external view returns(Beast) {
+    function getLegend(uint256 _legendId) external view returns(uint256) {
       Beast storage legend = beasts[_legendId];
-      return legend;
+      return legend.genes;
     }
 
     function buyRandomLegend() external payable {
