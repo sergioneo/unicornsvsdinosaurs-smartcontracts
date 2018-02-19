@@ -36,6 +36,7 @@ contract Challenges is AccessControl {
 		Challenge memory _challenge = Challenge({
 			id: _id,
             name: _name,
+            isActive: true,
             strengthPonderation: _strengthPonderation,
             dexterityPonderation: _dexterityPonderation,
             endurancePonderation: _endurancePonderation,
@@ -50,6 +51,7 @@ contract Challenges is AccessControl {
 
 	function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) 
 	external ownerOf(_challengerId) {
+		require(challenges[_id].isActive == true);
 
   	}
 }
