@@ -33,5 +33,24 @@ contract ExperienceSystems {
         });
         experienceSystems[_id] = _experienceSystems;
 	}
+
+	function calculateExperience(uint _experienceSystemId, uint _winnerId, uint _looserId) internal {
+		ExperienceSystem memory _experienceSystem = experienceSystems[_experienceSystemId];
+		Beast storage winner = beasts[_winnerId];
+		Beast storage looser = beasts[_looserId];
+		if (_experienceSystem.isJustBase) {
+			winner.experience += _experienceSystem.base;
+			looser.experience -= _experienceSystem.base;
+		} else if (_experienceSystem.isJustPercentaje) {
+			winner.experience += looser.experience * _experienceSystem.percentaje;
+			looser.experience -= looser.experience * _experienceSystem.percentaje;
+		} else {
+			uint looserExperience = looser.experience;
+			winner.experience += _experienceSystem.base;
+			looser.experience -= _experienceSystem.base;
+			winner.experience += looserExperience * _experienceSystem.percentaje;
+			looser.experience -= looserExperience * _experienceSystem.percentaje;
+		}
+	}
 	
 }
