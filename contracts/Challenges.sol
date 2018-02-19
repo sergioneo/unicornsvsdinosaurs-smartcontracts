@@ -7,6 +7,7 @@ contract Challenges is AccessControl {
 	struct Challenge {
 		uint id;
 		string name;
+		bool isActive;
 		uint strengthPonderation;
 		uint dexterityPonderation;
 		uint endurancePonderation;
@@ -14,7 +15,7 @@ contract Challenges is AccessControl {
 		uint wisdomPonderation;
 		uint charismaonderation;
 		uint randomFactor;
-		uint expBase;
+		uint expMultiplicator;
 	}
 
 	mapping (uint => Challenge) public challenges;
@@ -30,7 +31,7 @@ contract Challenges is AccessControl {
 
 	function createChallenge(uint _id, string _name, uint _strengthPonderation, uint _dexterityPonderation,
 	 uint _endurancePonderation, uint _knowledgePonderation, uint _wisdomPonderation, uint _charismaonderation,
-	 uint _randomFactor, uint _expBase) 
+	 uint _randomFactor, uint _expMultiplicator) 
 	onlyCOO {
 		Challenge memory _challenge = Challenge({
 			id: _id,
@@ -42,14 +43,14 @@ contract Challenges is AccessControl {
             wisdomPonderation: _wisdomPonderation,
             charismaonderation: _charismaonderation,
             randomFactor: _randomFactor,
-            expBase: _expBase
+            expMultiplicator: _expMultiplicator
         });
         challenges[_id] = _challenge;
 	}
 
 	function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) 
 	external ownerOf(_challengerId) {
-		
+
   	}
 }
 
