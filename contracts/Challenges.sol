@@ -8,6 +8,7 @@ contract Challenges is AccessControl {
 		uint id;
 		string name;
 		bool isActive;
+		uint minLevelRequired;
 		uint strengthPonderation;
 		uint dexterityPonderation;
 		uint endurancePonderation;
@@ -29,7 +30,7 @@ contract Challenges is AccessControl {
 		
 	}	
 
-	function createChallenge(uint _id, string _name, uint _strengthPonderation, uint _dexterityPonderation,
+	function createChallenge(uint _id, string _name, uint _minLevelRequired, uint _strengthPonderation, uint _dexterityPonderation,
 	 uint _endurancePonderation, uint _knowledgePonderation, uint _wisdomPonderation, uint _charismaPonderation,
 	 uint _randomFactor, uint _expMultiplicator) 
 	external onlyCOO {
@@ -37,6 +38,7 @@ contract Challenges is AccessControl {
 			id: _id,
             name: _name,
             isActive: true,
+            minLevelRequired: _minLevelRequired,
             strengthPonderation: _strengthPonderation,
             dexterityPonderation: _dexterityPonderation,
             endurancePonderation: _endurancePonderation,
@@ -49,17 +51,20 @@ contract Challenges is AccessControl {
         challenges[_id] = _challenge;
 	}
 
-	function editChallenge(uint _challengeId, bool _isActive, uint _randomFactor, uint _expMultiplicator) external onlyCOO {
+	function editChallenge(uint _challengeId, bool _isActive, uint _randomFactor, uint _expMultiplicator, uint _minLevelRequired) external onlyCOO {
 		Challenge storage _challenge = challenges[_challengeId];
 		_challenge.isActive = _isActive;
 		_challenge.randomFactor = _randomFactor;
 		_challenge.expMultiplicator = _expMultiplicator;
+		_challenge.minLevelRequired = _minLevelRequired;
 	}
 
 	function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) 
 	external ownerOf(_challengerId) retruns(uint) {
 		require(challenges[_id].isActive == true);
+
 		Challenge memory _challenge = challenges[_challengeId];
+		require(beasts[_challengerId].level >= _challenge.minLevelRequired);
 
 		Beast storage _challenger = beasts[_challengerId];
 		Beast storage _challenged = beasts[_challengedId];
