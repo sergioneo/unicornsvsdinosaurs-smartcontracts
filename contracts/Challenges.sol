@@ -39,5 +39,9 @@ contract Challenges is AccessControl {
         });
         challenges[_id] = _challenge;
 	}
+
+	function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) external {
+
+  	}
 }
 
