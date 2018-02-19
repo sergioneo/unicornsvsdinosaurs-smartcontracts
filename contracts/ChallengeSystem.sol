@@ -2,7 +2,7 @@ pragma solidity ^0.4.18;
 
 import './BeastBase.sol';
 
-contract Challenges is AccessControl {
+contract ChallengeSystem is AccessControl {
 
 	struct Challenge {
 		uint id;
@@ -27,7 +27,7 @@ contract Challenges is AccessControl {
     	_;
   	}
 
-	function Challenges () {
+	function ChallengeSystem () {
 		
 	}	
 
