@@ -57,7 +57,7 @@ contract Challenges is AccessControl {
 	}
 
 	function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) 
-	external ownerOf(_challengerId) {
+	external ownerOf(_challengerId) retruns(uint) {
 		require(challenges[_id].isActive == true);
 		Challenge memory _challenge = challenges[_challengeId];
 
@@ -79,6 +79,14 @@ contract Challenges is AccessControl {
 		challengedSum += wisdomPonderation * _challenged.attrs.wisdom;
 		challengedSum += charismaPonderation * _challenged.attrs.charisma;
 		challengedSum += uint(keccak256(block.difficulty, now, _challengedId)) % _challenge.randomFactor;
+
+		uint winnerId = 0;
+		if challengerSum > challengedSum {
+			winnerId = _challengerId;
+		} else {
+			winnerId = _challengedId;
+		}
+		return winnerId;
   	}
 }
 
