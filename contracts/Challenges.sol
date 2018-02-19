@@ -49,6 +49,13 @@ contract Challenges is AccessControl {
         challenges[_id] = _challenge;
 	}
 
+	function editChallenge(uint _challengeId, bool _isActive, uint _randomFactor, uint _expMultiplicator) external onlyCOO {
+		Challenge storage _challenge = challenges[_challengeId];
+		_challenge.isActive = _isActive;
+		_challenge.randomFactor = _randomFactor;
+		_challenge.expMultiplicator = _expMultiplicator;
+	}
+
 	function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) 
 	external ownerOf(_challengerId) {
 		require(challenges[_id].isActive == true);
