@@ -11,6 +11,8 @@ contract Challenges is AccessControl {
 		uint knowledgePonderation;
 		uint wisdomPonderation;
 		uint charismaonderation;
+		uint randomFactor;
+		uint expBase;
 	}
 
 	mapping (uint => Challenge) public challenges;
@@ -20,7 +22,8 @@ contract Challenges is AccessControl {
 	}	
 
 	function createChallenge(uint _id, string _name, uint _strengthPonderation, uint _dexterityPonderation,
-	 uint _endurancePonderation, uint _knowledgePonderation, uint _wisdomPonderation, uint _charismaonderation) 
+	 uint _endurancePonderation, uint _knowledgePonderation, uint _wisdomPonderation, uint _charismaonderation,
+	 uint _randomFactor, uint _expBase) 
 	onlyCOO {
 		Challenge memory _challenge = Challenge({
 			id: _id,
@@ -30,7 +33,9 @@ contract Challenges is AccessControl {
             endurancePonderation: _endurancePonderation,
             knowledgePonderation: _knowledgePonderation,
             wisdomPonderation: _wisdomPonderation,
-            charismaonderation: _charismaonderation
+            charismaonderation: _charismaonderation,
+            randomFactor: _randomFactor,
+            expBase: _expBase
         });
         challenges[_id] = _challenge;
 	}
