@@ -15,7 +15,8 @@ contract Challenges is AccessControl {
 		uint knowledgePonderation;
 		uint wisdomPonderation;
 		uint charismaPonderation;
-		uint randomFactor;
+		uint randomFactor; // How much you can add to the sum calculation.
+		// TODO: This should be an Exp System
 		uint expMultiplicator;
 	}
 
@@ -30,6 +31,7 @@ contract Challenges is AccessControl {
 		
 	}	
 
+	// Create a new challenge, important to have Unique ID
 	function createChallenge(uint _id, string _name, uint _minLevelRequired, uint _strengthPonderation, uint _dexterityPonderation,
 	 uint _endurancePonderation, uint _knowledgePonderation, uint _wisdomPonderation, uint _charismaPonderation,
 	 uint _randomFactor, uint _expMultiplicator) 
@@ -51,6 +53,7 @@ contract Challenges is AccessControl {
         challenges[_id] = _challenge;
 	}
 
+	// Edit a deployed challenge, only you can change active, exp system, isActive and minLevelRequired
 	function editChallenge(uint _challengeId, bool _isActive, uint _randomFactor, uint _expMultiplicator, uint _minLevelRequired) external onlyCOO {
 		Challenge storage _challenge = challenges[_challengeId];
 		_challenge.isActive = _isActive;
@@ -59,6 +62,7 @@ contract Challenges is AccessControl {
 		_challenge.minLevelRequired = _minLevelRequired;
 	}
 
+	// Function that executes a challenge, here we calculate winner and handle Exp + Ranking.
 	function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) 
 	external ownerOf(_challengerId) retruns(uint) {
 		require(challenges[_id].isActive == true);
@@ -88,8 +92,12 @@ contract Challenges is AccessControl {
 		uint winnerId = 0;
 		if challengerSum > challengedSum {
 			winnerId = _challengerId;
+			// TODO: Increment something and decrement something :D
+			// TODO: Ranking
 		} else {
 			winnerId = _challengedId;
+			// TODO: Increment something and decrement something :D
+			// TODO: Ranking
 		}
 		return winnerId;
   	}
