@@ -90,7 +90,7 @@ contract ChallengeSystem is AccessControl {
 		challengedSum += uint(keccak256(block.difficulty, now, _challengedId)) % _challenge.randomFactor;
 
 		uint winnerId = 0;
-		if challengerSum > challengedSum {
+		if (challengerSum > challengedSum) {
 			winnerId = _challengerId;
 			// TODO: Increment something and decrement something :D
 			// TODO: Ranking
