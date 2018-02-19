@@ -1,5 +1,7 @@
 pragma solidity ^0.4.18;
 
+import './BeastBase.sol';
+
 contract Challenges is AccessControl {
 
 	struct Challenge {
@@ -16,6 +18,11 @@ contract Challenges is AccessControl {
 	}
 
 	mapping (uint => Challenge) public challenges;
+
+	modifier ownerOf(uint _beastId) {
+    	require(msg.sender == beastIndexToOwner[_beastId]);
+    	_;
+  	}
 
 	function Challenges () {
 		
@@ -40,8 +47,9 @@ contract Challenges is AccessControl {
         challenges[_id] = _challenge;
 	}
 
-	function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) external {
-
+	function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) 
+	external ownerOf(_challengerId) {
+		
   	}
 }
 
