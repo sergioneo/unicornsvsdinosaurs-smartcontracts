@@ -20,8 +20,11 @@ contract ExperienceSystems {
 		
 	}	
 
+	// Create a new experience ExperienceSystem
+	// Impotant, ID must me unique.
 	function createExperienceSystem(uint _id, uint _base, uint _percentaje, bool _isJustBase,
 	 bool _isJustPercentaje, uint _dinosaurBonus, uint _unicornBonus)  {
+	 	require(_isJustPercentaje == false || _isJustBase == false);
 			ExperienceSystem memory _experienceSystems = ExperienceSystem({
 			id: _id,
             base: _base,
@@ -34,10 +37,12 @@ contract ExperienceSystems {
         experienceSystems[_id] = _experienceSystems;
 	}
 
+	// Calculate experience based on system ID and modify winner and looser experiece attribute
 	function calculateExperience(uint _experienceSystemId, uint _winnerId, uint _looserId) internal {
 		ExperienceSystem memory _experienceSystem = experienceSystems[_experienceSystemId];
 		Beast storage winner = beasts[_winnerId];
 		Beast storage looser = beasts[_looserId];
+		// There is n isJustBase = true and isJustPercentaje  = true option.
 		if (_experienceSystem.isJustBase) {
 			winner.experience += _experienceSystem.base;
 			looser.experience -= _experienceSystem.base;
