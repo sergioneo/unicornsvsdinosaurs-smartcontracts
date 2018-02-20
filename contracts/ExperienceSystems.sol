@@ -22,6 +22,7 @@ contract ExperienceSystems {
 
 	// Create a new experience ExperienceSystem
 	// Impotant, ID must me unique.
+	// Default Dinosaur and Unicorn Bonus is 1
 	function createExperienceSystem(uint _id, uint _base, uint _percentaje, bool _isJustBase,
 	 bool _isJustPercentaje, uint _dinosaurBonus, uint _unicornBonus)  {
 	 	require(_isJustPercentaje == false || _isJustBase == false);
@@ -42,6 +43,10 @@ contract ExperienceSystems {
 		ExperienceSystem memory _experienceSystem = experienceSystems[_experienceSystemId];
 		Beast storage winner = beasts[_winnerId];
 		Beast storage looser = beasts[_looserId];
+
+		// TODO: Here we need to assing Dinosaur or Unicorn bonus, but we need to check from ADN wich
+		// one is Dinosaur and wich one is Unicorn
+
 		// There is n isJustBase = true and isJustPercentaje  = true option.
 		if (_experienceSystem.isJustBase) {
 			winner.experience += _experienceSystem.base;
