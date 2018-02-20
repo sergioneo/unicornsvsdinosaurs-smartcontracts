@@ -17,7 +17,6 @@ contract ChallengeSystem is AccessControl {
 		uint wisdomPonderation;
 		uint charismaPonderation;
 		uint randomFactor; // How much you can add to the sum calculation.
-		// TODO: This should be an Exp System
 		uint experienceSystemId;
 	}
 
