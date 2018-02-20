@@ -31,7 +31,7 @@ contract BeastBase is AccessControl {
     }
     // TODO: Describe
     struct Beast {
-        uint256 genes; // first bite represent the type ( uni or dino )
+        uint256 genes; // first byte represent the type ( uni or dino )
         uint64 experience; // the experience the beast has.
         uint64 birthTime; // The timestamp from the block when this cat came into existence.
         uint64 breedingCoolDown;
