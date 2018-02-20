@@ -3,7 +3,7 @@ pragma solidity ^0.4.18;
 import './BeastBase.sol';
 import './ExperienceSystems.sol';
 
-contract ChallengeSystem is AccessControl {
+contract ChallengeSystem is AccessControl, ExperienceSystems {
 
 	struct Challenge {
 		uint id;
