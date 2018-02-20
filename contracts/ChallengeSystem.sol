@@ -1,6 +1,7 @@
 pragma solidity ^0.4.18;
 
 import './BeastBase.sol';
+import './ExperienceSystems.sol';
 
 contract ChallengeSystem is AccessControl {
 
@@ -17,7 +18,7 @@ contract ChallengeSystem is AccessControl {
 		uint charismaPonderation;
 		uint randomFactor; // How much you can add to the sum calculation.
 		// TODO: This should be an Exp System
-		uint expMultiplicator;
+		uint experienceSystemId;
 	}
 
 	mapping (uint => Challenge) public challenges;
@@ -34,7 +35,7 @@ contract ChallengeSystem is AccessControl {
 	// Create a new challenge, important to have Unique ID
 	function createChallenge(uint _id, string _name, uint _minLevelRequired, uint _strengthPonderation, uint _dexterityPonderation,
 	 uint _endurancePonderation, uint _knowledgePonderation, uint _wisdomPonderation, uint _charismaPonderation,
-	 uint _randomFactor, uint _expMultiplicator) 
+	 uint _randomFactor, uint _experienceSystemId) 
 	external onlyCOO {
 		Challenge memory _challenge = Challenge({
 			id: _id,
@@ -48,17 +49,17 @@ contract ChallengeSystem is AccessControl {
             wisdomPonderation: _wisdomPonderation,
             charismaPonderation: _charismaPonderation,
             randomFactor: _randomFactor,
-            expMultiplicator: _expMultiplicator
+            experienceSystemId: _experienceSystemId
         });
         challenges[_id] = _challenge;
 	}
 
 	// Edit a deployed challenge, only you can change active, exp system, isActive and minLevelRequired
-	function editChallenge(uint _challengeId, bool _isActive, uint _randomFactor, uint _expMultiplicator, uint _minLevelRequired) external onlyCOO {
+	function editChallenge(uint _challengeId, bool _isActive, uint _randomFactor, uint _experienceSystemId, uint _minLevelRequired) external onlyCOO {
 		Challenge storage _challenge = challenges[_challengeId];
 		_challenge.isActive = _isActive;
 		_challenge.randomFactor = _randomFactor;
-		_challenge.expMultiplicator = _expMultiplicator;
+		_challenge.experienceSystemId = _experienceSystemId;
 		_challenge.minLevelRequired = _minLevelRequired;
 	}
 
@@ -90,15 +91,19 @@ contract ChallengeSystem is AccessControl {
 		challengedSum += uint(keccak256(block.difficulty, now, _challengedId)) % _challenge.randomFactor;
 
 		uint winnerId = 0;
+		uint looserId = 0;
+
 		if (challengerSum > challengedSum) {
 			winnerId = _challengerId;
-			// TODO: Increment something and decrement something :D
+			looserId = _challengedId;
 			// TODO: Ranking
 		} else {
 			winnerId = _challengedId;
-			// TODO: Increment something and decrement something :D
+			looserId = _challengerId;
 			// TODO: Ranking
 		}
+		calculateExperience(_challenge.experienceSystemId, winnerId, looserId);
+
 		return winnerId;
   	}
 }
