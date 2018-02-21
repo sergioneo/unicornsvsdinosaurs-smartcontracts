@@ -2,7 +2,7 @@ pragma solidity ^0.4.18;
 
 import './BeastBase.sol';
 
-contract ExperienceSystems {
+contract ExperienceSystems is BeastBase {
 
 	struct ExperienceSystem {
 		uint id;
@@ -49,17 +49,17 @@ contract ExperienceSystems {
 
 		// There is n isJustBase = true and isJustPercentaje  = true option.
 		if (_experienceSystem.isJustBase) {
-			winner.experience += _experienceSystem.base;
-			looser.experience -= _experienceSystem.base;
+			winner.experience += uint64(_experienceSystem.base);
+			looser.experience -= uint64(_experienceSystem.base);
 		} else if (_experienceSystem.isJustPercentaje) {
-			winner.experience += looser.experience * _experienceSystem.percentaje;
-			looser.experience -= looser.experience * _experienceSystem.percentaje;
+			winner.experience += uint64(looser.experience * _experienceSystem.percentaje);
+			looser.experience -= uint64(looser.experience * _experienceSystem.percentaje);
 		} else {
 			uint looserExperience = looser.experience;
-			winner.experience += _experienceSystem.base;
-			looser.experience -= _experienceSystem.base;
-			winner.experience += looserExperience * _experienceSystem.percentaje;
-			looser.experience -= looserExperience * _experienceSystem.percentaje;
+			winner.experience += uint64(_experienceSystem.base);
+			looser.experience -= uint64(_experienceSystem.base);
+			winner.experience += uint64(looserExperience * _experienceSystem.percentaje);
+			looser.experience -= uint64(looserExperience * _experienceSystem.percentaje);
 		}
 	}
 	
