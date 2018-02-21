@@ -4,11 +4,6 @@ import './BeastMinting.sol';
 
 contract Legends is BeastMinting {
   
-    event Bought(uint256 legendId);
-
-    /// CONSTANT
-    uint BOUGHT_PRICE = 300000000000000000;
-
     /// @notice Creates the main Legend smart contract instance.
     function Legends() public {
         // Starts paused.
@@ -28,28 +23,46 @@ contract Legends is BeastMinting {
     /// @dev Reject all Ether from being sent here, unless it's from one of the
     ///  two auction contracts. (Hopefully, we can prevent user accidents.)
     function() external payable {
-        //require(
-        //    msg.sender == address(saleAuction) ||
-        //    msg.sender == address(siringAuction)
-        //);
+        require(
+            msg.sender == address(saleAuction) ||
+            msg.sender == address(siringAuction)
+        );
     }
 
-    function getLegend(uint256 _legendId) external view returns(uint256) {
+    function getLegend(uint256 _legendId) external view returns(
+        uint256 experience,
+        uint256 birthTime,
+        uint256 sireId,
+        uint256 matronId,
+        uint256 siringWithId,
+        uint256 generation,
+        uint256 strength,
+        uint256 dexterity,
+        uint256 endurance,
+        uint256 knowledge,
+        uint256 wisdom,
+        uint256 charisma,
+        uint256 genes
+    ) {
       Beast storage legend = beasts[_legendId];
-      return legend.genes;
-    }
 
-    function buyRandomLegend() external payable {
-        require( BOUGHT_PRICE == msg.value );
-
-        // TODO: Random gens
-        uint256 randomGens = random(100000000000);
-        uint legendId = _createBeast(0, 0, 0, randomGens, msg.sender);
-        Bought(legendId);
-    }
-
-    function legendToMarket(uint256 legendId, uint256 _startingPrice, uint256 _endingPrice) external {
-        createSaleAuction(legendId, _startingPrice, _endingPrice, 3600);
+      //isGestating = (legend.siringWithId != 0);
+      //isReady = (legend.cooldownEndBlock <= block.number);
+      //isReadyToFight = (legend.challengeCoolDown <= block.number);
+      experience = uint256(legend.experience);
+      birthTime = uint256(legend.birthTime);
+      sireId = uint256(legend.sireId);
+      matronId = uint256(legend.matronId);
+      siringWithId = uint256(legend.siringWithId);
+      //cooldownIndex = uint256(legend.cooldownIndex);
+      generation = uint256(legend.generation);
+      strength = uint256(legend.attrs.strength);
+      dexterity = uint256(legend.attrs.dexterity);
+      endurance = uint256(legend.attrs.endurance);
+      knowledge = uint256(legend.attrs.knowledge);
+      wisdom = uint256(legend.attrs.wisdom);
+      charisma = uint256(legend.attrs.charisma);
+      genes = legend.genes;
     }
 
     // @dev Allows the CFO to capture the balance available to the contract.
@@ -58,32 +71,4 @@ contract Legends is BeastMinting {
         cfoAddress.transfer(balance);
     }
 
-    // TODO: replace random with oracle
-    // COPY FROM https://github.com/axiomzen/eth-random
-    uint256 _seed;
-
-    // The upper bound of the number returns is 2^bits - 1
-    function bitSlice(uint256 n, uint256 bits, uint256 slot) private pure returns(uint256) {
-        uint256 offset = slot * bits;
-        // mask is made by shifting left an offset number of times
-        uint256 mask = uint256((2**bits) - 1) << offset;
-        // AND n with mask, and trim to max of 5 bits
-        return uint256((n & mask) >> offset);
-    }
-
-    function maxRandom() private returns (uint256 randomNumber) {
-        _seed = uint256(keccak256(
-            _seed,
-            block.blockhash(block.number - 1),
-            block.coinbase,
-            block.difficulty
-        ));
-        return _seed;
-    }
-
-    // return a pseudo random number between lower and upper bounds
-    // given the number of previous blocks it should hash.
-    function random(uint256 upper) private returns (uint256 randomNumber) {
-        return maxRandom() % upper;
-    }
 }

@@ -101,8 +101,8 @@ contract BeastOwnership  is BeastBase, ERC721 {
         // misuse. Auction contracts should only take ownership of kitties
         // through the allow + transferFrom flow.
         
-        //require(_to != address(saleAuction));
-        //require(_to != address(siringAuction));
+        require(_to != address(saleAuction));
+        require(_to != address(siringAuction));
 
         // You can only send your own cat.
         require(_owns(msg.sender, _tokenId));
