@@ -7,6 +7,9 @@
 ## Simple reference to use truffle and testrpc
 [The Hitchhiker’s Guide to Smart Contracts in Ethereum](https://blog.zeppelin.solutions/the-hitchhikers-guide-to-smart-contracts-in-ethereum-848f08001f05)
 
+## Simple reference to debug with truffle
+[DEBUGGING A SMART CONTRACT](http://truffleframework.com/tutorials/debugging-a-smart-contract)
+
 ## Test
 ### 1. testrpc ( local ethereum blockchain )
 
@@ -17,6 +20,7 @@ $ testrpc
 ```
 
 ### 2. Truffle
+#### *Note: All the values are in wei, you can use this to transform to wei [ETH Calculator](https://etherconverter.online/)
 
 Install truffle
 ```
@@ -28,35 +32,57 @@ Clone this proyect
 $ git clone ...
 ```
 
-Compile contracts
+Open truffle console develop in proyect directory
 ```
-$ truffle compile
-```
-
-Migrate contracts to testrpc using the develop network (see truffle.js config file)
-```
-$ truffle migrate
+truffle develop
 ```
 
-
-### 3. Test on rpc
-
-Start the truffle console
+In console, migrate the contracts
 ```
-$ truffle console
+migrate --reset
 ```
 
-Create the reference to contract
+List the address of this local test blockchain
 ```
-truffle(development)> var bm = BeastMinting.at(BeastMinting.address);
-```
-
-Create a new promo Beast
-```
-truffle(development)> bm.createPromoBeast(12345, "0x3fe29b33ce525dab676918cd726d1c4f37c7777d");
+var accounts;
+web3.eth.getAccounts(function(err,res) { accounts = res; });
+var account1 = accounts[0];
+var account2 = accounts[1];
 ```
 
-Print the data of the 1st event ( Birth ) after the creation of a promo Beast
+Set the address of Auction contract
 ```
-truffle(development)> bm.createPromoBeast(12345, "0x3fe29b33ce525dab676918cd726d1c4f37c7777d").then(function(ret){console.log(ret.logs[0].args.owner);console.log(ret.logs[0].args.beastId);console.log(ret.logs[0].args.genes);});
+Legends.deployed().then(function(instance){return instance.setSaleAuctionAddress(SaleClockAuction.address);});
+```
+
+Buy a Legend gen0 with Random Attrs ( like a loot box )
+```
+Legends.deployed().then(function(instance){return instance.buyRandomLegend({value:300000000000000000});});
+```
+
+Put a legend in auction
+```
+Legends.deployed().then(function(instance){return instance.legendToMarket(2, 300000000000000000, 300000000000000000);});
+```
+
+Get the detail of an auction
+```
+SaleClockAuction.deployed().then(function(instance){return instance.getAuction(2);});
+```
+
+Bid ( buy ) a Legend from in auction
+```
+SaleClockAuction.deployed().then(function(instance){return instance.bid(2, {value:300000000000000000, from: account2});});
+```
+
+List number of Legends of each account
+```
+Legends.deployed().then(function(instance){return instance.balanceOf(account1);});
+Legends.deployed().then(function(instance){return instance.balanceOf(account2);});
+```
+
+List id of Legends owned by an address
+```
+Legends.deployed().then(function(instance){return instance.tokensOfOwner(account1);});
+Legends.deployed().then(function(instance){return instance.tokensOfOwner(account2);});
 ```
