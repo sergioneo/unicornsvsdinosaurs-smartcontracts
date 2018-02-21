@@ -64,8 +64,8 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 
 	// Function that executes a challenge, here we calculate winner and handle Exp + Ranking.
 	function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) 
-	external ownerOf(_challengerId) retruns(uint) {
-		require(challenges[_id].isActive == true);
+	external ownerOf(_challengerId) returns(uint) {
+		require(challenges[_challengeId].isActive == true);
 
 		Challenge memory _challenge = challenges[_challengeId];
 		require(beasts[_challengerId].level >= _challenge.minLevelRequired);
@@ -73,20 +73,20 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 		Beast storage _challenger = beasts[_challengerId];
 		Beast storage _challenged = beasts[_challengedId];
 
-		uint challengerSum = strengthPonderation * _challenger.attrs.strenght;
-		challengerSum += dexterityPonderation * _challenger.attrs.dexterity;
-		challengerSum += endurancePonderation * _challenger.attrs.endurance;
-		challengerSum += knowledgePonderation * _challenger.attrs.knowledge;
-		challengerSum += wisdomPonderation * _challenger.attrs.wisdom;
-		challengerSum += charismaPonderation * _challenger.attrs.charisma;
+		uint challengerSum = _challenge.strengthPonderation * _challenger.attrs.strength;
+		challengerSum += _challenge.dexterityPonderation * _challenger.attrs.dexterity;
+		challengerSum += _challenge.endurancePonderation * _challenger.attrs.endurance;
+		challengerSum += _challenge.knowledgePonderation * _challenger.attrs.knowledge;
+		challengerSum += _challenge.wisdomPonderation * _challenger.attrs.wisdom;
+		challengerSum += _challenge.charismaPonderation * _challenger.attrs.charisma;
 		challengerSum += uint(keccak256(block.difficulty, now, _challengerId)) % _challenge.randomFactor;
 
-		uint challengedSum = strengthPonderation * _challenged.attrs.strenght;
-		challengedSum += dexterityPonderation * _challenged.attrs.dexterity;
-		challengedSum += endurancePonderation * _challenged.attrs.endurance;
-		challengedSum += knowledgePonderation * _challenged.attrs.knowledge;
-		challengedSum += wisdomPonderation * _challenged.attrs.wisdom;
-		challengedSum += charismaPonderation * _challenged.attrs.charisma;
+		uint challengedSum = _challenge.strengthPonderation * _challenged.attrs.strength;
+		challengedSum += _challenge.dexterityPonderation * _challenged.attrs.dexterity;
+		challengedSum += _challenge.endurancePonderation * _challenged.attrs.endurance;
+		challengedSum += _challenge.knowledgePonderation * _challenged.attrs.knowledge;
+		challengedSum += _challenge.wisdomPonderation * _challenged.attrs.wisdom;
+		challengedSum += _challenge.charismaPonderation * _challenged.attrs.charisma;
 		challengedSum += uint(keccak256(block.difficulty, now, _challengedId)) % _challenge.randomFactor;
 
 		uint winnerId = 0;
