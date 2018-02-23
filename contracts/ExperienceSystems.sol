@@ -47,7 +47,7 @@ contract ExperienceSystems is BeastBase {
 		// TODO: Here we need to assing Dinosaur or Unicorn bonus, but we need to check from ADN wich
 		// one is Dinosaur and wich one is Unicorn
 
-		// There is n isJustBase = true and isJustPercentaje  = true option.
+		// It is not possible to have: isJustBase = true and isJustPercentaje  = true option.
 		if (_experienceSystem.isJustBase) {
 			winner.experience += uint64(_experienceSystem.base);
 			looser.experience -= uint64(_experienceSystem.base);
