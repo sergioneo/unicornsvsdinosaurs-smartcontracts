@@ -62,5 +62,19 @@ contract ExperienceSystems is BeastBase {
 			looser.experience -= uint64(looserExperience * _experienceSystem.percentaje);
 		}
 	}
+
+	function calculateNewLevel(uint _experience, uint _currentLevel) returns uint internal {
+		if(_experience >= experienceRequiredForLevel[_currentLevel - 1) {
+			return _currentLevel + 1;
+		} else {
+			if(_currentLevel == 1) {
+				return 1;
+			} else if(_experience <= experienceRequiredForLevel[_currentLevel - 2) {
+				return _currentLevel - 1;
+			} else {
+				return _currentLevel;
+			}
+		}
+	}
 	
 }
