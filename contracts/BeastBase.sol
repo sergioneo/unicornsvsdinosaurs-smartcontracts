@@ -72,6 +72,30 @@ contract BeastBase is AccessControl {
         uint32(7 days)
     ];
 
+    /// Table indicating experience requiere for each level
+    uint[20] public experienceRequiredForLevel = [
+        uint(2),
+        uint(4),
+        uint(8),
+        uint(16),
+        uint(32),
+        uint(64),
+        uint(128),
+        uint(256),
+        uint(512),
+        uint(1024),
+        uint(2048),
+        uint(4096),
+        uint(8192),
+        uint(16384),
+        uint(32768),
+        uint(65536),
+        uint(131072),
+        uint(262144),
+        uint(524288),
+        uint(1048576),
+    ];
+
     // An approximation of currently how many seconds are in between blocks.
     uint256 public secondsPerBlock = 15;
 
