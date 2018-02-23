@@ -315,12 +315,12 @@ contract BeastBreeding is BeastOwnership {
         // Call the sooper-sekret gene mixing operation.
         uint256 childGenes = geneScience.mixGenes(matron.genes, sire.genes, matron.cooldownEndBlock - 1);
 
-        //TODO: Calculate Rarity based on geneScience
-        Rarity _rarity = Rarity.Common; // Change to Calculated one
+        //TODO: Calculate pedigree based on geneScience
+        Pedigree _pedigree = Pedigree.Common; // Change to Calculated one
 
         // Make the new beast!
         address owner = beastIndexToOwner[_matronId];
-        uint256 beastId = _createBeast(_matronId, matron.siringWithId, parentGen + 1, childGenes, _rarity, owner);
+        uint256 beastId = _createBeast(_matronId, matron.siringWithId, parentGen + 1, childGenes, _pedigree, owner);
 
         // Clear the reference to sire from the matron (REQUIRED! Having siringWithId
         // set is what marks a matron as being pregnant.)
