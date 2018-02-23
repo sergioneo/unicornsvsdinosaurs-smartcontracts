@@ -21,6 +21,8 @@ contract BeastBase is AccessControl {
 
     /*** DATA TYPES ***/
 
+    enum Rarity {Common,Rare,Epic, Legendary}
+
     // @dev This attributes are the beats base to play the different challenge,
     // each challenge will use different combination of atributes. 
     struct Attrs {
@@ -44,6 +46,7 @@ contract BeastBase is AccessControl {
         uint16 cooldownIndex;
         uint16 generation;
         uint8 level; // the level of the beast, based on experience.
+        Rarity rarity;
         Attrs attrs;
     }
 
@@ -155,6 +158,7 @@ contract BeastBase is AccessControl {
         uint256 _sireId,
         uint256 _generation,
         uint256 _genes,
+        Rarity _rarity,
         address _owner
     )
         internal
@@ -177,6 +181,7 @@ contract BeastBase is AccessControl {
             cooldownIndex: 0,
             generation: uint16(_generation),
             level: 1,
+            rarity: _rarity, 
             attrs: Attrs({
               strength: 1,
               dexterity: 1,
