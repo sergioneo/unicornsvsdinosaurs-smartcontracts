@@ -102,6 +102,8 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 			// TODO: Ranking
 		}
 		calculateExperience(_challenge.experienceSystemId, winnerId, looserId);
+		calculateLevel(_challenger.experience, _challenger.level);
+		calculateLevel(_challenged.experience, _challenged.level);
 
 		return winnerId;
   	}
