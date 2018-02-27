@@ -249,4 +249,10 @@ contract BeastBase is AccessControl {
             }
         }
     }
+
+    function changePreferedAttribute(uint _tokenId, uint _preferedAttribute) onlyOwner {
+        Beast storage _beast = beasts[_tokenId]
+        require(_beast.preferedAttribute != _preferedAttribute);
+        _beast.preferedAttribute = _preferedAttribute;
+    }
 }
