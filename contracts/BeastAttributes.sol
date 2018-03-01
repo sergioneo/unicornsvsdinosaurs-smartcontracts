@@ -9,12 +9,16 @@ contract BeastAttributes is AccessControl {
 
     /// @dev Transfer event as defined in current draft of ERC721. Emitted every time a kitten
     ///  ownership is assigned, including births.
-    event Transfer(address from, address to, uint256 tokenId);
+    event Level(uint _beastID, uint _from, uint _to);
+
+    event ChangePreferedAttribute(uint _beastID, uint _from, uint _to);
 
 
     function levelUp(uint _tokenId, uint _toLevel) internal {
         Beast storage _beast = beasts[_tokenId]
         require(_beast.experience >= experienceRequiredForLevel[_toLevel - 1]);
+        // emit the Level event
+        Level(_tokenId, _toLevel -1, _toLevel);
         // Add Prefered Skills
             if(_beast.preferedAttribute == 0) {
                 _beast.attrs.strength += 1;
@@ -51,6 +55,8 @@ contract BeastAttributes is AccessControl {
     function changePreferedAttribute(uint _tokenId, uint _preferedAttribute) onlyOwner {
         Beast storage _beast = beasts[_tokenId]
         require(_beast.preferedAttribute != _preferedAttribute);
+        // emit the Level event
+        ChangePreferedAttribute(_tokenId, _beast.preferedAttribute, _preferedAttribute);
         _beast.preferedAttribute = _preferedAttribute;
     }
 }
