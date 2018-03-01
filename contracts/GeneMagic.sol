@@ -1,5 +1,4 @@
 pragma solidity ^0.4.0;
-
 contract GeneMagic {
     
     uint8 constant BEAST_TYPE_LENGTH = 2;
@@ -11,8 +10,8 @@ contract GeneMagic {
         uint[] probabilities;
     }
     
-    attributeDefinition[] public dinosaurs_attribute_list;
-    attributeDefinition[] public unicorns_attribute_list;
+    attributeDefinition[] private dinosaurs_attribute_list;
+    attributeDefinition[] private unicorns_attribute_list;
     
     function randomNumber(uint a, uint b) public constant returns (int) {
         return int(uint((block.timestamp - a)%b));
@@ -125,6 +124,58 @@ contract GeneMagic {
         unicorns_attribute_list[0].probabilities.push(50);
         unicorns_attribute_list[0].probabilities.push(30);
         unicorns_attribute_list[0].probabilities.push(100);
+    }
+    
+    function numberOfAttributes(uint8 target) public constant returns (uint) {
+        if (target == 0) {
+            return dinosaurs_attribute_list.length;
+        } else if (target == 1){
+            return unicorns_attribute_list.length;
+        } else {
+            revert();
+        }
+    }
+    
+    function getAttributeName(uint target, uint i) public constant returns (string) {
+        if (target == 0) {
+            return dinosaurs_attribute_list[i].name;
+        } else if (target == 1) {
+            return unicorns_attribute_list[i].name;
+        } else {
+            revert();
+        }
+    }
+    
+    function getAttributeProbabilities(uint target, uint i) public constant returns (uint[]) {
+        if (target == 0) {
+            return dinosaurs_attribute_list[i].probabilities;
+        } else if (target == 1) {
+            return unicorns_attribute_list[i].probabilities;
+        } else {
+            revert();
+        }
+    }
+    
+    function getAttributeSize(uint target, uint i) public constant returns (uint) {
+        if (target == 0) {
+            return dinosaurs_attribute_list[i].size;
+        } else if (target == 1) {
+            return unicorns_attribute_list[i].size;
+        } else {
+            revert();
+        }
+    }
+    
+    function updateAttribute(uint target, uint i, string name, uint[] list) public {
+        if (target == 0) {
+            dinosaurs_attribute_list[i].name = name;
+            dinosaurs_attribute_list[i].probabilities = list;
+        } else if (target == 1) {
+            unicorns_attribute_list[i].name = name;
+            unicorns_attribute_list[i].probabilities = list;
+        } else {
+            revert();
+        }
     }
     
 }
