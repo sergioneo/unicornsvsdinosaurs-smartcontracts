@@ -46,7 +46,7 @@ contract SkillsSystem is AccessControl {
 	}
 
 	// Edit a  skill, important to have Unique ID
-	function editSkill(string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _winExperienceBonus, 
+	function editSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _winExperienceBonus, 
 		uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, 
 		bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) external onlyCOO {
 
