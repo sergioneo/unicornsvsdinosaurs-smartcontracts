@@ -55,6 +55,7 @@ contract BeastAttributes is AccessControl {
     function changePreferedAttribute(uint _tokenId, uint _preferedAttribute) onlyOwner {
         Beast storage _beast = beasts[_tokenId]
         require(_beast.preferedAttribute != _preferedAttribute);
+        require(_preferedAttribute <= 6 || _preferedAttribute > 0);
         // emit the Level event
         ChangePreferedAttribute(_tokenId, _beast.preferedAttribute, _preferedAttribute);
         _beast.preferedAttribute = _preferedAttribute;
