@@ -20,33 +20,33 @@ contract BeastAttributes is AccessControl {
         // emit the Level event
         Level(_tokenId, _toLevel -1, _toLevel);
         // Add Prefered Skills
-            if(_beast.preferedAttribute == 0) {
+            if(_beast.preferedAttribute == 1) {
                 _beast.attrs.strength += 1;
-            } else if(_beast.preferedAttribute == 1) {
-                _beast.attrs.dexterity += 1;
             } else if(_beast.preferedAttribute == 2) {
-                _beast.attrs.endurance += 1;
+                _beast.attrs.dexterity += 1;
             } else if(_beast.preferedAttribute == 3) {
-                _beast.attrs.knowledge += 1;
+                _beast.attrs.endurance += 1;
             } else if(_beast.preferedAttribute == 4) {
-                _beast.attrs.wisdom += 1;
+                _beast.attrs.knowledge += 1;
             } else if(_beast.preferedAttribute == 5) {
+                _beast.attrs.wisdom += 1;
+            } else if(_beast.preferedAttribute == 6) {
                 _beast.attrs.charisma += 1;
             }
         // Add remaining Random Skills
         for(uint i = 0; i < 3; i++) {
-            uint randomAttribute = uint(keccak256(block.difficulty, now, beasts, i, _tokenId)) % 6;
-            if(randomAttribute == 0) {
+            uint randomAttribute = uint(keccak256(block.difficulty, now, beasts, i, _tokenId)) % 6 + 1;
+            if(randomAttribute == 1) {
                 _beast.attrs.strength += 1;
-            } else if(randomAttribute == 1) {
-                _beast.attrs.dexterity += 1;
             } else if(randomAttribute == 2) {
-                _beast.attrs.endurance += 1;
+                _beast.attrs.dexterity += 1;
             } else if(randomAttribute == 3) {
-                _beast.attrs.knowledge += 1;
+                _beast.attrs.endurance += 1;
             } else if(randomAttribute == 4) {
-                _beast.attrs.wisdom += 1;
+                _beast.attrs.knowledge += 1;
             } else if(randomAttribute == 5) {
+                _beast.attrs.wisdom += 1;
+            } else if(randomAttribute == 6) {
                 _beast.attrs.charisma += 1;
             }
         }
