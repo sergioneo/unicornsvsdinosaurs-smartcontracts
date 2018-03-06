@@ -66,6 +66,9 @@ contract ExperienceSystems is BeastBase {
 		}
 		winner.experience += winnerExperienceIncrement * getExperienceBonusBasedOnRarity(winner.rarity);
 		looser.experience += looserExperienceIncrement * getExperienceBonusBasedOnRarity(looser.rarity);
+		if(looser.experience < experienceRequiredForLevel[looser.level - 1]) {
+			looser.experience = experienceRequiredForLevel[looser.level - 1];
+		}
 	}
 
 	function getExperienceBonusBasedOnRarity(Rarity _rarity) returns uint internal {
