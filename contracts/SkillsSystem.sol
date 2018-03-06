@@ -37,12 +37,33 @@ contract SkillsSystem is AccessControl {
             elementalDisadvantageBonus: _elementalDisadvantageBonus,
             randomAttributeBonus: _randomAttributeBonus,
             has5LevelBonus: _has5LevelBonus,
-            preferedAttributeIncreasedChance_ _preferedAttributeIncreasedChance,
+            preferedAttributeIncreasedChance: _preferedAttributeIncreasedChance,
             dominantGene: dominantGene,
             recesiveGene: _recesiveGene
         });
 
         skills[_id] = _skill;
+	}
+
+	// Edit a  skill, important to have Unique ID
+	function editSkill(string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _winExperienceBonus, 
+		uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, 
+		bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) external onlyCOO {
+
+		Skill storage _skill = skills[_id];
+		_skill.name = _name;
+		_skill.attirbuteId = _attirbuteId;
+		_skill.addAttributePercentaje = _addAttributePercentaje;
+		_skill.winExperienceBonus = _winExperienceBonus;
+		_skill.loseExperienceBonus = _loseExperienceBonus;
+		_skill.elementalAdvantageBonus = _elementalAdvantageBonus;
+		_skill.elementalDisadvantageBonus = _elementalDisadvantageBonus;
+		_skill.randomAttributeBonus = _randomAttributeBonus;
+		_skill.has5LevelBonus = _has5LevelBonus;
+		_skill.preferedAttributeIncreasedChance = _preferedAttributeIncreasedChance;
+		_skill.fertileSpeedBonus = _fertileSpeedBonus;
+		_skill.dominantGene = _dominantGene;
+		_skill.recesiveGene = _recesiveGene;
 	}
 
 }
