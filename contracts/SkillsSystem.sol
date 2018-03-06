@@ -7,6 +7,7 @@ contract SkillsSystem is AccessControl {
 		string name;
 		uint attirbuteId;
 		bool addAttributePercentaje;
+		uint attributeBonus;
 		uint winExperienceBonus;
 		uint loseExperienceBonus;
 		uint elementalAdvantageBonus;
@@ -22,7 +23,7 @@ contract SkillsSystem is AccessControl {
 	mapping (uint => Challenge) public skills;
 
 	// Create a new skill, important to have Unique ID
-	function createSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _winExperienceBonus, 
+	function createSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _attributeBonus, uint _winExperienceBonus, 
 		uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, 
 		bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) onlyCOO {
 
@@ -31,6 +32,7 @@ contract SkillsSystem is AccessControl {
             name: _name,
             attirbuteId: _attirbuteId,
             addAttributePercentaje: _addAttributePercentaje,
+            attributeBonus: _attributeBonus,
             winExperienceBonus: _winExperienceBonus,
             loseExperienceBonus: _loseExperienceBonus,
             elementalAdvantageBonus: _elementalAdvantageBonus,
@@ -46,7 +48,7 @@ contract SkillsSystem is AccessControl {
 	}
 
 	// Edit a  skill, important to have Unique ID
-	function editSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _winExperienceBonus, 
+	function editSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _attributeBonus, uint _winExperienceBonus, 
 		uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, 
 		bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) external onlyCOO {
 
@@ -54,6 +56,7 @@ contract SkillsSystem is AccessControl {
 		_skill.name = _name;
 		_skill.attirbuteId = _attirbuteId;
 		_skill.addAttributePercentaje = _addAttributePercentaje;
+		_skill.attributeBonus = _attributeBonus;
 		_skill.winExperienceBonus = _winExperienceBonus;
 		_skill.loseExperienceBonus = _loseExperienceBonus;
 		_skill.elementalAdvantageBonus = _elementalAdvantageBonus;
