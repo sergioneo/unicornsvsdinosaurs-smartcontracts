@@ -26,7 +26,7 @@ contract SkillsSystem is AccessControl {
 		uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, 
 		bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) onlyCOO {
 
-		Skill memory _skill = Challenge({
+		Skill memory _skill = Skill({
 			id: _id,
             name: _name,
             attirbuteId: _attirbuteId,
