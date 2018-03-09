@@ -21,6 +21,8 @@ contract BeastBase is AccessControl {
 
     /*** DATA TYPES ***/
 
+    enum Pedigree {Common,Rare,Epic, Legendary}
+
     // @dev This attributes are the beats base to play the different challenge,
     // each challenge will use different combination of atributes. 
     struct Attrs {
@@ -43,7 +45,10 @@ contract BeastBase is AccessControl {
         uint32 siringWithId;
         uint16 cooldownIndex;
         uint16 generation;
+        //TODO: Add skillId;
         uint8 level; // the level of the beast, based on experience.
+        uint8 preferedAttribute; // The one atttribute that we want to increment when level up.(0,1,2,3,4 or 5)
+        Rarity pedigree;
         Attrs attrs;
     }
 
@@ -131,6 +136,7 @@ contract BeastBase is AccessControl {
         uint256 _sireId,
         uint256 _generation,
         uint256 _genes,
+        Pedigree _pedigree,
         address _owner
     )
         internal
@@ -153,6 +159,8 @@ contract BeastBase is AccessControl {
             cooldownIndex: 0,
             generation: uint16(_generation),
             level: 1,
+            preferedAttribute: 0,
+            pedigree: _pedigree, 
             attrs: Attrs({
               strength: 1,
               dexterity: 1,

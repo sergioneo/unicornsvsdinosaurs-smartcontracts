@@ -317,9 +317,12 @@ contract BeastBreeding is Random, BeastOwnership {
         //uint256 childGenes = geneScience.mixGenes(matron.genes, sire.genes, matron.cooldownEndBlock - 1);
         uint256 childGenes = random(1000000000000000);
 
+        //TODO: Calculate pedigree based on geneScience
+        Pedigree _pedigree = Pedigree.Common; // Change to Calculated one
+
         // Make the new beast!
         address owner = beastIndexToOwner[_matronId];
-        uint256 beastId = _createBeast(_matronId, matron.siringWithId, parentGen + 1, childGenes, owner);
+        uint256 beastId = _createBeast(_matronId, matron.siringWithId, parentGen + 1, childGenes, _pedigree, owner);
 
         // Clear the reference to sire from the matron (REQUIRED! Having siringWithId
         // set is what marks a matron as being pregnant.)

@@ -2,6 +2,7 @@ pragma solidity ^0.4.18;
 
 import './BeastBase.sol';
 import './ExperienceSystems.sol';
+import './SkillsSystems.sol';
 
 contract ChallengeSystem is AccessControl, ExperienceSystems {
 
@@ -72,6 +73,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 
 		Beast storage _challenger = beasts[_challengerId];
 		Beast storage _challenged = beasts[_challengedId];
+		uint challengerBonus = 0;
 
 		uint challengerSum = _challenge.strengthPonderation * _challenger.attrs.strength;
 		challengerSum += _challenge.dexterityPonderation * _challenger.attrs.dexterity;
@@ -102,8 +104,20 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 			// TODO: Ranking
 		}
 		calculateExperience(_challenge.experienceSystemId, winnerId, looserId);
+		calculateLevel(_challenger.experience, _challenger.level);
+		calculateLevel(_challenged.experience, _challenged.level);
 
 		return winnerId;
+  	}
+
+  	function skillBonus(uint _beastId, uint _challengeId) returns(uint) {
+  		Beast memory beast = beasts[_beastId];
+  		Skill memory skill = skills[beast.skillId]; // TODO: Skill Id doesnt exist yet.
+  		if (skill.addAttributePercentaje == true) {
+  			//TODO: Return Attribute * % 
+  		} else {
+  			//TODO: Return just a sum * challenge Ponderation
+  		}
   	}
 }
 

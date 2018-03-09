@@ -47,19 +47,53 @@ contract ExperienceSystems is BeastBase {
 		// TODO: Here we need to assing Dinosaur or Unicorn bonus, but we need to check from ADN wich
 		// one is Dinosaur and wich one is Unicorn
 
-		// There is n isJustBase = true and isJustPercentaje  = true option.
+		uint winnerExperienceIncrement = 0;
+		uint looserExperienceIncrement = 0;
+
+		// It is not possible to have: isJustBase = true and isJustPercentaje  = true option.
 		if (_experienceSystem.isJustBase) {
-			winner.experience += uint64(_experienceSystem.base);
-			looser.experience -= uint64(_experienceSystem.base);
+			winnerExperienceIncrement += uint64(_experienceSystem.base);
+			looserExperienceIncrement -= uint64(_experienceSystem.base);
 		} else if (_experienceSystem.isJustPercentaje) {
-			winner.experience += uint64(looser.experience * _experienceSystem.percentaje);
-			looser.experience -= uint64(looser.experience * _experienceSystem.percentaje);
+			winnerExperienceIncrement += uint64(looser.experience * _experienceSystem.percentaje);
+			looserExperienceIncrement -= uint64(looser.experience * _experienceSystem.percentaje);
 		} else {
 			uint looserExperience = looser.experience;
-			winner.experience += uint64(_experienceSystem.base);
-			looser.experience -= uint64(_experienceSystem.base);
-			winner.experience += uint64(looserExperience * _experienceSystem.percentaje);
-			looser.experience -= uint64(looserExperience * _experienceSystem.percentaje);
+			winnerExperienceIncrement += uint64(_experienceSystem.base);
+			looserExperienceIncrement -= uint64(_experienceSystem.base);
+			winnerExperienceIncrement += uint64(looserExperience * _experienceSystem.percentaje);
+			looserExperienceIncrement -= uint64(looserExperience * _experienceSystem.percentaje);
+		}
+		winner.experience += winnerExperienceIncrement * getExperienceBonusBasedOnRarity(winner.rarity);
+		looser.experience += looserExperienceIncrement * getExperienceBonusBasedOnRarity(looser.rarity);
+		if(looser.experience < experienceRequiredForLevel[looser.level - 1]) {
+			looser.experience = experienceRequiredForLevel[looser.level - 1];
+		}
+	}
+
+	function getExperienceBonusBasedOnRarity(Rarity _rarity) returns uint internal {
+		if(_rarity == Rarity.Common) {
+			return 1
+		} else if(_rarity == Rarity.Rare) {
+			return 1.05
+		} else if(_rarity == Rarity.Epic) {
+			return 1.15
+		} else if(_rarity == Rarity.Legendary) {
+			return 1.3
+		}
+	}
+
+	function calculateLevel(uint _experience, uint _currentLevel) returns uint internal {
+		if(_experience >= experienceRequiredForLevel[_currentLevel - 1]) {
+			return _currentLevel + 1;
+		} else {
+			if(_currentLevel == 1) {
+				return 1;
+			} else if(_experience <= experienceRequiredForLevel[_currentLevel - 2]) {
+				return _currentLevel - 1;
+			} else {
+				return _currentLevel;
+			}
 		}
 	}
 	
