@@ -2,8 +2,9 @@ pragma solidity ^0.4.18;
 
 import './BeastOwnership.sol';
 import './interface/GeneScienceInterface.sol';
+import './util/Random.sol';
 
-contract BeastBreeding is BeastOwnership {
+contract BeastBreeding is Random, BeastOwnership {
 
     /// @dev The Pregnant event is fired when two beast successfully breed and the pregnancy
     ///  timer begins for the matron.
@@ -313,7 +314,8 @@ contract BeastBreeding is BeastOwnership {
         }
 
         // Call the sooper-sekret gene mixing operation.
-        uint256 childGenes = geneScience.mixGenes(matron.genes, sire.genes, matron.cooldownEndBlock - 1);
+        //uint256 childGenes = geneScience.mixGenes(matron.genes, sire.genes, matron.cooldownEndBlock - 1);
+        uint256 childGenes = random(1000000000000000);
 
         // Make the new beast!
         address owner = beastIndexToOwner[_matronId];
