@@ -2,8 +2,9 @@ pragma solidity ^0.4.18;
 
 import './BeastAuction.sol';
 import './interface/GeneScienceInterface.sol';
+import './util/Random.sol';
 
-contract BeastMinting is BeastAuction {
+contract BeastMinting is Random, BeastAuction {
 
     event EggBought(uint256 legendId);
 
@@ -46,35 +47,5 @@ contract BeastMinting is BeastAuction {
     /// @dev Computes the next egg price
     function getCurrentEggPrice() public view returns (uint256) {
         return EGGS_PRICE_BASE + (eggsCreatedCount * EGGS_PRICE_INCREASE);
-    }
-
-
-    // TODO: replace random with oracle
-    // @dev COPY FROM https://github.com/axiomzen/eth-random
-    uint256 _seed;
-
-    // The upper bound of the number returns is 2^bits - 1
-    function bitSlice(uint256 n, uint256 bits, uint256 slot) private pure returns(uint256) {
-        uint256 offset = slot * bits;
-        // mask is made by shifting left an offset number of times
-        uint256 mask = uint256((2**bits) - 1) << offset;
-        // AND n with mask, and trim to max of 5 bits
-        return uint256((n & mask) >> offset);
-    }
-
-    function maxRandom() private returns (uint256 randomNumber) {
-        _seed = uint256(keccak256(
-            _seed,
-            block.blockhash(block.number - 1),
-            block.coinbase,
-            block.difficulty
-        ));
-        return _seed;
-    }
-
-    // return a pseudo random number between lower and upper bounds
-    // given the number of previous blocks it should hash.
-    function random(uint256 upper) private returns (uint256 randomNumber) {
-        return maxRandom() % upper;
     }
 }
