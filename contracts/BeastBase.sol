@@ -48,7 +48,7 @@ contract BeastBase is AccessControl {
         //TODO: Add skillId;
         uint8 level; // the level of the beast, based on experience.
         uint8 preferedAttribute; // The one atttribute that we want to increment when level up.(0,1,2,3,4 or 5)
-        Rarity pedigree;
+        Pedigree pedigree;
         Attrs attrs;
     }
 
@@ -160,7 +160,7 @@ contract BeastBase is AccessControl {
             generation: uint16(_generation),
             level: 1,
             preferedAttribute: 0,
-            pedigree: _pedigree, 
+            pedigree: _pedigree,
             attrs: Attrs({
               strength: 1,
               dexterity: 1,
