@@ -34,12 +34,12 @@ contract BeastAttributes is AccessControl {
         uint(131072),
         uint(262144),
         uint(524288),
-        uint(1048576),
+        uint(1048576)
     ];
 
 
     function levelUp(uint _tokenId, uint _toLevel) internal {
-        Beast storage _beast = beasts[_tokenId]
+        Beast storage _beast = beasts[_tokenId];
         require(_beast.experience >= experienceRequiredForLevel[_toLevel - 1]);
         // emit the Level event
         Level(_tokenId, _toLevel -1, _toLevel);
@@ -77,7 +77,7 @@ contract BeastAttributes is AccessControl {
     }
 
     function changePreferedAttribute(uint _tokenId, uint _preferedAttribute) onlyOwner {
-        Beast storage _beast = beasts[_tokenId]
+        Beast storage _beast = beasts[_tokenId];
         require(_beast.preferedAttribute != _preferedAttribute);
         require(_preferedAttribute <= 6 || _preferedAttribute > 0);
         // emit the Level event
