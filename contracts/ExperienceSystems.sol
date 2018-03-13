@@ -65,7 +65,7 @@ contract ExperienceSystems is BeastBase {
 			winnerExperienceIncrement += uint64(looserExperience * _experienceSystem.percentaje);
 			looserExperienceIncrement -= uint64(looserExperience * _experienceSystem.percentaje);
 		}
-		// Is there a Skill Bonus to Win more exp or loss les exp?
+		// Is there a Skill Bonus to Win more exp or loss less exp?
 		Skill memory winnerSkills = skills[winner.skillId];
 		Skill memory looserSkills = skills[looser.skillId];
 		winnerExperienceIncrement += winnerExperienceIncrement * winnerSkills.winExperienceBonus;
