@@ -114,7 +114,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 
   	function skillBonus(uint _beastId) returns(uint) {
   		Beast memory _beast = beasts[_beastId];
-  		Skill memory skill = skills[beast.skillId]; // TODO: Skill Id doesnt exist yet.
+  		Skill memory skill = skills[beast.skillId];
   		if (skill.addAttributePercentaje == true) {
   			return skillValue(skill.attirbuteId, _beastId) * skill.attributeBonus;
   		} else {

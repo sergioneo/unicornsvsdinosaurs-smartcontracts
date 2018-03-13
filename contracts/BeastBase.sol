@@ -45,7 +45,7 @@ contract BeastBase is AccessControl {
         uint32 siringWithId;
         uint16 cooldownIndex;
         uint16 generation;
-        //TODO: Add skillId;
+        uint skillId;
         uint8 level; // the level of the beast, based on experience.
         uint8 preferedAttribute; // The one atttribute that we want to increment when level up.(0,1,2,3,4 or 5)
         Pedigree pedigree;
@@ -147,6 +147,7 @@ contract BeastBase is AccessControl {
         require(_sireId == uint256(uint32(_sireId)));
         require(_generation == uint256(uint16(_generation)));
 
+// TODO: Skill ID = 0 is not the right thing to do, we want to have random skills?
         Beast memory _beast = Beast({
             genes: _genes,
             experience: 0,
@@ -158,6 +159,7 @@ contract BeastBase is AccessControl {
             siringWithId: 0,
             cooldownIndex: 0,
             generation: uint16(_generation),
+            skillId: 0, 
             level: 1,
             preferedAttribute: 0,
             pedigree: _pedigree,
