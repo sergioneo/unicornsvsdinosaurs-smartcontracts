@@ -37,6 +37,24 @@ contract BeastAttributes is AccessControl {
         uint(1048576)
     ];
 
+    // Return Skill Value based on Attribute ID for specific beast
+    function skillValue(uint _attributeID, uint _tokenId) returns (uint) {
+        Beast storage _beast = beasts[_tokenId];
+            if(_attributeID == 1) {
+                return _beast.attrs.strength;
+            } else if(_attributeID == 2) {
+                return _beast.attrs.dexterity;
+            } else if(_attributeID == 3) {
+                return _beast.attrs.endurance;
+            } else if(_attributeID == 4) {
+                return _beast.attrs.knowledge;
+            } else if(_attributeID == 5) {
+                return _beast.attrs.wisdom;
+            } else if(_attributeID == 6) {
+                return _beast.attrs.charisma;
+            }
+    }
+
 
     function levelUp(uint _tokenId, uint _toLevel) internal {
         Beast storage _beast = beasts[_tokenId];
