@@ -112,6 +112,25 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 		return winnerId;
   	}
 
+	// Earth = 0, Water = 1, Fire = 2, Air = 3.
+	// Water bonus over Fire
+	// Fire bonus over Air
+	// Air bonus over Earth
+	// Earth bonus over Water
+  	function elementBonus(uint _challengerId, uint _challengedId) returns(uint) {
+  		Beast storage _challenger = beasts[_challengerId];
+		Beast storage _challenged = beasts[_challengedId];
+		if((_challenger.element == 0 && _challenged.element == 1) || (_challenger.element == 1 && _challenged.element == 2) 
+			|| (_challenger.element == 2 && _challenged.element == 3) || (_challenger.element == 3 && _challenged.element == 0)) {
+			return _challengerId
+		} else ((_challenger.element == 1 && _challenged.element == 0) || (_challenger.element == 2 && _challenged.element == 1) 
+			|| (_challenger.element == 3 && _challenged.element == 2) || (_challenger.element == 0 && _challenged.element == 3)) {
+			return _challengedId
+		} else {
+			return 0
+		}
+  	}
+
   	function skillBonus(uint _beastId) returns(uint) {
   		Beast memory _beast = beasts[_beastId];
   		Skill memory skill = skills[beast.skillId];
