@@ -93,6 +93,12 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 		challengedSum += uint(keccak256(block.difficulty, now, _challengedId)) % _challenge.randomFactor;
 		challengedSum += skillBonus(_challengedId);
 
+		if (elementBonus(_challengerId, _challengedId) == _challengerId) {
+			challengerSum = challengerSum * 1.1;
+		} else if (elementBonus(_challengerId, _challengedId) == _challengedId) {
+			challengedSum = challengedSum * 1.1;
+		}
+
 		uint winnerId = 0;
 		uint looserId = 0;
 
