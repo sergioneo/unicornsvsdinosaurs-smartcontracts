@@ -82,7 +82,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 		challengerSum += _challenge.wisdomPonderation * _challenger.attrs.wisdom;
 		challengerSum += _challenge.charismaPonderation * _challenger.attrs.charisma;
 		challengerSum += uint(keccak256(block.difficulty, now, _challengerId)) % _challenge.randomFactor;
-		challengerSum += skillBonus(_challengerId);
+		challengerSum += skillAttributeBonus(_challengerId);
 
 		uint challengedSum = _challenge.strengthPonderation * _challenged.attrs.strength;
 		challengedSum += _challenge.dexterityPonderation * _challenged.attrs.dexterity;
@@ -91,7 +91,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 		challengedSum += _challenge.wisdomPonderation * _challenged.attrs.wisdom;
 		challengedSum += _challenge.charismaPonderation * _challenged.attrs.charisma;
 		challengedSum += uint(keccak256(block.difficulty, now, _challengedId)) % _challenge.randomFactor;
-		challengedSum += skillBonus(_challengedId);
+		challengedSum += skillAttributeBonus(_challengedId);
 
 		if (elementBonus(_challengerId, _challengedId) == _challengerId) {
 			challengerSum = challengerSum * 1.1;
@@ -137,7 +137,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 		}
   	}
 
-  	function skillBonus(uint _beastId) returns(uint) {
+  	function skillAttributeBonus(uint _beastId) returns(uint) {
   		Beast memory _beast = beasts[_beastId];
   		Skill memory skill = skills[beast.skillId];
   		if (skill.addAttributePercentaje == true) {
