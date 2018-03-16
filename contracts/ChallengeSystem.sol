@@ -94,9 +94,9 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 		challengedSum += skillAttributeBonus(_challengedId);
 
 		if (elementBonus(_challengerId, _challengedId) == _challengerId) {
-			challengerSum = challengerSum * 1.1;
+			challengerSum = challengerSum * skillElementBonus(_challengerId, _challengedId);
 		} else if (elementBonus(_challengerId, _challengedId) == _challengedId) {
-			challengedSum = challengedSum * 1.1;
+			challengedSum = challengedSum * skillElementBonus(_challengerId, _challengedId);
 		}
 
 		uint winnerId = 0;
@@ -144,6 +144,24 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
   			return skillValue(skill.attirbuteId, _beastId) * skill.attributeBonus;
   		} else {
   			return skillValue(skill.attirbuteId, _beastId) + skill.attributeBonus;
+  		}
+  	}
+
+  	function skillElementBonus(uint _challengerId, uint _challengedId) returns(uint) {
+  		Beast storage _challenger = beasts[_challengerId];
+		Beast storage _challenged = beasts[_challengedId];
+
+  		Skill memory _challengerSkill = skills[_challenger.skillId];
+  		Skill memory _challengedSkill = skills[_challenged.skillId];
+
+  		if(_challengerSkill.elementalAdvantageBonus == true && _challengedSkill.elementalDisadvantageBonus == false) {
+  			return 1.2;
+  		} else if(_challengerSkill.elementalAdvantageBonus == true && _challengedSkill.elementalDisadvantageBonus == true) {
+  			return 1.1;
+  		} else if(_challengerSkill.elementalAdvantageBonus == false && _challengedSkill.elementalDisadvantageBonus == true) {
+  			return 1.05;
+  		} else {
+  			return 1.1;
   		}
   	}
 }
