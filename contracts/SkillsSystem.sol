@@ -1,34 +1,41 @@
 pragma solidity ^0.4.18;
 
+import "./util/AccessControl.sol";
+
 contract SkillsSystem is AccessControl {
 
-	struct Skill {
-		uint id;
-		string name;
-		uint attirbuteId;
-		bool addAttributePercentaje;
-		uint attributeBonus;
-		uint winExperienceBonus;
-		uint loseExperienceBonus;
-		uint elementalAdvantageBonus;
-		uint elementalDisadvantageBonus;
-		uint randomAttributeBonus;
-		bool has5LevelBonus;
-		bool preferedAttributeIncreasedChance;
-		bool fertileSpeedBonus;
-		bool dominantGene;
-		bool recesiveGene;
-	}
+    struct Skill {
+        uint id;
+        string name;
+        uint attirbuteId;
+        bool addAttributePercentaje;
+        uint attributeBonus;
+        uint winExperienceBonus;
+        uint loseExperienceBonus;
+        uint elementalAdvantageBonus;
+        uint elementalDisadvantageBonus;
+        uint randomAttributeBonus;
+        bool has5LevelBonus;
+        bool preferedAttributeIncreasedChance;
+        bool fertileSpeedBonus;
+        bool dominantGene;
+        bool recesiveGene;
+        bool isSkill;
+    }
 
-	mapping (uint => Challenge) public skills;
+    mapping (uint => Skill) public skills;
 
-	// Create a new skill, important to have Unique ID
-	function createSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _attributeBonus, uint _winExperienceBonus, 
-		uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, 
-		bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) onlyCOO {
+    function skillExists( uint skillId) internal view returns(bool) {
+        return skills[skillId].isSkill;
+    }
 
-		Skill memory _skill = Skill({
-			id: _id,
+    // Create a new skill, important to have Unique ID
+    function createSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _attributeBonus, uint _winExperienceBonus, 
+        uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, 
+        bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) public onlyCOO {
+        require( !skillExists(_id) ); // prevents destruction of existing skill with same ID
+        Skill memory _skill = Skill({
+            id: _id,
             name: _name,
             attirbuteId: _attirbuteId,
             addAttributePercentaje: _addAttributePercentaje,
@@ -40,33 +47,35 @@ contract SkillsSystem is AccessControl {
             randomAttributeBonus: _randomAttributeBonus,
             has5LevelBonus: _has5LevelBonus,
             preferedAttributeIncreasedChance: _preferedAttributeIncreasedChance,
-            dominantGene: dominantGene,
-            recesiveGene: _recesiveGene
+            fertileSpeedBonus: _fertileSpeedBonus,
+            dominantGene: _dominantGene,
+            recesiveGene: _recesiveGene,
+            isSkill: true
         });
 
         skills[_id] = _skill;
-	}
+    }
 
-	// Edit a  skill, important to have Unique ID
-	function editSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _attributeBonus, uint _winExperienceBonus, 
-		uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, 
-		bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) external onlyCOO {
+    // Edit a  skill, important to have Unique ID
+    function editSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _attributeBonus, uint _winExperienceBonus, 
+        uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, 
+        bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) external onlyCOO {
 
-		Skill storage _skill = skills[_id];
-		_skill.name = _name;
-		_skill.attirbuteId = _attirbuteId;
-		_skill.addAttributePercentaje = _addAttributePercentaje;
-		_skill.attributeBonus = _attributeBonus;
-		_skill.winExperienceBonus = _winExperienceBonus;
-		_skill.loseExperienceBonus = _loseExperienceBonus;
-		_skill.elementalAdvantageBonus = _elementalAdvantageBonus;
-		_skill.elementalDisadvantageBonus = _elementalDisadvantageBonus;
-		_skill.randomAttributeBonus = _randomAttributeBonus;
-		_skill.has5LevelBonus = _has5LevelBonus;
-		_skill.preferedAttributeIncreasedChance = _preferedAttributeIncreasedChance;
-		_skill.fertileSpeedBonus = _fertileSpeedBonus;
-		_skill.dominantGene = _dominantGene;
-		_skill.recesiveGene = _recesiveGene;
-	}
+        Skill storage _skill = skills[_id];
+        _skill.name = _name;
+        _skill.attirbuteId = _attirbuteId;
+        _skill.addAttributePercentaje = _addAttributePercentaje;
+        _skill.attributeBonus = _attributeBonus;
+        _skill.winExperienceBonus = _winExperienceBonus;
+        _skill.loseExperienceBonus = _loseExperienceBonus;
+        _skill.elementalAdvantageBonus = _elementalAdvantageBonus;
+        _skill.elementalDisadvantageBonus = _elementalDisadvantageBonus;
+        _skill.randomAttributeBonus = _randomAttributeBonus;
+        _skill.has5LevelBonus = _has5LevelBonus;
+        _skill.preferedAttributeIncreasedChance = _preferedAttributeIncreasedChance;
+        _skill.fertileSpeedBonus = _fertileSpeedBonus;
+        _skill.dominantGene = _dominantGene;
+        _skill.recesiveGene = _recesiveGene;
+    }
 
 }

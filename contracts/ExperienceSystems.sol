@@ -13,6 +13,7 @@ contract ExperienceSystems is BeastBase {
 		bool isJustPercentaje;
 		uint dinosaurBonus;
 		uint unicornBonus;
+		bool isExperience;
 	}
 
 	mapping (uint => ExperienceSystem) public experienceSystems;
@@ -21,12 +22,17 @@ contract ExperienceSystems is BeastBase {
 		
 	}	
 
+	function experienceExists( uint experienceId) internal view returns(bool) {
+        return experienceSystems[experienceId].isExperience;
+    }
+
 	// Create a new experience ExperienceSystem
 	// Impotant, ID must me unique.
 	// Default Dinosaur and Unicorn Bonus is 1
 	function createExperienceSystem(uint _id, uint _base, uint _percentaje, bool _isJustBase,
-	 bool _isJustPercentaje, uint _dinosaurBonus, uint _unicornBonus)  {
-	 	require(_isJustPercentaje == false || _isJustBase == false);
+	 bool _isJustPercentaje, uint _dinosaurBonus, uint _unicornBonus) onlyCOO {
+	 	require( !experienceExists(_id) ); // prevents destruction of existing experience with same ID
+		require(_isJustPercentaje == false || _isJustBase == false);
 			ExperienceSystem memory _experienceSystems = ExperienceSystem({
 			id: _id,
             base: _base,
@@ -34,7 +40,8 @@ contract ExperienceSystems is BeastBase {
             isJustBase: _isJustBase,
             isJustPercentaje: _isJustPercentaje,
             dinosaurBonus: _dinosaurBonus,
-            unicornBonus: _unicornBonus
+            unicornBonus: _unicornBonus,
+			isExperience: true
         });
         experienceSystems[_id] = _experienceSystems;
 	}
@@ -71,21 +78,21 @@ contract ExperienceSystems is BeastBase {
 		winnerExperienceIncrement += winnerExperienceIncrement * winnerSkills.winExperienceBonus;
 		looserExperienceIncrement += looserExperienceIncrement * looserSkills.loseExperienceBonus;
 
-		winner.experience += winnerExperienceIncrement * getExperienceBonusBasedOnRarity(winner.rarity);
-		looser.experience -= looserExperienceIncrement * getExperienceBonusBasedOnRarity(looser.rarity);
+		winner.experience += winnerExperienceIncrement * getExperienceBonusBasedOnRarity(winner.pedigree);
+		looser.experience -= looserExperienceIncrement * getExperienceBonusBasedOnRarity(looser.pedigree);
 		if(looser.experience < experienceRequiredForLevel[looser.level - 1]) {
 			looser.experience = experienceRequiredForLevel[looser.level - 1];
 		}
 	}
 
-	function getExperienceBonusBasedOnRarity(Rarity _rarity) returns uint internal {
-		if(_rarity == Rarity.Common) {
+	function getExperienceBonusBasedOnRarity(Pedigree _pedigree) internal returns(uint) {
+		if (_pedigree == Pedigree.Common) {
 			return 1
-		} else if(_rarity == Rarity.Rare) {
+		} else if(_pedigree == Pedigree.Rare) {
 			return 1.05
-		} else if(_rarity == Rarity.Epic) {
+		} else if(_pedigree == Pedigree.Epic) {
 			return 1.15
-		} else if(_rarity == Rarity.Legendary) {
+		} else if(_pedigree == Pedigree.Legendary) {
 			return 1.3
 		}
 	}
