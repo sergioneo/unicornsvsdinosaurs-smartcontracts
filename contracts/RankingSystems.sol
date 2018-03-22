@@ -18,22 +18,11 @@ contract RankingSystems is BeastBase {
     mapping (uint256 => RankingStruct) public rankings;
     uint256[] rankingsIndexes;
     
-    function getRankingIndexes() public view returns(bytes32[]) {
-        
-        bytes32[] memory returnList;
-        for (uint i = 0; i < rankingsIndexes.length; i++) {
-            bytes32 listMember = bytes32( rankingsIndexes[i] );
-            returnList[i] = listMember;
-        }
-        
-        return returnList;
-    }
-    
     mapping (uint8 => uint256) public globalRank; // races rank, index will be the bits, as int, of the race
     uint8[] globalRankIndexes;
     
     // @dev onlyCEO
-    function resetRankings() public {
+    function resetRankings() public onlyCEO {
         // reset global ranking
         for ( uint i = 0; i<globalRankIndexes.length; i++ ) {
             delete globalRank[globalRankIndexes[i]];
@@ -53,7 +42,7 @@ contract RankingSystems is BeastBase {
 
     // TODO: refactor
     // @dev: keep eye on GAS !!
-    function registerWinner( uint256 gameId, uint256 beastId ) public {
+    function registerWinner( uint256 gameId, uint256 beastId ) internal {
         
         if (!rankingExists(gameId)) { // create the ranking
             rankings[gameId].isRanking = true;
@@ -142,7 +131,7 @@ contract RankingSystems is BeastBase {
     /**
         * @dev Sort the array
         */
-    function _sort( uint256 gameId ) public {
+    function _sort( uint256 gameId ) private {
         for( uint i = 0; i < rankings[gameId].rankingList.length-1; i++ ) {
             _sort_item(gameId, i);
         }
