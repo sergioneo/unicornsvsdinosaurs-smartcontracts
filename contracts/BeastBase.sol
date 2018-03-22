@@ -137,11 +137,10 @@ contract BeastBase is AccessControl {
         uint256 _sireId,
         uint256 _generation,
         uint256 _genes,
-        Pedigree _pedigree,
         address _owner
     )
         internal
-        returns (uint)
+        returns (uint256)
     {
         // prevent overflows
         require(_matronId == uint256(uint32(_matronId)));
@@ -161,18 +160,18 @@ contract BeastBase is AccessControl {
             siringWithId: 0,
             cooldownIndex: 0,
             generation: uint16(_generation),
-            skillId: 0, 
+            skillId: 0, // TODO: Extract from Genes
             level: 1,
             preferedAttribute: 0,
-            element: 0, 
-            pedigree: _pedigree,
+            element: 0, // TODO: Extract from Genes 
+            pedigree: Pedigree.Common, // TODO: Extract from Genes
             attrs: Attrs({
-              strength: 1,
-              dexterity: 1,
-              endurance: 1,
-              knowledge: 1,
-              wisdom: 1,
-              charisma: 1
+                strength: 1,
+                dexterity: 1,
+                endurance: 1,
+                knowledge: 1,
+                wisdom: 1,
+                charisma: 1
             })
         });
         uint256 newBeastId = beasts.push(_beast) - 1;
