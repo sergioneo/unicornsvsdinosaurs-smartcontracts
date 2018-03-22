@@ -1,9 +1,11 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.18;
 contract GeneMagic {
     
     uint8 constant BEAST_TYPE_LENGTH = 2;
     uint8 constant GENE_BASE_LENGTH = 254;
     
+    bool public isGeneMagic = true;
+
     struct attributeDefinition {
         string name;
         uint8 size;
@@ -34,7 +36,7 @@ contract GeneMagic {
         return getLastBits(genes, BEAST_TYPE_LENGTH);
     }
     
-    function mixGene(uint16 geneMother, uint16 geneFather, uint[] attributeProbabilities) private view returns (uint16){
+    function mixGene(uint16 geneMother, uint16 geneFather, uint[] attributeProbabilities) private view returns (uint16) {
         uint[] memory actualProbabilities = attributeProbabilities;
         uint arraySum = 0;
         for (uint i = 0; i < attributeProbabilities.length; i++) {
@@ -129,7 +131,7 @@ contract GeneMagic {
     function numberOfAttributes(uint8 target) public constant returns (uint) {
         if (target == 0) {
             return dinosaurs_attribute_list.length;
-        } else if (target == 1){
+        } else if (target == 1) {
             return unicorns_attribute_list.length;
         } else {
             revert();
