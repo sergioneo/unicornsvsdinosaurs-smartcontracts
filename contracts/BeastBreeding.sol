@@ -1,7 +1,7 @@
 pragma solidity ^0.4.18;
 
 import './BeastOwnership.sol';
-import './interface/GeneScienceInterface.sol';
+import './interface/GeneMagicInterface.sol';
 import './util/Random.sol';
 
 contract BeastBreeding is Random, BeastOwnership {
@@ -20,18 +20,18 @@ contract BeastBreeding is Random, BeastOwnership {
 
     /// @dev The address of the sibling contract that is used to implement the sooper-sekret
     ///  genetic combination algorithm.
-    GeneScienceInterface public geneScience;
+    GeneMagicInterface public geneMagic;
 
     /// @dev Update the address of the genetic contract, can only be called by the CEO.
     /// @param _address An address of a GeneScience contract instance to be used from this point forward.
-    function setGeneScienceAddress(address _address) external onlyCEO {
-        GeneScienceInterface candidateContract = GeneScienceInterface(_address);
+    function setGeneMagicAddress(address _address) external onlyCEO {
+        GeneMagicInterface candidateContract = GeneMagicInterface(_address);
 
         // NOTE: verify that a contract is what we expect - https://github.com/Lunyr/crowdsale-contracts/blob/cfadd15986c30521d8ba7d5b6f57b4fefcc7ac38/contracts/LunyrToken.sol#L117
-        require(candidateContract.isGeneScience());
+        require(candidateContract.isGeneMagic());
 
         // Set the new contract address
-        geneScience = candidateContract;
+        geneMagic = candidateContract;
     }
 
     /// @dev Checks that a given beast is able to breed. Requires that the
@@ -270,12 +270,7 @@ contract BeastBreeding is Random, BeastOwnership {
         require(_isReadyToBreed(sire));
 
         // Test that these cats are a valid mating pair.
-        require(_isValidMatingPair(
-            matron,
-            _matronId,
-            sire,
-            _sireId
-        ));
+        require(_isValidMatingPair(matron, _matronId, sire, _sireId));
 
         // All checks passed, beast gets pregnant!
         _breedWith(_matronId, _sireId);
@@ -317,12 +312,9 @@ contract BeastBreeding is Random, BeastOwnership {
         //uint256 childGenes = geneScience.mixGenes(matron.genes, sire.genes, matron.cooldownEndBlock - 1);
         uint256 childGenes = random(1000000000000000);
 
-        //TODO: Calculate pedigree based on geneScience
-        Pedigree _pedigree = Pedigree.Common; // Change to Calculated one
-
         // Make the new beast!
         address owner = beastIndexToOwner[_matronId];
-        uint256 beastId = _createBeast(_matronId, matron.siringWithId, parentGen + 1, childGenes, _pedigree, owner);
+        uint256 beastId = _createBeast(_matronId, matron.siringWithId, parentGen + 1, childGenes, owner);
 
         // Clear the reference to sire from the matron (REQUIRED! Having siringWithId
         // set is what marks a matron as being pregnant.)
