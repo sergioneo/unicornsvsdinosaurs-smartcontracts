@@ -19,6 +19,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 		uint charismaPonderation;
 		uint randomFactor; // How much you can add to the sum calculation.
 		uint experienceSystemId;
+		bool isChallenge;
 	}
 
 	mapping (uint => Challenge) public challenges;
@@ -32,11 +33,16 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 		
 	}	
 
+	function challengeExists( uint challengeId) internal view returns(bool) {
+        return challenges[challengeId].isChallenge;
+    }
+
 	// Create a new challenge, important to have Unique ID
 	function createChallenge(uint _id, string _name, uint _minLevelRequired, uint _strengthPonderation, uint _dexterityPonderation,
 	 uint _endurancePonderation, uint _knowledgePonderation, uint _wisdomPonderation, uint _charismaPonderation,
 	 uint _randomFactor, uint _experienceSystemId) 
 	external onlyCOO {
+		require( !challengeExists(_id) ); // prevents destruction of existing challenge with same ID
 		Challenge memory _challenge = Challenge({
 			id: _id,
             name: _name,
@@ -49,7 +55,8 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
             wisdomPonderation: _wisdomPonderation,
             charismaPonderation: _charismaPonderation,
             randomFactor: _randomFactor,
-            experienceSystemId: _experienceSystemId
+            experienceSystemId: _experienceSystemId,
+			isChallenge: true
         });
         challenges[_id] = _challenge;
 	}
