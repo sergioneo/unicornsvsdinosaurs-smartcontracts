@@ -1,7 +1,7 @@
 pragma solidity ^0.4.18;
 
 import './BeastBase.sol';
-import './SkillsSystems.sol';
+import './SkillsSystem.sol';
 
 contract ExperienceSystems is BeastBase {
 
@@ -87,17 +87,17 @@ contract ExperienceSystems is BeastBase {
 
 	function getExperienceBonusBasedOnRarity(Pedigree _pedigree) internal returns(uint) {
 		if (_pedigree == Pedigree.Common) {
-			return 1
+			return 1;
 		} else if(_pedigree == Pedigree.Rare) {
-			return 1.05
+			return 1.05;
 		} else if(_pedigree == Pedigree.Epic) {
-			return 1.15
+			return 1.15;
 		} else if(_pedigree == Pedigree.Legendary) {
-			return 1.3
+			return 1.3;
 		}
 	}
 
-	function calculateLevel(uint _experience, uint _currentLevel) returns uint internal {
+	function calculateLevel(uint _experience, uint _currentLevel) internal returns(uint) {
 		if(_experience >= experienceRequiredForLevel[_currentLevel - 1]) {
 			return _currentLevel + 1;
 		} else {

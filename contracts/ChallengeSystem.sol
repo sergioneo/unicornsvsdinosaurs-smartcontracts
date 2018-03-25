@@ -2,7 +2,7 @@ pragma solidity ^0.4.18;
 
 import './BeastBase.sol';
 import './ExperienceSystems.sol';
-import './SkillsSystems.sol';
+import './SkillsSystem.sol';
 
 contract ChallengeSystem is AccessControl, ExperienceSystems {
 
@@ -133,14 +133,12 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
   	function elementBonus(uint _challengerId, uint _challengedId) returns(uint) {
   		Beast storage _challenger = beasts[_challengerId];
 		Beast storage _challenged = beasts[_challengedId];
-		if((_challenger.element == 0 && _challenged.element == 1) || (_challenger.element == 1 && _challenged.element == 2) 
-			|| (_challenger.element == 2 && _challenged.element == 3) || (_challenger.element == 3 && _challenged.element == 0)) {
-			return _challengerId
-		} else ((_challenger.element == 1 && _challenged.element == 0) || (_challenger.element == 2 && _challenged.element == 1) 
-			|| (_challenger.element == 3 && _challenged.element == 2) || (_challenger.element == 0 && _challenged.element == 3)) {
-			return _challengedId
+		if ((_challenger.element == 0 && _challenged.element == 1) || (_challenger.element == 1 && _challenged.element == 2) || (_challenger.element == 2 && _challenged.element == 3) || (_challenger.element == 3 && _challenged.element == 0)) {
+			return _challengerId;
+		} else if ((_challenger.element == 1 && _challenged.element == 0) || (_challenger.element == 2 && _challenged.element == 1) || (_challenger.element == 3 && _challenged.element == 2) || (_challenger.element == 0 && _challenged.element == 3)) {
+			return _challengedId;
 		} else {
-			return 0
+			return 0;
 		}
   	}
 
