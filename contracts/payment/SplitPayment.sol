@@ -45,6 +45,7 @@ contract SplitPayment {
     	require(this.balance >= payment);
     	payee.transfer(payment);
     }
+    owner.transfer(this.balance);
   }
 
   /**
