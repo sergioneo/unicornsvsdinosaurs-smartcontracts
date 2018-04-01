@@ -8,9 +8,7 @@ contract BeastMinting is Random, BeastAuction {
 
     event UniEggBought();
     event DinoEggBought();
-
     event EggOpened(uint256 legendId);
-
     event PromoBeastCreated(uint256 legendId);
     event RandomBoxOpened(uint256 legendId);
     event LegendaryRandomBoxOpened(uint256 legendId);
