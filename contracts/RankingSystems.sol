@@ -8,7 +8,7 @@ contract RankingSystems is BeastBase {
 
     struct RankingStruct {
         mapping (bytes32 => uint256) rankingCount; // beastId => winnings
-        uint256[4] rankingList; // beastIds
+        uint256[TOP_RANK_PER_GAME] rankingList; // beastIds
         uint256 minToRank;
         uint256 mappingVersion;
         bool isRanking;
