@@ -2,8 +2,7 @@ pragma solidity ^0.4.18;
 
 import './BeastBase.sol';
 
-
-contract BeastAttributes is AccessControl {
+contract BeastAttributes is BeastBase {
     /*** EVENTS ***/
 
 
@@ -38,21 +37,21 @@ contract BeastAttributes is AccessControl {
     ];
 
     // Return Skill Value based on Attribute ID for specific beast
-    function skillValue(uint _attributeID, uint _tokenId) returns (uint) {
+    function skillValue(uint _attributeID, uint _tokenId) public returns (uint) {
         Beast storage _beast = beasts[_tokenId];
-            if(_attributeID == 1) {
-                return _beast.attrs.strength;
-            } else if(_attributeID == 2) {
-                return _beast.attrs.dexterity;
-            } else if(_attributeID == 3) {
-                return _beast.attrs.endurance;
-            } else if(_attributeID == 4) {
-                return _beast.attrs.knowledge;
-            } else if(_attributeID == 5) {
-                return _beast.attrs.wisdom;
-            } else if(_attributeID == 6) {
-                return _beast.attrs.charisma;
-            }
+        if (_attributeID == 1) {
+            return _beast.attrs.strength;
+        } else if(_attributeID == 2) {
+            return _beast.attrs.dexterity;
+        } else if(_attributeID == 3) {
+            return _beast.attrs.endurance;
+        } else if(_attributeID == 4) {
+            return _beast.attrs.knowledge;
+        } else if(_attributeID == 5) {
+            return _beast.attrs.wisdom;
+        } else if(_attributeID == 6) {
+            return _beast.attrs.charisma;
+        }
     }
 
 
@@ -62,19 +61,19 @@ contract BeastAttributes is AccessControl {
         // emit the Level event
         Level(_tokenId, _toLevel -1, _toLevel);
         // Add Prefered Skills
-            if(_beast.preferedAttribute == 1) {
-                _beast.attrs.strength += 1;
-            } else if(_beast.preferedAttribute == 2) {
-                _beast.attrs.dexterity += 1;
-            } else if(_beast.preferedAttribute == 3) {
-                _beast.attrs.endurance += 1;
-            } else if(_beast.preferedAttribute == 4) {
-                _beast.attrs.knowledge += 1;
-            } else if(_beast.preferedAttribute == 5) {
-                _beast.attrs.wisdom += 1;
-            } else if(_beast.preferedAttribute == 6) {
-                _beast.attrs.charisma += 1;
-            }
+        if(_beast.preferedAttribute == 1) {
+            _beast.attrs.strength += 1;
+        } else if(_beast.preferedAttribute == 2) {
+            _beast.attrs.dexterity += 1;
+        } else if(_beast.preferedAttribute == 3) {
+            _beast.attrs.endurance += 1;
+        } else if(_beast.preferedAttribute == 4) {
+            _beast.attrs.knowledge += 1;
+        } else if(_beast.preferedAttribute == 5) {
+            _beast.attrs.wisdom += 1;
+        } else if(_beast.preferedAttribute == 6) {
+            _beast.attrs.charisma += 1;
+        }
         // Add remaining Random Skills
         for(uint i = 0; i < 3; i++) {
             uint randomAttribute = uint(keccak256(block.difficulty, now, beasts, i, _tokenId)) % 6 + 1;
@@ -94,12 +93,14 @@ contract BeastAttributes is AccessControl {
         }
     }
 
-    function changePreferedAttribute(uint _tokenId, uint _preferedAttribute) onlyOwner {
+    function changePreferedAttribute(uint _tokenId, uint _preferedAttribute) public {
+        require(beastIndexToOwner[_tokenId] == msg.sender);
+
         Beast storage _beast = beasts[_tokenId];
         require(_beast.preferedAttribute != _preferedAttribute);
         require(_preferedAttribute <= 6 || _preferedAttribute > 0);
         // emit the Level event
         ChangePreferedAttribute(_tokenId, _beast.preferedAttribute, _preferedAttribute);
-        _beast.preferedAttribute = _preferedAttribute;
+        _beast.preferedAttribute = uint8(_preferedAttribute);
     }
 }
