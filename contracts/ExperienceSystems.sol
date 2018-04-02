@@ -45,8 +45,8 @@ contract ExperienceSystems is Random, BeastAttributes, SkillsSystem{
     // Calculate experience based on system ID and modify winner and looser experiece attribute
     function calculateExperience(uint _experienceSystemId, uint256 _winnerId, uint256 _looserId) internal {
         ExperienceSystem memory _experienceSystem = experienceSystems[_experienceSystemId];
-        Beast storage winner =     [_winnerId];
-        Beast storage looser =     [_looserId];
+        Beast storage winner = beasts[_winnerId];
+        Beast storage looser = beasts[_looserId];
 
         // TODO: Here we need to assing Dinosaur or Unicorn bonus, but we need to check from ADN wich
         // one is Dinosaur and wich one is Unicorn
@@ -117,16 +117,18 @@ contract ExperienceSystems is Random, BeastAttributes, SkillsSystem{
      */
     uint constant DIVIDER = 10;
     mapping( uint => uint256[] ) private suggestionsList;
+    mapping( uint256 => uint256 ) private suggestionsIndexOfBeast;
     mapping( uint256 => uint ) private beastRange;
 
     uint[] private activeRanges;
     uint private maxRange;
 
-    function getRandomSuggestionBattles(uint256 _beastId) public view returns (bytes32[6]) {
+    // must not consume gas !!
+    function getRandomSuggestionBattles(uint256 _beastId) public returns (bytes32[6]) {
 
         bytes32[6] memory suggestionList;
         uint currentRange = beastRange[_beastId];
-        uint lowerRange = currentRange - 1 <= 0 ? 0 : currentRange - 1;
+        uint lowerRange = currentRange - 1 <= 1 ? 1 : currentRange - 1;
         uint upperRange = currentRange + 1 >= maxRange ? maxRange : currentRange + 1;
 
         uint256 lenLowerRange = suggestionsList[lowerRange].length - 1;
@@ -135,25 +137,29 @@ contract ExperienceSystems is Random, BeastAttributes, SkillsSystem{
         suggestionList[0] = bytes32(suggestionsList[lowerRange][random(lenLowerRange)]);
         suggestionList[1] = bytes32(suggestionsList[lowerRange][random(lenLowerRange)]);
         suggestionList[2] = bytes32(suggestionsList[lowerRange][random(lenLowerRange)]);
-        suggestionList[3] = bytes32(suggestionsList[lowerRange][random(lenUpperRange)]);
-        suggestionList[4] = bytes32(suggestionsList[lowerRange][random(lenUpperRange)]);
-        suggestionList[5] = bytes32(suggestionsList[lowerRange][random(lenUpperRange)]);
+        suggestionList[3] = bytes32(suggestionsList[upperRange][random(lenUpperRange)]);
+        suggestionList[4] = bytes32(suggestionsList[upperRange][random(lenUpperRange)]);
+        suggestionList[5] = bytes32(suggestionsList[upperRange][random(lenUpperRange)]);
 
         return suggestionList;
     }
-    
+
     function _addToSuggestionList(uint64 _beastExp, uint _beastId) internal {
-        uint range = uint(_beastExp/DIVIDER);
+        uint range = uint(_beastExp/DIVIDER) + 1; // range start from 1 to avoid problems with defaults values of 0s 
         _addToActiveRanges(range);
-        
-        _deleteFromSuggestionsList(beastRange[_beastId], _beastId);
-        suggestionsList[range].push(_beastId);
-        beastRange[_beastId] = range;
+        if( beastRange[_beastId] != range ) { // if beast change range
+            if( beastRange[_beastId] > 0 ) {
+                _deleteFromSuggestionsList(beastRange[_beastId], _beastId);
+            }
+            uint256 newIndex = suggestionsList[range].push(_beastId);
+            suggestionsIndexOfBeast[_beastId] = newIndex - 1;
+            beastRange[_beastId] = range; 
+        }
     }
 
     function _deleteFromSuggestionsList(uint range, uint256 _beastId) internal {
-        delete suggestionsList[range][_beastId];
-        suggestionsList[range][_beastId] = suggestionsList[range][suggestionsList[range].length-1];
+        delete suggestionsList[range][suggestionsIndexOfBeast[_beastId]];
+        suggestionsList[range][suggestionsIndexOfBeast[_beastId]] = suggestionsList[range][suggestionsList[range].length-1];
         suggestionsList[range].length--;
     }
 
@@ -164,7 +170,7 @@ contract ExperienceSystems is Random, BeastAttributes, SkillsSystem{
         maxRange = _maxValueInArray(activeRanges);
     }
 
-    function _maxValueInArray(uint[] arrayToSearch) private returns (uint) {
+    function _maxValueInArray(uint[] arrayToSearch) private pure returns (uint) {
         uint max = 0;
         for( uint i = 0; i < arrayToSearch.length; i++ ){
             if( arrayToSearch[i] > max ){
@@ -174,7 +180,7 @@ contract ExperienceSystems is Random, BeastAttributes, SkillsSystem{
         return max;
     } 
 
-    function _valueExistsInArray(uint[] arrayToSearch, uint valueToSearch) private returns (bool) {
+    function _valueExistsInArray(uint[] arrayToSearch, uint valueToSearch) private pure returns (bool) {
         for( uint i = 0; i < arrayToSearch.length; i++ ){
             if( arrayToSearch[i] == valueToSearch ){
                 return true;
