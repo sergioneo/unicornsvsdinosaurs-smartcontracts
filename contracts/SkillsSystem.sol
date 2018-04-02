@@ -30,10 +30,8 @@ contract SkillsSystem is AccessControl {
     }
 
     // Create a new skill, important to have Unique ID
-    function createSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _attributeBonus, uint _winExperienceBonus, 
-        uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, 
-        bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) public onlyCOO {
-        require( !skillExists(_id) ); // prevents destruction of existing skill with same ID
+    function createSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _attributeBonus, uint _winExperienceBonus, uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) public onlyCOO {
+        require(!skillExists(_id)); // prevents destruction of existing skill with same ID
         Skill memory _skill = Skill({
             id: _id,
             name: _name,
@@ -57,9 +55,7 @@ contract SkillsSystem is AccessControl {
     }
 
     // Edit a  skill, important to have Unique ID
-    function editSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _attributeBonus, uint _winExperienceBonus, 
-        uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, 
-        bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) external onlyCOO {
+    function editSkill(uint _id, string _name, uint _attirbuteId, bool _addAttributePercentaje, uint _attributeBonus, uint _winExperienceBonus, uint _loseExperienceBonus, uint _elementalAdvantageBonus, uint _elementalDisadvantageBonus, uint _randomAttributeBonus, bool _has5LevelBonus, bool _preferedAttributeIncreasedChance, bool _fertileSpeedBonus, bool _dominantGene, bool _recesiveGene) external onlyCOO {
 
         Skill storage _skill = skills[_id];
         _skill.name = _name;

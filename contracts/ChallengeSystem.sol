@@ -27,22 +27,15 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
     modifier ownerOf(uint _beastId) {
         require(msg.sender == beastIndexToOwner[_beastId]);
         _;
-    }
-
-    function ChallengeSystem () {
-        
-    }    
+    }   
 
     function challengeExists( uint challengeId) internal view returns(bool) {
         return challenges[challengeId].isChallenge;
     }
 
     // Create a new challenge, important to have Unique ID
-    function createChallenge(uint _id, string _name, uint _minLevelRequired, uint _strengthPonderation, uint _dexterityPonderation,
-    uint _endurancePonderation, uint _knowledgePonderation, uint _wisdomPonderation, uint _charismaPonderation,
-    uint _randomFactor, uint _experienceSystemId) 
-    external onlyCOO {
-        require( !challengeExists(_id) ); // prevents destruction of existing challenge with same ID
+    function createChallenge(uint _id, string _name, uint _minLevelRequired, uint _strengthPonderation, uint _dexterityPonderation, uint _endurancePonderation, uint _knowledgePonderation, uint _wisdomPonderation, uint _charismaPonderation, uint _randomFactor, uint _experienceSystemId) external onlyCOO {
+        require(!challengeExists(_id)); // prevents destruction of existing challenge with same ID
         Challenge memory _challenge = Challenge({
             id: _id,
             name: _name,
@@ -71,8 +64,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
     }
 
     // Function that executes a challenge, here we calculate winner and handle Exp + Ranking.
-    function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) 
-    external ownerOf(_challengerId) returns(uint) {
+    function challengeBeast(uint _challengerId, uint _challengedId, uint _challengeId) external ownerOf(_challengerId) returns(uint) {
         require(challenges[_challengeId].isActive == true);
 
         Challenge memory _challenge = challenges[_challengeId];
@@ -80,7 +72,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
 
         Beast storage _challenger = beasts[_challengerId];
         Beast storage _challenged = beasts[_challengedId];
-        uint challengerBonus = 0;
+        //uint challengerBonus = 0;
 
         uint challengerSum = _challenge.strengthPonderation * _challenger.attrs.strength;
         challengerSum += _challenge.dexterityPonderation * _challenger.attrs.dexterity;
@@ -130,7 +122,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
     // Fire bonus over Air
     // Air bonus over Earth
     // Earth bonus over Water
-    function elementBonus(uint _challengerId, uint _challengedId) returns(uint) {
+    function elementBonus(uint _challengerId, uint _challengedId) internal returns(uint) {
         Beast storage _challenger = beasts[_challengerId];
         Beast storage _challenged = beasts[_challengedId];
         if ((_challenger.element == 0 && _challenged.element == 1) || (_challenger.element == 1 && _challenged.element == 2) || (_challenger.element == 2 && _challenged.element == 3) || (_challenger.element == 3 && _challenged.element == 0)) {
@@ -142,7 +134,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
         }
     }
 
-    function skillAttributeBonus(uint _beastId) returns(uint) {
+    function skillAttributeBonus(uint _beastId) internal returns(uint) {
         Beast memory _beast = beasts[_beastId];
         Skill memory skill = skills[_beast.skillId];
         if (skill.addAttributePercentaje == true) {
@@ -152,7 +144,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
         }
     }
 
-    function skillElementBonus(uint _challengerId, uint _challengedId) returns(uint) {
+    function skillElementBonus(uint _challengerId, uint _challengedId) internal returns(uint) {
         Beast storage _challenger = beasts[_challengerId];
         Beast storage _challenged = beasts[_challengedId];
 
