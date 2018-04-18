@@ -14,14 +14,16 @@ contract BeastMinting is Random, BeastAuction {
     event LegendaryRandomBoxOpened(uint256 legendId);
 
     // Limits the number of beast the contract owner can ever create.
-    uint256 public constant PROMO_CREATION_LIMIT = 1000;
+    uint256 public constant PROMO_CREATION_LIMIT = 100;
 
-    // Limits the number of eggs that will exists.
+    // Limits the number of eggs that will exists (unis AND dinos)
     uint256 public constant EGGS_LIMIT = 4000;
     // Base price of the eggs
     uint256 public constant EGGS_PRICE_INCREASE = 500000000000000;
     // Increate amount after bought one egg
     uint256 public constant EGGS_PRICE_BASE = 3000000000000000;
+    // Max eggs than can be bought at the same time
+    uint public constant EGGS_MAX_BOUGHT = 5;
 
     mapping (address => uint256) uniEggsOwned; // Amount of uni eggs owned by an address
     mapping (address => uint256) dinoEggsOwned; // Amount of dino eggs owned by an address
@@ -53,8 +55,8 @@ contract BeastMinting is Random, BeastAuction {
         require(_owner != address(0));
         require(promoBeastCreatedCount < PROMO_CREATION_LIMIT);
 
-        promoBeastCreatedCount++;
         uint256 legendId = _createBeast(0, 0, 0, _genes, _owner);
+        promoBeastCreatedCount++;
         emit PromoBeastCreated(legendId);
     }
 
@@ -96,6 +98,17 @@ contract BeastMinting is Random, BeastAuction {
     }
 
     /**
+     * Bought multiple Uni egg
+     * @dev amount of eggs must increase on an address
+     */
+    function buyUniEggs() external payable {
+        require(eggsCanBeBought == true);
+        require((getCurrentUniEggPrice()*EGGS_MAX_BOUGHT) == msg.value);
+        eggsUniBoughtCount += EGGS_MAX_BOUGHT;
+        uniEggsOwned[msg.sender] += EGGS_MAX_BOUGHT;
+    }
+
+    /**
      * Hatch an owned Uni egg
      * @dev genes MUST be of Uni
      */
@@ -125,6 +138,17 @@ contract BeastMinting is Random, BeastAuction {
         require(getCurrentDinoEggPrice() == msg.value);
         eggsDinoBoughtCount++;
         dinoEggsOwned[msg.sender]++;
+    }
+
+    /**
+     * Bought multiple Dino egg
+     * @dev amount of eggs must increase on an address
+     */
+    function buyDinoEggs() external payable {
+        require(eggsCanBeBought == true);
+        require((getCurrentDinoEggPrice()*EGGS_MAX_BOUGHT) == msg.value);
+        eggsDinoBoughtCount += EGGS_MAX_BOUGHT;
+        dinoEggsOwned[msg.sender] += EGGS_MAX_BOUGHT;
     }
 
     /**
