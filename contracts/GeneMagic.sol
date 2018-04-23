@@ -3,6 +3,35 @@ contract GeneMagic {
     
     uint8 constant BEAST_TYPE_LENGTH = 2;
     uint8 constant GENE_BASE_LENGTH = 254;
+    uint8 constant GENE_SIZE = 5;
+    uint8 constant RECESSIVE_GENE_ABILITY = 12;
+    uint8 constant DOMINANT_GENE_ABILITY = 23;
+
+    // PROBABILITIES FOR ABILITIES
+    uint256[32] abilities = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+        
+    // PROBABILITIES FOR ELEMENTS
+    uint256[32] elements = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+        
+    // PROBABILITIES FOR UNICORNS
+    uint256[32] u_type = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_eyes = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_horn = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_hair = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_tail = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_snout = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_legs = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+
+    // PROBABILITIES FOR DINOSAURS
+    uint256[32] d_type = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_eyes = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_nose = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_mouth = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_tail = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_plume = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_legs = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_spikes = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_wings = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
     
     bool public isGeneMagic = true;
 
@@ -15,87 +44,343 @@ contract GeneMagic {
     attributeDefinition[] private dinosaurs_attribute_list;
     attributeDefinition[] private unicorns_attribute_list;
     
-    function randomNumber(uint a, uint b) public constant returns (int) {
-        return int(uint((block.timestamp - a)%b));
+    /**
+     * Performs Gene Magic between two gene sequences.
+     * @param genesMother - The gene sequence of the mother
+     * @param genesFather - The gene sequence of the father
+     * @param incubatorId - The id of the incubator
+     * @return {uint256} The gene configuration of the child
+    */
+    function mixGenes(uint256 genesMother, uint256 genesFather, uint16 incubatorId) public returns (uint256) {
+        uint8 beastTypeMother = getBeastType(genesMother);
+        uint8 beastTypeFather = getBeastType(genesFather);
+        if (beastTypeFather != beastTypeMother) {
+            revert();
+        }
+        
+        uint baseMother = remainingGenes(genesMother, BEAST_TYPE_LENGTH);
+        uint baseFather = remainingGenes(genesFather, BEAST_TYPE_LENGTH);
+        uint256 mixedGenes = 0;
+        if (beastTypeMother == 0) {
+            mixedGenes = mixGenesDinosaurs(baseMother, baseFather, incubatorId);
+        } else {
+            mixedGenes = mixGenesUnicorns(baseMother, baseFather, incubatorId);
+        }
+        
+        return mixedGenes*2**(BEAST_TYPE_LENGTH) + beastTypeMother;
+    }
+
+    /**
+     * Creates a brand new gene sequence
+     * @param beastType - The beast type of this new beast
+     * @return {uint256} The gene configuration of the new beast
+    */
+    function createGenes(uint8 beastType) public returns(uint256) {
+        uint256 mixedGenes = 0;
+        if (beastType == 0) {
+            mixedGenes = createGenesDinosaur();
+        } else {
+            mixedGenes = createGenesUnicorn();
+        }
+        return mixedGenes*2**(BEAST_TYPE_LENGTH) + beastType;
+    }
+
+    /**
+     * Auxiliary function - Creates a brand new gene unicorn sequence
+     * @return {uint256} The gene configuration of the new unicorn
+    */
+    function createGenesUnicorn() private returns(uint256) {
+        uint256 newGenes = 0;
+        
+        // Ability
+        newGenes = newGenes * 2**GENE_SIZE + createGene(abilities);
+        
+        // Element
+        newGenes = newGenes * 2**GENE_SIZE + createGene(elements);
+        
+        // Type
+        newGenes = newGenes * 2**GENE_SIZE + createGene(u_type);
+        
+        // Eyes
+        newGenes = newGenes * 2**GENE_SIZE + createGene(u_eyes);
+        
+        // Horn
+        newGenes = newGenes * 2**GENE_SIZE + createGene(u_horn);
+        
+        // Hair
+        newGenes = newGenes * 2**GENE_SIZE + createGene(u_hair);
+        
+        // Tail
+        newGenes = newGenes * 2**GENE_SIZE + createGene(u_tail);
+        
+        // Snout
+        newGenes = newGenes * 2**GENE_SIZE + createGene(u_snout);
+        
+        // Legs
+        newGenes = newGenes * 2**GENE_SIZE + createGene(u_legs);
+    
+        return newGenes;
     }
     
-    function getBits(uint256 src, uint start, uint length) public pure returns (uint256){
-        uint256 shifted = src / 2**start;
-        return shifted & uint256(2 ** length - 1);
+    /**
+     * Auxiliary function - Performs Gene Magic between two unicorn gene sequences.
+     * @param genesMother - The gene sequence of the unicorn mother
+     * @param genesFather - The gene sequence of the unicorn father
+     * @param incubatorId - The id of the incubator
+     * @return {uint256} The gene configuration of the unicorn child
+    */
+    function mixGenesUnicorns(uint256 genesMother, uint256 genesFather, uint16 incubatorId) private returns(uint256) {
+        
+        
+        if (incubatorId < 4) {
+            elements[incubatorId] *= 3;
+        }
+
+        uint16 abilityFather = catchNextGene(genesFather);
+        uint16 abilityMother = catchNextGene(genesMother);
+        uint256 newGenes = 0;
+        
+        // Ability
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, abilities, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Element
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, elements, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Type
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_type, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Eyes
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_eyes, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Horn
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_horn, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Hair
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_hair, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Tail
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_tail, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Snout
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_snout, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Legs
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_legs, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+    
+        return newGenes;
     }
     
-    function getLastBits(uint256 src, uint n) public pure returns (uint256) {
-        return src / 2 ** n;
-    }
+    /**
+     * Auxiliary function - Creates a brand new gene dinosaur sequence
+     * @return {uint256} The gene configuration of the new dinosaur
+    */
+    function createGenesDinosaur() private returns(uint256) {
+        uint256 newGenes = 0;
+        
+        // Ability
+        newGenes = newGenes * 2**GENE_SIZE + createGene(abilities);
+        
+        // Element
+        newGenes = newGenes * 2**GENE_SIZE + createGene(elements);
+        
+        // Type
+        newGenes = newGenes * 2**GENE_SIZE + createGene(d_type);
+        
+        // Eyes
+        newGenes = newGenes * 2**GENE_SIZE + createGene(d_eyes);
+        
+        // Nose
+        newGenes = newGenes * 2**GENE_SIZE + createGene(d_nose);
+        
+        // Mouth
+        newGenes = newGenes * 2**GENE_SIZE + createGene(d_mouth);
+        
+        // Tail
+        newGenes = newGenes * 2**GENE_SIZE + createGene(d_tail);
+        
+        // Plume
+        newGenes = newGenes * 2**GENE_SIZE + createGene(d_plume);
+        
+        // Legs
+        newGenes = newGenes * 2**GENE_SIZE + createGene(d_legs);
+        
+        // Spikes
+        newGenes = newGenes * 2**GENE_SIZE + createGene(d_spikes);
+        
+        // Wings
+        newGenes = newGenes * 2**GENE_SIZE + createGene(d_wings);
     
-    function getBeastType(uint256 genes) public pure returns (uint8) {
-        return uint8(getBits(genes, 0, BEAST_TYPE_LENGTH));
+        return newGenes;
     }
-    
-    function getGeneBase(uint256 genes) public pure returns (uint256) {
-        return getLastBits(genes, BEAST_TYPE_LENGTH);
-    }
+ 
+    /**
+     * Auxiliary function - Performs Gene Magic between two dinosaur gene sequences.
+     * @param genesMother - The gene sequence of the dinosaur mother
+     * @param genesFather - The gene sequence of the dinosaur father
+     * @param incubatorId - The id of the incubator
+     * @return {uint256} The gene configuration of the dinosaur child
+    */
+    function mixGenesDinosaurs(uint256 genesMother, uint256 genesFather, uint16 incubatorId) private returns(uint256) {
+        if (incubatorId < 4) {
+            elements[incubatorId] *= 3;
+        }
+
+        uint16 abilityFather = catchNextGene(genesFather);
+        uint16 abilityMother = catchNextGene(genesMother);
+        uint256 newGenes = 0;
+        
+        // Ability
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, abilities, false, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Element
+
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, elements, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Type
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_type, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Eyes
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_eyes, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Nose
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_nose, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Mouth
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_mouth, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Tail
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_tail, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Plume
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_plume, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Legs
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_legs, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Spikes
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_spikes, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+        
+        // Wings
+        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_wings, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
     
     function mixGene(uint16 geneMother, uint16 geneFather, uint[] attributeProbabilities) private view returns (uint16) {
         uint[] memory actualProbabilities = attributeProbabilities;
         uint arraySum = 0;
         for (uint i = 0; i < attributeProbabilities.length; i++) {
-            if (geneMother == i || geneFather == i) {
-                actualProbabilities[i] = 2*attributeProbabilities[i];
-            } else {
-                actualProbabilities[i] = attributeProbabilities[i];
+            total += attributeProbabilities[i];
+        }
+        
+        int _randomNumber = int(randomNumber(total));
+        
+        uint16 r = 32;
+        
+        for (uint z = 0; z < attributeProbabilities.length; z++) {
+            _randomNumber -= int(attributeProbabilities[z]);
+            if (_randomNumber <= 0) {
+                r = uint16(z);
+                break;
             }
-            arraySum += actualProbabilities[i];
         }
-        int256 dice = randomNumber(1, arraySum);
-        for (uint j = 0; j < actualProbabilities.length; j++) {
-            dice -= int256(actualProbabilities[j]);
-            if (dice <= 0) {
-                return uint16(j);
+        
+        if (r == 32) {
+            r = 0;
+        }
+        
+        return r;
+    }
+
+    /**
+     * Mixes two genes using a density function.
+     * @param genesMother - The gene sequence of the dinosaur mother
+     * @param genesFather - The gene sequence of the dinosaur father
+     * @param attributeProbabilities - The probability distribution of the gene values.
+     * @return {uint16} The new gene value
+    */
+    function mixGene(uint256 genesMother, uint256 genesFather, uint[32] attributeProbabilities, bool useAbilities, uint16 abilityMother, uint16 abilityFather) private returns(uint16) {
+        
+        mixesMade++;
+        
+        uint16 geneMother = catchNextGene(genesMother);
+        uint16 geneFather = catchNextGene(genesFather);
+        
+        for (uint j = 0; j < attributeProbabilities.length; j++) {
+            if (attributeProbabilities[j] == uint(geneFather)) {
+                attributeProbabilities[j] *= 2;
+            } else if (attributeProbabilities[j] == uint(geneMother)) {
+                attributeProbabilities[j] *= 2;
             }
+
+            if (useAbilities) {
+                if (abilityFather == RECESSIVE_GENE_ABILITY && attributeProbabilities[j] == uint(geneFather)) {
+                    attributeProbabilities[j] /= 2;
+                } else if (abilityFather == DOMINANT_GENE_ABILITY && attributeProbabilities[j] == uint(geneFather)) {
+                    attributeProbabilities[j] *= 2;
+                }
+
+                if (abilityMother == RECESSIVE_GENE_ABILITY && attributeProbabilities[j] == uint(geneMother)) {
+                    attributeProbabilities[j] /= 2;
+                } else if (abilityMother == DOMINANT_GENE_ABILITY && attributeProbabilities[j] == uint(geneMother)) {
+                    attributeProbabilities[j] *= 2;
+                }
+            }
+
         }
-        return uint16(actualProbabilities.length - 1);
-    }
-    
-    function mixGenes(uint256 genesMother, uint256 genesFather) public constant returns(uint256) {
-        uint8 beastTypeMother = getBeastType(genesMother);
-        if (beastTypeMother != getBeastType(genesFather)) {
-            revert();
+        
+        uint total = 0;
+        for (uint i = 0; i < attributeProbabilities.length; i++) {
+            total += attributeProbabilities[i];
         }
-        attributeDefinition[] memory attributeList;
-        if (beastTypeMother == uint8(0)) {
-            attributeList = dinosaurs_attribute_list;
-        } else if (beastTypeMother == uint8(0)) {
-            attributeList = unicorns_attribute_list;
-        }
-        uint256 childGeneBase = 0;
-        uint256 fatherGeneBase = getGeneBase(genesFather);
-        uint256 motherGeneBase = getGeneBase(genesMother);
-        uint startingPosition = 0;
-        for (uint i = 0; i < attributeList.length; i++) {
-            attributeDefinition memory attr = attributeList[i];
-            uint16 geneSegmentMother = uint16(getBits(motherGeneBase, startingPosition, attr.size));
-            uint16 geneSegmentFather = uint16(getBits(fatherGeneBase, startingPosition, attr.size));
-            uint16 newGenes = mixGene(geneSegmentMother, geneSegmentFather, attr.probabilities);
-            childGeneBase = childGeneBase + newGenes * 2 ** (startingPosition);
-            startingPosition += attr.size;
-        }
-        childGeneBase = childGeneBase * 2 ** 2 + beastTypeMother;
-        return childGeneBase;
-    }
-    
-    function addAttribute(uint8 target, string name, uint8 size) public {
-        attributeDefinition memory attr = attributeDefinition({
-            name: name,
-            size: size,
-            probabilities: new uint[](0)
-        });
-        if (target == uint8(0)) {
-            dinosaurs_attribute_list.push(attr);
-        } else if (target == uint8(1)) {
-            unicorns_attribute_list.push(attr);
-        } else {
-            revert();
+        
+        int _randomNumber = int(randomNumber(total));
+        
+        uint16 r = 32;
+        
+        for (uint z = 0; z < attributeProbabilities.length; z++) {
+            _randomNumber -= int(attributeProbabilities[z]);
+            if (_randomNumber <= 0) {
+                r = uint16(z);
+                break;
+            }
         }
     }
     
@@ -136,48 +421,56 @@ contract GeneMagic {
         } else {
             revert();
         }
+        
+        return r;
     }
     
-    function getAttributeName(uint target, uint i) public constant returns (string) {
-        if (target == 0) {
-            return dinosaurs_attribute_list[i].name;
-        } else if (target == 1) {
-            return unicorns_attribute_list[i].name;
-        } else {
-            revert();
+    /**
+     * Returns the beast type of a gene sequence
+     * @param genes - The gene sequence
+     * @return {uint8} The beast type
+    */
+    function getBeastType(uint256 genes) private returns (uint8) {
+        uint8 accumulator = 0;
+        for (uint b = 0; b < BEAST_TYPE_LENGTH; b++) {
+            uint256 r = genes % 2;
+            accumulator += uint8(r) * uint8(2 ** b);
+            genes /= 2;
         }
+        return accumulator;
     }
-    
-    function getAttributeProbabilities(uint target, uint i) public constant returns (uint[]) {
-        if (target == 0) {
-            return dinosaurs_attribute_list[i].probabilities;
-        } else if (target == 1) {
-            return unicorns_attribute_list[i].probabilities;
-        } else {
-            revert();
+
+    /**
+     * Returns the next available gene of a gene sequence.
+     * @param geneBase - The gene sequence
+     * @return {uint16} The next gene available
+    */
+    function catchNextGene(uint256 geneBase) private returns (uint16) {
+        uint16 accumulator = 0;
+        for (uint b = 0; b < GENE_SIZE; b++) {
+            uint256 r = geneBase % 2;
+            accumulator += uint16(r) * uint16(2 ** b);
+            geneBase /= 2;
         }
+        return accumulator;
     }
     
-    function getAttributeSize(uint target, uint i) public constant returns (uint) {
-        if (target == 0) {
-            return dinosaurs_attribute_list[i].size;
-        } else if (target == 1) {
-            return unicorns_attribute_list[i].size;
-        } else {
-            revert();
-        }
+    /**
+     * Extracts the next available gene of a gene sequence and returns the remainder.
+     * @param geneBase - The gene sequence
+     * @param geneSize - The gene size
+     * @return {uint16} The remainder of the sequence after extracting the gene
+    */
+    function remainingGenes(uint256 geneBase, uint8 geneSize) private returns (uint256) {
+        return geneBase / (2 ** geneSize);
     }
-    
-    function updateAttribute(uint target, uint i, string name, uint[] list) public {
-        if (target == 0) {
-            dinosaurs_attribute_list[i].name = name;
-            dinosaurs_attribute_list[i].probabilities = list;
-        } else if (target == 1) {
-            unicorns_attribute_list[i].name = name;
-            unicorns_attribute_list[i].probabilities = list;
-        } else {
-            revert();
-        }
+
+    /**
+     * Returns a random number using block difficulty, time and mixes previously made as seed.
+     * @return {number} The random value.
+    */
+    function randomNumber(uint b) private constant returns (uint) {
+        return uint(keccak256(block.difficulty, now, mixesMade))%b;
     }
-    
+
 }
