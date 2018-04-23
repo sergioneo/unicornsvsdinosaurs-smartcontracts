@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.0;
 contract GeneMagic {
     
     uint8 constant BEAST_TYPE_LENGTH = 2;
@@ -33,16 +33,7 @@ contract GeneMagic {
     uint256[32] d_spikes = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
     uint256[32] d_wings = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
     
-    bool public isGeneMagic = true;
-
-    struct attributeDefinition {
-        string name;
-        uint8 size;
-        uint[] probabilities;
-    }
-    
-    attributeDefinition[] private dinosaurs_attribute_list;
-    attributeDefinition[] private unicorns_attribute_list;
+    uint private mixesMade = 0;
     
     /**
      * Performs Gene Magic between two gene sequences.
@@ -303,9 +294,19 @@ contract GeneMagic {
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
     
-    function mixGene(uint16 geneMother, uint16 geneFather, uint[] attributeProbabilities) private view returns (uint16) {
-        uint[] memory actualProbabilities = attributeProbabilities;
-        uint arraySum = 0;
+        return newGenes;
+    }
+
+    /**
+     * Generates a new gene according to a density function.
+     * @param attributeProbabilities - The probability distribution of the gene values.
+     * @return {uint16} The new gene value
+    */
+    function createGene(uint[32] attributeProbabilities) private returns(uint16) {
+        
+        mixesMade++;
+        
+        uint total = 0;
         for (uint i = 0; i < attributeProbabilities.length; i++) {
             total += attributeProbabilities[i];
         }
@@ -382,44 +383,9 @@ contract GeneMagic {
                 break;
             }
         }
-    }
-    
-    function initDinosaurs() public {
-        addAttribute(0, "pedigree", 2);
-        dinosaurs_attribute_list[0].probabilities.push(849);
-        dinosaurs_attribute_list[0].probabilities.push(100);
-        dinosaurs_attribute_list[0].probabilities.push(50);
-        dinosaurs_attribute_list[0].probabilities.push(1);
-        addAttribute(0, "type", 4);
-        dinosaurs_attribute_list[1].probabilities.push(99);
-        dinosaurs_attribute_list[1].probabilities.push(1);
-        dinosaurs_attribute_list[1].probabilities.push(2);
-        dinosaurs_attribute_list[1].probabilities.push(3);
-        dinosaurs_attribute_list[1].probabilities.push(8);
-        addAttribute(0, "eyes", 8);
-        dinosaurs_attribute_list[2].probabilities.push(1000);
-        dinosaurs_attribute_list[2].probabilities.push(1);
-        dinosaurs_attribute_list[2].probabilities.push(233);
-        addAttribute(0, "horn", 7);
-        dinosaurs_attribute_list[3].probabilities.push(1);
-        dinosaurs_attribute_list[3].probabilities.push(10000);
-    }
-    
-    function initUnicorns() public {
-        addAttribute(1, "pedigree", 2);
-        unicorns_attribute_list[0].probabilities.push(100);
-        unicorns_attribute_list[0].probabilities.push(50);
-        unicorns_attribute_list[0].probabilities.push(30);
-        unicorns_attribute_list[0].probabilities.push(100);
-    }
-    
-    function numberOfAttributes(uint8 target) public constant returns (uint) {
-        if (target == 0) {
-            return dinosaurs_attribute_list.length;
-        } else if (target == 1) {
-            return unicorns_attribute_list.length;
-        } else {
-            revert();
+        
+        if (r == 32) {
+            r = 0;
         }
         
         return r;
