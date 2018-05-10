@@ -8,30 +8,34 @@ contract GeneMagic {
     uint8 constant DOMINANT_GENE_ABILITY = 23;
 
     // PROBABILITIES FOR ABILITIES
-    uint256[32] abilities = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] abilities = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] second_abilities = [uint256(0), 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         
     // PROBABILITIES FOR ELEMENTS
-    uint256[32] elements = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] elements = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+
+    // PROBABILITIES FOR PEDIGREE
+    uint256[32] pedigree = [uint256(0), 1, 2, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         
     // PROBABILITIES FOR UNICORNS
-    uint256[32] u_type = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_eyes = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_horn = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_hair = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_tail = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_snout = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_legs = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_type = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_eyes = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_horn = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_hair = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_tail = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_snout = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] u_legs = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
 
     // PROBABILITIES FOR DINOSAURS
-    uint256[32] d_type = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_eyes = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_nose = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_mouth = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_tail = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_plume = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_legs = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_spikes = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_wings = [uint256(1), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_type = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_eyes = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_nose = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_mouth = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_tail = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_plume = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_legs = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_spikes = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] d_wings = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
     
     uint private mixesMade = 0;
     
@@ -58,7 +62,7 @@ contract GeneMagic {
             mixedGenes = mixGenesUnicorns(baseMother, baseFather, incubatorId);
         }
         
-        return mixedGenes*2**(BEAST_TYPE_LENGTH) + beastTypeMother;
+        return mixedGenes*2**(uint(BEAST_TYPE_LENGTH)) + beastTypeMother;
     }
 
     /**
@@ -66,49 +70,67 @@ contract GeneMagic {
      * @param beastType - The beast type of this new beast
      * @return {uint256} The gene configuration of the new beast
     */
-    function createGenes(uint8 beastType) public returns(uint256) {
+    function createGenes(uint8 beastType, uint256 suggestedSequence) public returns(uint256) {
         uint256 mixedGenes = 0;
         if (beastType == 0) {
-            mixedGenes = createGenesDinosaur();
+            mixedGenes = createGenesDinosaur(suggestedSequence);
         } else {
-            mixedGenes = createGenesUnicorn();
+            mixedGenes = createGenesUnicorn(suggestedSequence);
         }
-        return mixedGenes*2**(BEAST_TYPE_LENGTH) + beastType;
+        return mixedGenes*2**(uint(BEAST_TYPE_LENGTH)) + beastType;
     }
 
     /**
      * Auxiliary function - Creates a brand new gene unicorn sequence
      * @return {uint256} The gene configuration of the new unicorn
     */
-    function createGenesUnicorn() private returns(uint256) {
+    function createGenesUnicorn(uint256 suggestedSequence) private returns(uint256) {
         uint256 newGenes = 0;
+        uint16 nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Ability
-        newGenes = newGenes * 2**GENE_SIZE + createGene(abilities);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(abilities, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+
+        // Second Ability
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(second_abilities, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+
+        // Pedigree
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(pedigree, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Element
-        newGenes = newGenes * 2**GENE_SIZE + createGene(elements);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(elements, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Type
-        newGenes = newGenes * 2**GENE_SIZE + createGene(u_type);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_type, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Eyes
-        newGenes = newGenes * 2**GENE_SIZE + createGene(u_eyes);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_eyes, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Horn
-        newGenes = newGenes * 2**GENE_SIZE + createGene(u_horn);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_horn, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Hair
-        newGenes = newGenes * 2**GENE_SIZE + createGene(u_hair);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_hair, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Tail
-        newGenes = newGenes * 2**GENE_SIZE + createGene(u_tail);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_tail, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Snout
-        newGenes = newGenes * 2**GENE_SIZE + createGene(u_snout);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_snout, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Legs
-        newGenes = newGenes * 2**GENE_SIZE + createGene(u_legs);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_legs, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
     
         return newGenes;
     }
@@ -132,47 +154,57 @@ contract GeneMagic {
         uint256 newGenes = 0;
         
         // Ability
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, abilities, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, abilities, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+
+        // Second Ability
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, second_abilities, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+
+        // Pedigree
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, pedigree, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Element
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, elements, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, elements, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Type
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_type, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, u_type, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Eyes
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_eyes, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, u_eyes, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Horn
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_horn, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, u_horn, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Hair
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_hair, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, u_hair, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Tail
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_tail, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, u_tail, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Snout
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_snout, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, u_snout, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Legs
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, u_legs, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, u_legs, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
     
@@ -183,41 +215,61 @@ contract GeneMagic {
      * Auxiliary function - Creates a brand new gene dinosaur sequence
      * @return {uint256} The gene configuration of the new dinosaur
     */
-    function createGenesDinosaur() private returns(uint256) {
+    function createGenesDinosaur(uint256 suggestedSequence) private returns(uint256) {
         uint256 newGenes = 0;
+        uint16 nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Ability
-        newGenes = newGenes * 2**GENE_SIZE + createGene(abilities);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(abilities, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+
+        // Second Ability
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(second_abilities, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+
+        // Pedigree
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(pedigree, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Element
-        newGenes = newGenes * 2**GENE_SIZE + createGene(elements);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(elements, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Type
-        newGenes = newGenes * 2**GENE_SIZE + createGene(d_type);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_type, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Eyes
-        newGenes = newGenes * 2**GENE_SIZE + createGene(d_eyes);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_eyes, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Nose
-        newGenes = newGenes * 2**GENE_SIZE + createGene(d_nose);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_nose, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Mouth
-        newGenes = newGenes * 2**GENE_SIZE + createGene(d_mouth);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_mouth, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Tail
-        newGenes = newGenes * 2**GENE_SIZE + createGene(d_tail);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_tail, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Plume
-        newGenes = newGenes * 2**GENE_SIZE + createGene(d_plume);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_plume, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Legs
-        newGenes = newGenes * 2**GENE_SIZE + createGene(d_legs);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_legs, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Spikes
-        newGenes = newGenes * 2**GENE_SIZE + createGene(d_spikes);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_spikes, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
         
         // Wings
-        newGenes = newGenes * 2**GENE_SIZE + createGene(d_wings);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_wings, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
     
         return newGenes;
     }
@@ -239,58 +291,68 @@ contract GeneMagic {
         uint256 newGenes = 0;
         
         // Ability
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, abilities, false, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, abilities, false, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+
+        // Second Ability
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, second_abilities, true, abilityMother, abilityFather);
+        genesFather = remainingGenes(genesFather, GENE_SIZE);
+        genesMother = remainingGenes(genesMother, GENE_SIZE);
+
+        // Pedigree
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, pedigree, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Element
 
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, elements, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, elements, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Type
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_type, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, d_type, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Eyes
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_eyes, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, d_eyes, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Nose
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_nose, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, d_nose, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Mouth
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_mouth, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, d_mouth, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Tail
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_tail, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, d_tail, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Plume
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_plume, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, d_plume, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Legs
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_legs, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, d_legs, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Spikes
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_spikes, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, d_spikes, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
         
         // Wings
-        newGenes = newGenes * 2**GENE_SIZE + mixGene(genesMother, genesFather, d_wings, true, abilityMother, abilityFather);
+        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, d_wings, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
     
@@ -302,8 +364,12 @@ contract GeneMagic {
      * @param attributeProbabilities - The probability distribution of the gene values.
      * @return {uint16} The new gene value
     */
-    function createGene(uint[32] attributeProbabilities) private returns(uint16) {
+    function createGene(uint[32] attributeProbabilities, uint16 suggestedGene) private returns(uint16) {
         
+        if (suggestedGene != 0) {
+            return suggestedGene;
+        }
+
         mixesMade++;
         
         uint total = 0;
@@ -396,7 +462,7 @@ contract GeneMagic {
      * @param genes - The gene sequence
      * @return {uint8} The beast type
     */
-    function getBeastType(uint256 genes) private returns (uint8) {
+    function getBeastType(uint256 genes) private pure returns (uint8) {
         uint8 accumulator = 0;
         for (uint b = 0; b < BEAST_TYPE_LENGTH; b++) {
             uint256 r = genes % 2;
@@ -411,7 +477,7 @@ contract GeneMagic {
      * @param geneBase - The gene sequence
      * @return {uint16} The next gene available
     */
-    function catchNextGene(uint256 geneBase) private returns (uint16) {
+    function catchNextGene(uint256 geneBase) private pure returns (uint16) {
         uint16 accumulator = 0;
         for (uint b = 0; b < GENE_SIZE; b++) {
             uint256 r = geneBase % 2;
@@ -427,8 +493,8 @@ contract GeneMagic {
      * @param geneSize - The gene size
      * @return {uint16} The remainder of the sequence after extracting the gene
     */
-    function remainingGenes(uint256 geneBase, uint8 geneSize) private returns (uint256) {
-        return geneBase / (2 ** geneSize);
+    function remainingGenes(uint256 geneBase, uint8 geneSize) private pure returns (uint256) {
+        return geneBase / (2 ** uint(geneSize));
     }
 
     /**
