@@ -51,22 +51,22 @@ contract SplitPayment {
   /**
    * @dev Claim your share of the balance.
    */
-  // function claim() public {
-  //   address payee = msg.sender;
+  function claim() public {
+    address payee = msg.sender;
 
-  //   require(shares[payee] > 0);
+    require(shares[payee] > 0);
 
-  //   uint256 totalReceived = this.balance.add(totalReleased);
-  //   uint256 payment = totalReceived.mul(shares[payee]).div(totalShares).sub(released[payee]);
+    uint256 totalReceived = this.balance.add(totalReleased);
+    uint256 payment = totalReceived.mul(shares[payee]).div(totalShares).sub(released[payee]);
 
-  //   require(payment != 0);
-  //   require(this.balance >= payment);
+    require(payment != 0);
+    require(this.balance >= payment);
 
-  //   released[payee] = released[payee].add(payment);
-  //   totalReleased = totalReleased.add(payment);
+    released[payee] = released[payee].add(payment);
+    totalReleased = totalReleased.add(payment);
 
-  //   payee.transfer(payment);
-  // }
+    payee.transfer(payment);
+  }
 
   /**
    * @dev Add a new payee to the contract.
