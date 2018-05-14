@@ -25,7 +25,7 @@ contract EggFactory {
     
     // Mapping of eggs owned by an address
     // @dev: owner => ( eggId => eggsAmount )
-    mapping ( address => mapping ( uint256 => uint256 ) ) private eggsOwned;
+    mapping ( address => mapping ( uint256 => uint256 ) ) public eggsOwned;
     
     // Add modifier of onlyCOO
     function createEggScheme( uint256 _eggId, uint256 _max, uint256 _customGene, uint256 _price, uint256 _increase, bool _active, bool _open ) public {
@@ -54,27 +54,27 @@ contract EggFactory {
         eggs[_eggId].open = state;
     }
     
-    function buyEgg(address _owner, uint256 _eggId, uint256 _amount) public payable {
+    function buyEgg(uint256 _eggId, uint256 _amount) public payable {
         require(eggs[_eggId].active == true);
         require((currentEggPrice(_eggId)*_amount) == msg.value);
         
         eggs[_eggId].buy += _amount;
-        eggsOwned[_owner][_eggId] += _amount;
+        eggsOwned[msg.sender][_eggId] += _amount;
     } 
     
     function currentEggPrice( uint256 _eggId ) public view returns (uint256) {
         return eggs[_eggId].price + (eggs[_eggId].buy * eggs[_eggId].increase);
     }
     
-    function openEgg(address _owner, uint256 _eggId, uint256 _amount) public {
+    function openEgg(uint256 _eggId, uint256 _amount) public {
         require(eggs[_eggId].open == true);
-        require(eggsOwned[_owner][_eggId] >= _amount);
+        require(eggsOwned[msg.sender][_eggId] >= _amount);
         
         // Give to geneMagic the custom genes of the egg for the beast definition
         //uint256 randomGens = random(1000000000000000);
         //uint256 beastId = _createBeast(0, 0, 0, randomGens, msg.sender);
 
-        eggsOwned[_owner][_eggId] -= _amount;
+        eggsOwned[msg.sender][_eggId] -= _amount;
 
         //emit EggOpened(beastId);
     }
