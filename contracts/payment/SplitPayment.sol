@@ -1,6 +1,6 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.23;
 
-import "../lib/SafeMath.sol";
+import "../math/SafeMath.sol";
 
 
 /**
@@ -18,14 +18,11 @@ contract SplitPayment {
   mapping(address => uint256) public released;
   address[] public payees;
 
-  address public owner;
-
   /**
    * @dev Constructor
    */
-  function SplitPayment(address[] _payees, uint256[] _shares) public payable {
+  constructor(address[] _payees, uint256[] _shares) public payable {
     require(_payees.length == _shares.length);
-    owner = msg.sender;
 
     for (uint256 i = 0; i < _payees.length; i++) {
       addPayee(_payees[i], _shares[i]);
@@ -35,18 +32,7 @@ contract SplitPayment {
   /**
    * @dev payable fallback
    */
-  function () public payable {
-  	for (uint256 i = 0; i < _payees.length; i++) {
-  	  	address payee = payees[i];
-  	  	require(shares[payee] > 0);
-  	  	uint256 totalReceived = msg.value;
-  	  	uint256 payment = totalReceived.mul(shares[payee]).div(totalShares));
-   		require(payment != 0);
-    	require(this.balance >= payment);
-    	payee.transfer(payment);
-    }
-    owner.transfer(this.balance);
-  }
+  function () public payable {}
 
   /**
    * @dev Claim your share of the balance.
@@ -56,11 +42,11 @@ contract SplitPayment {
 
     require(shares[payee] > 0);
 
-    uint256 totalReceived = this.balance.add(totalReleased);
+    uint256 totalReceived = address(this).balance.add(totalReleased);
     uint256 payment = totalReceived.mul(shares[payee]).div(totalShares).sub(released[payee]);
 
     require(payment != 0);
-    require(this.balance >= payment);
+    require(address(this).balance >= payment);
 
     released[payee] = released[payee].add(payment);
     totalReleased = totalReleased.add(payment);
