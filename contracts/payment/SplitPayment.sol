@@ -55,6 +55,16 @@ contract SplitPayment {
   }
 
   /**
+   * @dev Check your share of the balance.
+   */
+  function checkMyBalance() public view returns(uint256) {
+    uint256 totalReceived = address(this).balance.add(totalReleased);
+    uint256 payment = totalReceived.mul(shares[msg.sender]).div(totalShares).sub(released[msg.sender]);
+
+    return payment;
+  }
+
+  /**
    * @dev Add a new payee to the contract.
    * @param _payee The address of the payee to add.
    * @param _shares The number of shares owned by the payee.
