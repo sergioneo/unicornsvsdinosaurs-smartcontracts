@@ -6,7 +6,7 @@ contract AuctionFactory {
 		uint id;
 		string description;
 		uint256 price;
-		uint miniumumIncrement;
+		uint minimumIncrement;
 		address currentOwner;
 		uint timeCreated;
 		uint duration;
@@ -15,6 +15,8 @@ contract AuctionFactory {
 	}
 
 	mapping (uint => AuctionScheme) public auctions;
+
+	uint256[] public auctionIndexes;
 
 	address ceoAddress;
 
@@ -26,23 +28,25 @@ contract AuctionFactory {
 	}
 
 	function createAuctionScheme(uint _auctionId, string _description, uint _price, 
-		uint _miniumumIncrement, uint _duration, uint _increaseTime) {
+		uint _minimumIncrement, uint _duration, uint _increaseTime) {
 		require(!auctionExists(_auctionId));
 		auctions[_auctionId].isAuctionScheme = true;
 		auctions[_auctionId].id = _auctionId;
 		auctions[_auctionId].description = _description;
 		auctions[_auctionId].price = _price;
 
-		auctions[_auctionId].miniumumIncrement = _miniumumIncrement;
+		auctions[_auctionId].minimumIncrement = _minimumIncrement;
 		auctions[_auctionId].duration = _duration;
 		auctions[_auctionId].increaseTime = _increaseTime;
 		auctions[_auctionId].timeCreated = block.timestamp;
+
+		auctionIndexes.push(_auctionId);
 	}
 
 	function bid(uint _auctionId) payable {
 		require(auctionExists(_auctionId));
 		require((auctions[_auctionId].timeCreated + auctions[_auctionId].duration) < block.timestamp);
-		require (msg.value >= auctions[_auctionId].price  + auctions[_auctionId].miniumumIncrement);
+		require (msg.value >= auctions[_auctionId].price  + auctions[_auctionId].minimumIncrement);
 		auctions[_auctionId].currentOwner.transfer(auctions[_auctionId].price);
 		auctions[_auctionId].currentOwner = msg.sender;
 		auctions[_auctionId].timeCreated += auctions[_auctionId].increaseTime; 
@@ -56,6 +60,10 @@ contract AuctionFactory {
 	// Verify existence of id to avoid collision
     function auctionExists( uint _auctionId) internal view returns(bool) {
         return auctions[_auctionId].isAuctionScheme;
+    }
+
+    function listAuctionIds() external view returns(uint256[]){
+        return auctionIndexes;
     }
 
 	// Set a new address for vault contract
