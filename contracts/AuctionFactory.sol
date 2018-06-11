@@ -16,6 +16,9 @@ contract AuctionFactory {
 		bool canBeSwaped;
 	}
 
+	event NewBid(address newBidder, uint256 _auctionId, uint256 amount);
+	event AuctionFinished(address auctionOwner, uint256 _auctionId, uint256 amount);
+
 	mapping (uint => AuctionScheme) public auctions;
 
 	uint256[] public auctionIndexes;
@@ -53,11 +56,13 @@ contract AuctionFactory {
 		auctions[_auctionId].currentOwner = msg.sender;
 		auctions[_auctionId].timeCreated += auctions[_auctionId].increaseTime; 
 		auctions[_auctionId].price = msg.value;
+		emit NewBid(msg.sender, _auctionId, msg.value);
 	}
 
 	function endAuction(uint _auctionId) {
 		require((auctions[_auctionId].timeCreated + auctions[_auctionId].duration) > block.timestamp);
 		vaultAddress.transfer(auctions[_auctionId].price);
+		emit AuctionFinished(auctions[_auctionId].currentOwner, _auctionId, auctions[_auctionId].price);
 	}
 
 	function swapAuction(uint _auctionId) {
