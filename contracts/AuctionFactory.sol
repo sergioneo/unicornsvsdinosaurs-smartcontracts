@@ -52,6 +52,7 @@ contract AuctionFactory {
 		auctions[_auctionId].currentOwner.transfer(auctions[_auctionId].price);
 		auctions[_auctionId].currentOwner = msg.sender;
 		auctions[_auctionId].timeCreated += auctions[_auctionId].increaseTime; 
+		auctions[_auctionId].price = msg.value;
 	}
 
 	function endAuction(uint _auctionId) {
