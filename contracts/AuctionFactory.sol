@@ -1,6 +1,8 @@
 pragma solidity ^0.4.23;
 
-contract AuctionFactory {
+import "./AccessControl.sol";
+
+contract AuctionFactory is AccessControl {
 
 	struct AuctionScheme {
 		uint id;
@@ -87,15 +89,9 @@ contract AuctionFactory {
     }
 
 	// Set a new address for vault contract
-    function setVaultAddress(address _vaultAddress) public onlyCEO returns (bool) {
+    function setVaultAddress(address _vaultAddress) public onlyCEO {
         require( _vaultAddress != address(0x0) );
         vaultAddress = _vaultAddress;
-    }
-
-    /// @dev Access modifier for CEO-only functionality
-    modifier onlyCEO() {
-        require(msg.sender == ceoAddress);
-        _;
     }
 	
 }
