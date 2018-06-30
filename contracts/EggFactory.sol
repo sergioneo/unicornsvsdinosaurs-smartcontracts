@@ -66,6 +66,7 @@ contract EggFactory {
         return eggs[_eggId].price + (eggs[_eggId].buy * eggs[_eggId].increase);
     }
     
+    /** Define interface to open egg ? */
     function openEgg(uint256 _eggId, uint256 _amount) public {
         require(eggs[_eggId].open == true);
         require(eggsOwned[msg.sender][_eggId] >= _amount);
