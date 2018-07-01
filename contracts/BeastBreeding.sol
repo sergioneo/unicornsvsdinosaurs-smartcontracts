@@ -324,7 +324,7 @@ contract BeastBreeding is Random, BeastOwnership {
         pregnantBeasts--;
 
         // Send the balance fee to the person who made birth happen.
-        msg.sender.send(autoBirthFee);
+        msg.sender.transfer(autoBirthFee);
 
         // return the new beast's ID
         return beastId;

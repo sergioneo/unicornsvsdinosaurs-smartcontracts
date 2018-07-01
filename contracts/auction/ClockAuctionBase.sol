@@ -1,6 +1,6 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import '../token/ERC721.sol';
+import "../token/ERC721.sol";
 
 /// @title Auction Core
 /// @dev Contains models, variables, and internal methods for the auction.
@@ -79,7 +79,7 @@ contract ClockAuctionBase {
         tokenIdToAuction[_tokenId] = _auction;
         tokensIdInAuction.push(_tokenId);
 
-        AuctionCreated(
+        emit AuctionCreated(
             uint256(_tokenId),
             uint256(_auction.startingPrice),
             uint256(_auction.endingPrice),
@@ -91,7 +91,7 @@ contract ClockAuctionBase {
     function _cancelAuction(uint256 _tokenId, address _seller) internal {
         _removeAuction(_tokenId);
         _transfer(_seller, _tokenId);
-        AuctionCancelled(_tokenId);
+        emit AuctionCancelled(_tokenId);
     }
 
     /// @dev Computes the price and transfers winnings.
@@ -152,7 +152,7 @@ contract ClockAuctionBase {
         msg.sender.transfer(bidExcess);
 
         // Tell the world!
-        AuctionSuccessful(_tokenId, price, msg.sender);
+        emit AuctionSuccessful(_tokenId, price, msg.sender);
 
         return price;
     }
