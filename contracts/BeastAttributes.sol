@@ -58,7 +58,7 @@ contract BeastAttributes is BeastBase {
         Beast storage _beast = beasts[_tokenId];
         require(_beast.experience >= experienceRequiredForLevel[_toLevel - 1]);
         // emit the Level event
-        Level(_tokenId, _toLevel -1, _toLevel);
+        emit Level(_tokenId, _toLevel -1, _toLevel);
         // Add Prefered Skills
         if(_beast.preferedAttribute == 1) {
             _beast.attrs.strength += 1;
@@ -99,7 +99,7 @@ contract BeastAttributes is BeastBase {
         require(_beast.preferedAttribute != _preferedAttribute);
         require(_preferedAttribute <= 6 || _preferedAttribute > 0);
         // emit the Level event
-        ChangePreferedAttribute(_tokenId, _beast.preferedAttribute, _preferedAttribute);
+        emit ChangePreferedAttribute(_tokenId, _beast.preferedAttribute, _preferedAttribute);
         _beast.preferedAttribute = uint8(_preferedAttribute);
     }
 }
