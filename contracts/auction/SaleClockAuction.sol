@@ -2,7 +2,7 @@ pragma solidity ^0.4.18;
 
 import './ClockAuction.sol';
 
-/// @title Clock auction modified for sale of kitties
+/// @title Clock auction modified for sale of beasts
 /// @notice We omit a fallback function to prevent accidental sends to this contract.
 contract SaleClockAuction is ClockAuction {
 

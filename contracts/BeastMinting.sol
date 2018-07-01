@@ -12,18 +12,16 @@ contract BeastMinting is Random, BeastAuction {
     event RandomBoxOpened(uint256 legendId);
     event LegendaryRandomBoxOpened(uint256 legendId);
 
-    EggFactoryInterface public eggFactory;
-
-    // Limits the number of beast the contract owner can ever create.
-    uint256 public constant PROMO_CREATION_LIMIT = 150;
+    uint256 public constant PROMO_CREATION_LIMIT = 150; // Limits the number of beast the contract owner can ever create.
 
     uint256 public promoBeastCreatedCount; // Amount of promo beasts created
     uint256 public randomBoxOpenedCount; // Amount of random boxes opened
     uint256 public legendaryRandomBoxOpenedCount; // Amount of legendary random boxes opened
 
-    /**
-     * Set the address of the Egg Factory Contract
-     */
+    EggFactoryInterface public eggFactory;
+
+    /// @dev Sets the reference to the egg factory
+    /// @param _address - Address of egg factory contract.
     function setEggFactoryAddress(address _address) public onlyCEO {
         EggFactoryInterface candidateContract = EggFactoryInterface(_address);
         require(candidateContract.isEggFactory());

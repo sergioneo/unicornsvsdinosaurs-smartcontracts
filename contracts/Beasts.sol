@@ -2,17 +2,15 @@ pragma solidity ^0.4.24;
 
 import "./BeastMinting.sol";
 
-contract Legends is BeastMinting {
+contract Beasts is BeastMinting {
   
     /// @notice Creates the main Legend smart contract instance.
-    function Legends() public {
+    constructor() public {
         // Starts paused.
         paused = false;
 
-        // the creator of the contract is the initial CEO
+        // the creator of the contract is the initial CEO, COO and CFO
         ceoAddress = msg.sender;
-
-        // the creator of the contract is also the initial COO and CFO
         cooAddress = msg.sender;
         cfoAddress = msg.sender;
 

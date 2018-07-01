@@ -1,8 +1,8 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import './BeastOwnership.sol';
-import './interface/GeneMagicInterface.sol';
-import './util/Random.sol';
+import "./BeastOwnership.sol";
+import "./interface/GeneMagicInterface.sol";
+import "./util/Random.sol";
 
 contract BeastBreeding is Random, BeastOwnership {
 
@@ -23,7 +23,7 @@ contract BeastBreeding is Random, BeastOwnership {
     GeneMagicInterface public geneMagic;
 
     /// @dev Update the address of the genetic contract, can only be called by the CEO.
-    /// @param _address An address of a GeneScience contract instance to be used from this point forward.
+    /// @param _address An address of a GeneMagic contract instance to be used from this point forward.
     function setGeneMagicAddress(address _address) external onlyCEO {
         GeneMagicInterface candidateContract = GeneMagicInterface(_address);
 
@@ -117,7 +117,7 @@ contract BeastBreeding is Random, BeastOwnership {
         returns (bool)
     {
         require(_beastId > 0);
-        // A kitty is pregnant if and only if this field is set
+        // A beast is pregnant if and only if this field is set
         return beasts[_beastId].siringWithId != 0;
     }
 
@@ -218,7 +218,7 @@ contract BeastBreeding is Random, BeastOwnership {
         delete sireAllowedToAddress[_matronId];
         delete sireAllowedToAddress[_sireId];
 
-        // Every time a kitty gets pregnant, counter is incremented.
+        // Every time a beast gets pregnant, counter is incremented.
         pregnantBeasts++;
 
         // Emit the pregnancy event.
@@ -280,7 +280,7 @@ contract BeastBreeding is Random, BeastOwnership {
     /// @param _matronId A Beast ready to give birth.
     /// @return The Beast ID of the new beast.
     /// @dev Looks at a given Beast and, if pregnant and if the gestation period has passed,
-    ///  combines the genes of the two parents to create a new beast. The new Kitty is assigned
+    ///  combines the genes of the two parents to create a new beast. The new Beast is assigned
     ///  to the current owner of the matron. Upon successful completion, both the matron and the
     ///  new beast will be ready to breed again. Note that anyone can call this function (if they
     ///  are willing to pay the gas!), but the new beast always goes to the mother's owner.

@@ -1,15 +1,14 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import './BeastBase.sol';
+import "./BeastBase.sol";
 
 contract BeastAttributes is BeastBase {
     /*** EVENTS ***/
 
 
-    /// @dev Transfer event as defined in current draft of ERC721. Emitted every time a kitten
+    /// @dev Transfer event as defined in current draft of ERC721. Emitted every time a beast
     ///  ownership is assigned, including births.
     event Level(uint _beastID, uint _from, uint _to);
-
     event ChangePreferedAttribute(uint _beastID, uint _from, uint _to);
 
     /// Table indicating experience requiere for each level

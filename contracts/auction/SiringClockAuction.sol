@@ -59,7 +59,7 @@ contract SiringClockAuction is ClockAuction {
         address seller = tokenIdToAuction[_tokenId].seller;
         // _bid checks that token ID is valid and will throw if bid fails
         _bid(_tokenId, msg.value);
-        // We transfer the kitty back to the seller, the winner will get
+        // We transfer the beast back to the seller, the winner will get
         // the offspring
         _transfer(seller, _tokenId);
     }
