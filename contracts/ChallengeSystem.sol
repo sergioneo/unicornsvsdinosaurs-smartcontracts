@@ -1,8 +1,8 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import './BeastBase.sol';
-import './ExperienceSystems.sol';
-import './SkillsSystem.sol';
+import "./BeastBase.sol";
+import "./ExperienceSystems.sol";
+import "./SkillsSystem.sol";
 
 contract ChallengeSystem is AccessControl, ExperienceSystems {
 
@@ -34,7 +34,19 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
     }
 
     // Create a new challenge, important to have Unique ID
-    function createChallenge(uint _id, string _name, uint _minLevelRequired, uint _strengthPonderation, uint _dexterityPonderation, uint _endurancePonderation, uint _knowledgePonderation, uint _wisdomPonderation, uint _charismaPonderation, uint _randomFactor, uint _experienceSystemId) external onlyCOO {
+    function createChallenge(
+        uint _id, 
+        string _name, 
+        uint _minLevelRequired, 
+        uint _strengthPonderation, 
+        uint _dexterityPonderation, 
+        uint _endurancePonderation, 
+        uint _knowledgePonderation, 
+        uint _wisdomPonderation, 
+        uint _charismaPonderation, 
+        uint _randomFactor, 
+        uint _experienceSystemId
+    ) external onlyCOO {
         require(!challengeExists(_id)); // prevents destruction of existing challenge with same ID
         Challenge memory _challenge = Challenge({
             id: _id,
@@ -55,7 +67,13 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
     }
 
     // Edit a deployed challenge, only you can change active, exp system, isActive and minLevelRequired
-    function editChallenge(uint _challengeId, bool _isActive, uint _randomFactor, uint _experienceSystemId, uint _minLevelRequired) external onlyCOO {
+    function editChallenge(
+        uint _challengeId, 
+        bool _isActive, 
+        uint _randomFactor, 
+        uint _experienceSystemId, 
+        uint _minLevelRequired
+    ) external onlyCOO {
         Challenge storage _challenge = challenges[_challengeId];
         _challenge.isActive = _isActive;
         _challenge.randomFactor = _randomFactor;
@@ -125,9 +143,19 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
     function elementBonus(uint _challengerId, uint _challengedId) internal returns(uint) {
         Beast storage _challenger = beasts[_challengerId];
         Beast storage _challenged = beasts[_challengedId];
-        if ((_challenger.element == 0 && _challenged.element == 1) || (_challenger.element == 1 && _challenged.element == 2) || (_challenger.element == 2 && _challenged.element == 3) || (_challenger.element == 3 && _challenged.element == 0)) {
+        if (
+            (_challenger.element == 0 && _challenged.element == 1) ||
+            (_challenger.element == 1 && _challenged.element == 2) || 
+            (_challenger.element == 2 && _challenged.element == 3) || 
+            (_challenger.element == 3 && _challenged.element == 0)
+        ) {
             return _challengerId;
-        } else if ((_challenger.element == 1 && _challenged.element == 0) || (_challenger.element == 2 && _challenged.element == 1) || (_challenger.element == 3 && _challenged.element == 2) || (_challenger.element == 0 && _challenged.element == 3)) {
+        } else if (
+                (_challenger.element == 1 && _challenged.element == 0) || 
+                (_challenger.element == 2 && _challenged.element == 1) || 
+                (_challenger.element == 3 && _challenged.element == 2) || 
+                (_challenger.element == 0 && _challenged.element == 3)) 
+            {
             return _challengedId;
         } else {
             return 0;
