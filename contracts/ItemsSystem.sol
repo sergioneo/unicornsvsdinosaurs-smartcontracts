@@ -1,6 +1,6 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import './util/AccessControl.sol';
+import "./util/AccessControl.sol";
 
 contract ItemsSystem is AccessControl {
 
@@ -17,8 +17,14 @@ contract ItemsSystem is AccessControl {
     mapping (uint => Item) public items;
 
     // Create a new Item, important to have Unique ID
-    function createItem(uint _id, string _name, uint _attirbuteId1, uint _attribute1Bonus, uint _attirbuteId2, uint _attribute2Bonus) external onlyCOO {
-
+    function createItem(
+        uint _id, 
+        string _name, 
+        uint _attirbuteId1, 
+        uint _attribute1Bonus, 
+        uint _attirbuteId2, 
+        uint _attribute2Bonus
+    ) external onlyCOO {
         Item memory _item = Item({
             id: _id,
             name: _name,
@@ -32,8 +38,14 @@ contract ItemsSystem is AccessControl {
     }
 
     // Edit a Item, important to have Unique ID
-    function editItem(uint _id, string _name, uint _attirbuteId1, uint _attribute1Bonus, uint _attirbuteId2, uint _attribute2Bonus) external onlyCOO {
-
+    function editItem(
+        uint _id, 
+        string _name, 
+        uint _attirbuteId1, 
+        uint _attribute1Bonus, 
+        uint _attirbuteId2, 
+        uint _attribute2Bonus
+    ) external onlyCOO {
         Item storage _item = items[_id];
         _item.name = _name;
         _item.attirbuteId1 = _attirbuteId1;
