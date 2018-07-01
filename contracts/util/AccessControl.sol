@@ -1,8 +1,7 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
 /// @title manages special access privileges.
 /// @author Axiom Zen (https://www.axiomzen.co)
-/// @dev See KittyAccessControl
 
 contract AccessControl {
       /// @dev Emited when contract is upgraded - See README.md for updgrade plan
