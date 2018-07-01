@@ -1,8 +1,8 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import './BeastAttributes.sol';
-import './SkillsSystem.sol';
-import './util/Random.sol';
+import "./BeastAttributes.sol";
+import "./SkillsSystem.sol";
+import "./util/Random.sol";
 
 contract ExperienceSystems is Random, BeastAttributes, SkillsSystem{
 
@@ -26,7 +26,15 @@ contract ExperienceSystems is Random, BeastAttributes, SkillsSystem{
     // Create a new experience ExperienceSystem
     // Impotant, ID must me unique.
     // Default Dinosaur and Unicorn Bonus is 1
-    function createExperienceSystem(uint _id, uint _base, uint _percentaje, bool _isJustBase, bool _isJustPercentaje, uint _dinosaurBonus, uint _unicornBonus) internal onlyCOO {
+    function createExperienceSystem(
+        uint _id, 
+        uint _base, 
+        uint _percentaje, 
+        bool _isJustBase, 
+        bool _isJustPercentaje, 
+        uint _dinosaurBonus, 
+        uint _unicornBonus
+    ) internal onlyCOO {
         require(!experienceExists(_id)); // prevents destruction of existing experience with same ID
         require(_isJustPercentaje == false || _isJustBase == false);
         ExperienceSystem memory _experienceSystems = ExperienceSystem({
