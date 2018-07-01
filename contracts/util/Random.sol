@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
 contract Random {
 
@@ -16,12 +16,14 @@ contract Random {
     }
 
     function maxRandom() private returns (uint256 randomNumber) {
-        _seed = uint256(keccak256(
-            _seed,
-            block.blockhash(block.number - 1),
-            block.coinbase,
-            block.difficulty
-        ));
+        _seed = uint256(
+            keccak256(
+                _seed,
+                block.blockhash(block.number - 1),
+                block.coinbase,
+                block.difficulty
+            )
+        );
         return _seed;
     }
 
