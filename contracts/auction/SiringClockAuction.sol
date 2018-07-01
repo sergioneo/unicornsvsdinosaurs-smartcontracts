@@ -11,7 +11,7 @@ contract SiringClockAuction is ClockAuction {
     bool public isSiringClockAuction = true;
 
     // Delegate constructor
-    function SiringClockAuction(address _nftAddr, uint256 _cut) public ClockAuction(_nftAddr, _cut) { }
+    constructor(address _nftAddr, uint256 _cut) public ClockAuction(_nftAddr, _cut) { }
 
     /// @dev Creates and begins a new auction. Since this function is wrapped,
     /// require sender to be Legends contract.
