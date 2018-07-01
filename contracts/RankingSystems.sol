@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
 import "./BeastBase.sol";
 
@@ -58,7 +58,7 @@ contract RankingSystems is BeastBase {
 
         if (rankings[gameId].rankingList.length < TOP_RANK_PER_GAME) { // easy add
             if ( !_findInFixedArray(rankings[gameId].rankingList, beastId ) ) {
-                rankings[gameId].rankingList[ rankings[gameId].rankingList.length ] = beastId;
+                rankings[gameId].rankingList[rankings[gameId].rankingList.length] = beastId;
             }
             
             if ( rankings[gameId].rankingList.length == 1 || rankings[gameId].rankingCount[beastIdRef] < rankings[gameId].minToRank ) {
@@ -66,7 +66,7 @@ contract RankingSystems is BeastBase {
             }
 
         } else { // dificult add
-            if ( _findInFixedArray(rankings[gameId].rankingList, beastId ) ) {
+            if ( _findInFixedArray(rankings[gameId].rankingList, beastId) ) {
                 if ( rankings[gameId].rankingList.length == 1 || rankings[gameId].rankingCount[beastIdRef] < rankings[gameId].minToRank ) {
                     rankings[gameId].minToRank = rankings[gameId].rankingCount[beastIdRef];
                 }
@@ -75,7 +75,7 @@ contract RankingSystems is BeastBase {
                 if( rankings[gameId].rankingCount[beastIdRef] > rankings[gameId].minToRank ) {
                     // add to list, sort and remove the last
                     //rankings[gameId].rankingList[ rankings[gameId].rankingList.length - 1 ] = beastId;
-                    rankings[gameId].rankingList[ 0 ] = beastId;
+                    rankings[gameId].rankingList[0] = beastId;
                     rankings[gameId].minToRank = rankings[gameId].rankingCount[beastIdRef];
                 }
                 
