@@ -8,36 +8,38 @@ contract GeneMagic {
     uint8 constant DOMINANT_GENE_ABILITY = 23;
 
     // PROBABILITIES FOR ABILITIES
-    uint256[32] abilities = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] second_abilities = [uint256(0), 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    uint256[32] public abilities;
+    uint256[32] public second_abilities;
         
     // PROBABILITIES FOR ELEMENTS
-    uint256[32] elements = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] public elements;
 
     // PROBABILITIES FOR PEDIGREE
-    uint256[32] pedigree = [uint256(0), 1, 2, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    uint256[32] public pedigree;
         
     // PROBABILITIES FOR UNICORNS
-    uint256[32] u_type = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_eyes = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_horn = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_hair = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_tail = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_snout = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] u_legs = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] public u_type;
+    uint256[32] public u_eyes;
+    uint256[32] public u_horn;
+    uint256[32] public u_hair;
+    uint256[32] public u_tail;
+    uint256[32] public u_snout;
+    uint256[32] public u_legs;
 
     // PROBABILITIES FOR DINOSAURS
-    uint256[32] d_type = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_eyes = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_nose = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_mouth = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_tail = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_plume = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_legs = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_spikes = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
-    uint256[32] d_wings = [uint256(0), 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 1, 2, 1, 4, 3, 5, 3, 2, 1, 9];
+    uint256[32] public d_type;
+    uint256[32] public d_eyes;
+    uint256[32] public d_nose;
+    uint256[32] public d_mouth;
+    uint256[32] public d_tail;
+    uint256[32] public d_plume;
+    uint256[32] public d_legs;
+    uint256[32] public d_spikes;
+    uint256[32] public d_wings;
     
     uint private mixesMade = 0;
+
+    event readGene(string, uint256);
     
     /**
      * Performs Gene Magic between two gene sequences.
@@ -46,23 +48,17 @@ contract GeneMagic {
      * @param incubatorId - The id of the incubator
      * @return {uint256} The gene configuration of the child
     */
-    function mixGenes(uint256 genesMother, uint256 genesFather, uint16 incubatorId) public returns (uint256) {
-        uint8 beastTypeMother = getBeastType(genesMother);
-        uint8 beastTypeFather = getBeastType(genesFather);
-        if (beastTypeFather != beastTypeMother) {
-            revert();
-        }
-        
+    function mixGenes(uint8 beastType, uint256 genesMother, uint256 genesFather, uint16 incubatorId) public returns (uint256) {
         uint baseMother = remainingGenes(genesMother, BEAST_TYPE_LENGTH);
         uint baseFather = remainingGenes(genesFather, BEAST_TYPE_LENGTH);
         uint256 mixedGenes = 0;
-        if (beastTypeMother == 0) {
+        if (beastType == 0) {
             mixedGenes = mixGenesDinosaurs(baseMother, baseFather, incubatorId);
         } else {
             mixedGenes = mixGenesUnicorns(baseMother, baseFather, incubatorId);
         }
         
-        return mixedGenes*2**(uint(BEAST_TYPE_LENGTH)) + beastTypeMother;
+        return mixedGenes;
     }
 
     /**
@@ -77,7 +73,7 @@ contract GeneMagic {
         } else {
             mixedGenes = createGenesUnicorn(suggestedSequence);
         }
-        return mixedGenes*2**(uint(BEAST_TYPE_LENGTH)) + beastType;
+        return mixedGenes;
     }
 
     /**
@@ -87,52 +83,63 @@ contract GeneMagic {
     function createGenesUnicorn(uint256 suggestedSequence) private returns(uint256) {
         uint256 newGenes = 0;
         uint16 nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Ability
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(abilities, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-
-        // Second Ability
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(second_abilities, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-
-        // Pedigree
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(pedigree, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Element
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(elements, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Type
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_type, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Eyes
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_eyes, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Horn
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_horn, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Hair
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_hair, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Tail
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_tail, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Snout
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_snout, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
         
         // Legs
         newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_legs, nextSuggestedGene);
         nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Snout
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_snout, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Tail
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_tail, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Hair
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_hair, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Horn
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_horn, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Eyes
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_eyes, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Type
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(u_type, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Element
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(elements, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+
+        // Pedigree
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(pedigree, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+
+        // Second Ability
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(second_abilities, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Ability
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(abilities, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
     
-        return newGenes;
+        return newGenes * 4 + 1;
     }
     
     /**
@@ -202,11 +209,6 @@ contract GeneMagic {
         newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, u_snout, true, abilityMother, abilityFather);
         genesFather = remainingGenes(genesFather, GENE_SIZE);
         genesMother = remainingGenes(genesMother, GENE_SIZE);
-        
-        // Legs
-        newGenes = newGenes * 2**uint(GENE_SIZE) + mixGene(genesMother, genesFather, u_legs, true, abilityMother, abilityFather);
-        genesFather = remainingGenes(genesFather, GENE_SIZE);
-        genesMother = remainingGenes(genesMother, GENE_SIZE);
     
         return newGenes;
     }
@@ -218,60 +220,73 @@ contract GeneMagic {
     function createGenesDinosaur(uint256 suggestedSequence) private returns(uint256) {
         uint256 newGenes = 0;
         uint16 nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Ability
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(abilities, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-
-        // Second Ability
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(second_abilities, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-
-        // Pedigree
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(pedigree, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Element
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(elements, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Type
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_type, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Eyes
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_eyes, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Nose
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_nose, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Mouth
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_mouth, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Tail
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_tail, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Plume
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_plume, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Legs
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_legs, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
-        
-        // Spikes
-        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_spikes, nextSuggestedGene);
-        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
         
         // Wings
         newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_wings, nextSuggestedGene);
         nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Spikes
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_spikes, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Legs
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_legs, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Plume
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_plume, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Tail
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_tail, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Mouth
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_mouth, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Nose
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_nose, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Eyes
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_eyes, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Type
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(d_type, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Element
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(elements, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+
+        // Pedigree
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(pedigree, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+
+        // Second Ability
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(second_abilities, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
+        suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
+        
+        // Ability
+        newGenes = newGenes * 2**uint(GENE_SIZE) + createGene(abilities, nextSuggestedGene);
+        nextSuggestedGene = catchNextGene(suggestedSequence);
     
-        return newGenes;
+        return newGenes * 4;
     }
  
     /**
@@ -456,21 +471,6 @@ contract GeneMagic {
         
         return r;
     }
-    
-    /**
-     * Returns the beast type of a gene sequence
-     * @param genes - The gene sequence
-     * @return {uint8} The beast type
-    */
-    function getBeastType(uint256 genes) private pure returns (uint8) {
-        uint8 accumulator = 0;
-        for (uint b = 0; b < BEAST_TYPE_LENGTH; b++) {
-            uint256 r = genes % 2;
-            accumulator += uint8(r) * uint8(2 ** b);
-            genes /= 2;
-        }
-        return accumulator;
-    }
 
     /**
      * Returns the next available gene of a gene sequence.
@@ -503,6 +503,94 @@ contract GeneMagic {
     */
     function randomNumber(uint b) private constant returns (uint) {
         return uint(keccak256(block.difficulty, now, mixesMade))%b;
+    }
+
+
+
+    // Unicorn setters
+
+    function set_u_type(uint32 pos, uint256 val) public {
+        u_type[pos] = val;
+    }
+
+    function set_u_eyes(uint32 pos, uint256 val) public {
+        u_eyes[pos] = val;
+    }
+
+    function set_u_horn(uint32 pos, uint256 val) public {
+        u_horn[pos] = val;
+    }
+
+    function set_u_hair(uint32 pos, uint256 val) public {
+        u_hair[pos] = val;
+    }
+
+    function set_u_tail(uint32 pos, uint256 val) public {
+        u_tail[pos] = val;
+    }
+
+    function set_u_snout(uint32 pos, uint256 val) public {
+        u_snout[pos] = val;
+    }
+
+    function set_u_legs(uint32 pos, uint256 val) public {
+        u_legs[pos] = val;
+    }
+
+    // Dinosaur setters
+
+    function set_d_type(uint32 pos, uint256 val) public {
+        d_type[pos] = val;
+    }
+
+    function set_d_eyes(uint32 pos, uint256 val) public {
+        d_eyes[pos] = val;
+    }
+
+    function set_d_nose(uint32 pos, uint256 val) public {
+        d_nose[pos] = val;
+    }
+
+    function set_d_mouth(uint32 pos, uint256 val) public {
+        d_mouth[pos] = val;
+    }
+
+    function set_d_tail(uint32 pos, uint256 val) public {
+        d_tail[pos] = val;
+    }
+
+    function set_d_plume(uint32 pos, uint256 val) public {
+        d_plume[pos] = val;
+    }
+
+    function set_d_legs(uint32 pos, uint256 val) public {
+        d_legs[pos] = val;
+    }
+
+    function set_d_spikes(uint32 pos, uint256 val) public {
+        d_spikes[pos] = val;
+    }
+
+    function set_d_wings(uint32 pos, uint256 val) public {
+        d_wings[pos] = val;
+    }
+
+    // COMMON SETTERS
+
+    function set_abilities(uint32 pos, uint256 val) public {
+        abilities[pos] = val;
+    }
+
+    function set_second_abilities(uint32 pos, uint256 val) public {
+        second_abilities[pos] = val;
+    }
+
+    function set_elements(uint32 pos, uint256 val) public {
+        elements[pos] = val;
+    }
+
+    function set_pedigree(uint32 pos, uint256 val) public {
+        pedigree[pos] = val;
     }
 
 }
