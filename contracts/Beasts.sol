@@ -49,7 +49,7 @@ contract Beasts is BeastMinting {
     ) {
         Beast storage legend = beasts[_legendId];
 
-        race = leged.race;
+        race = legend.race;
         isGestating = (legend.siringWithId != 0);
         isReady = (legend.cooldownEndBlock <= block.number);
         cooldownEndBlock = uint256(legend.cooldownEndBlock);
