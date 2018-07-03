@@ -40,7 +40,7 @@ contract ClockAuction is Pausable, ClockAuctionBase {
             msg.sender == nftAddress
         );
         // We are using this boolean method to make sure that even if one fails it will still work
-        bool res = nftAddress.transfer(this.balance);
+        bool res = nftAddress.send(this.balance);
     }
 
     /// @dev Creates and begins a new auction.
