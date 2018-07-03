@@ -33,6 +33,7 @@ contract Beasts is BeastMinting {
 
     // TODO: Check gas usage
     function getLegend(uint256 _legendId) external view returns(
+        uint race,
         bool isGestating,
         bool isReady,
         uint256 cooldownEndBlock,
@@ -48,6 +49,7 @@ contract Beasts is BeastMinting {
     ) {
         Beast storage legend = beasts[_legendId];
 
+        race = leged.race;
         isGestating = (legend.siringWithId != 0);
         isReady = (legend.cooldownEndBlock <= block.number);
         cooldownEndBlock = uint256(legend.cooldownEndBlock);

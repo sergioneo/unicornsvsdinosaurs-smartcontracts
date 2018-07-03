@@ -34,6 +34,7 @@ contract BeastBase is AccessControl {
     }
     // TODO: Describe
     struct Beast {
+        uint race;
         uint256 genes; // first bit represent the type ( uni or dino )
         uint64 experience; // the experience the beast has.
         uint64 challengeCoolDown;
@@ -149,6 +150,7 @@ contract BeastBase is AccessControl {
         // TODO: Skill ID = 0 is not the right thing to do, we want to have random skills?
         // TODO: element = 0 is not right as well, should be taken out from ADN.
         Beast memory _beast = Beast({
+            race: 0, // TODO: Extract from Genes
             genes: _genes,
             experience: 0,
             challengeCoolDown: 0,
