@@ -9,37 +9,37 @@ contract GeneMagic {
     uint8 constant DOMINANT_GENE_ABILITY = 23;
 
     // PROBABILITIES FOR ABILITIES
-    uint256[32] public abilities;
-    uint256[32] public second_abilities;
+    uint256[32] private abilities;
+    uint256[32] private second_abilities;
         
     // PROBABILITIES FOR ELEMENTS
-    uint256[32] public elements;
+    uint256[32] private elements;
 
     // PROBABILITIES FOR PEDIGREE
-    uint256[32] public pedigree;
+    uint256[32] private pedigree;
 
     // PROBABILITIES FOR COLOR COMBINATION
-    uint256[32] public color_combination;
+    uint256[32] private color_combination;
         
     // PROBABILITIES FOR UNICORNS
-    uint256[32] public u_type;
-    uint256[32] public u_eyes;
-    uint256[32] public u_horn;
-    uint256[32] public u_hair;
-    uint256[32] public u_tail;
-    uint256[32] public u_snout;
-    uint256[32] public u_legs;
+    uint256[32] private u_type;
+    uint256[32] private u_eyes;
+    uint256[32] private u_horn;
+    uint256[32] private u_hair;
+    uint256[32] private u_tail;
+    uint256[32] private u_snout;
+    uint256[32] private u_legs;
 
     // PROBABILITIES FOR DINOSAURS
-    uint256[32] public d_type;
-    uint256[32] public d_eyes;
-    uint256[32] public d_nose;
-    uint256[32] public d_mouth;
-    uint256[32] public d_tail;
-    uint256[32] public d_plume;
-    uint256[32] public d_legs;
-    uint256[32] public d_spikes;
-    uint256[32] public d_wings;
+    uint256[32] private d_type;
+    uint256[32] private d_eyes;
+    uint256[32] private d_nose;
+    uint256[32] private d_mouth;
+    uint256[32] private d_tail;
+    uint256[32] private d_plume;
+    uint256[32] private d_legs;
+    uint256[32] private d_spikes;
+    uint256[32] private d_wings;
     
     uint private mixesMade = 0;
 
@@ -549,87 +549,87 @@ contract GeneMagic {
 
     // Unicorn setters
 
-    function set_u_type(uint32 pos, uint256 val) public {
+    function set_u_type(uint32 pos, uint256 val) private {
         u_type[pos] = val;
     }
 
-    function set_u_eyes(uint32 pos, uint256 val) public {
+    function set_u_eyes(uint32 pos, uint256 val) private {
         u_eyes[pos] = val;
     }
 
-    function set_u_horn(uint32 pos, uint256 val) public {
+    function set_u_horn(uint32 pos, uint256 val) private {
         u_horn[pos] = val;
     }
 
-    function set_u_hair(uint32 pos, uint256 val) public {
+    function set_u_hair(uint32 pos, uint256 val) private {
         u_hair[pos] = val;
     }
 
-    function set_u_tail(uint32 pos, uint256 val) public {
+    function set_u_tail(uint32 pos, uint256 val) private {
         u_tail[pos] = val;
     }
 
-    function set_u_snout(uint32 pos, uint256 val) public {
+    function set_u_snout(uint32 pos, uint256 val) private {
         u_snout[pos] = val;
     }
 
-    function set_u_legs(uint32 pos, uint256 val) public {
+    function set_u_legs(uint32 pos, uint256 val) private {
         u_legs[pos] = val;
     }
 
     // Dinosaur setters
 
-    function set_d_type(uint32 pos, uint256 val) public {
+    function set_d_type(uint32 pos, uint256 val) private {
         d_type[pos] = val;
     }
 
-    function set_d_eyes(uint32 pos, uint256 val) public {
+    function set_d_eyes(uint32 pos, uint256 val) private {
         d_eyes[pos] = val;
     }
 
-    function set_d_nose(uint32 pos, uint256 val) public {
+    function set_d_nose(uint32 pos, uint256 val) private {
         d_nose[pos] = val;
     }
 
-    function set_d_mouth(uint32 pos, uint256 val) public {
+    function set_d_mouth(uint32 pos, uint256 val) private {
         d_mouth[pos] = val;
     }
 
-    function set_d_tail(uint32 pos, uint256 val) public {
+    function set_d_tail(uint32 pos, uint256 val) private {
         d_tail[pos] = val;
     }
 
-    function set_d_plume(uint32 pos, uint256 val) public {
+    function set_d_plume(uint32 pos, uint256 val) private {
         d_plume[pos] = val;
     }
 
-    function set_d_legs(uint32 pos, uint256 val) public {
+    function set_d_legs(uint32 pos, uint256 val) private {
         d_legs[pos] = val;
     }
 
-    function set_d_spikes(uint32 pos, uint256 val) public {
+    function set_d_spikes(uint32 pos, uint256 val) private {
         d_spikes[pos] = val;
     }
 
-    function set_d_wings(uint32 pos, uint256 val) public {
+    function set_d_wings(uint32 pos, uint256 val) private {
         d_wings[pos] = val;
     }
 
     // COMMON SETTERS
 
-    function set_abilities(uint32 pos, uint256 val) public {
+    function set_abilities(uint32 pos, uint256 val) private {
         abilities[pos] = val;
     }
 
-    function set_second_abilities(uint32 pos, uint256 val) public {
+    function set_second_abilities(uint32 pos, uint256 val) private {
         second_abilities[pos] = val;
     }
 
-    function set_elements(uint32 pos, uint256 val) public {
+    function set_elements(uint32 pos, uint256 val) private {
         elements[pos] = val;
     }
 
-    function set_pedigree(uint32 pos, uint256 val) public {
+    function set_pedigree(uint32 pos, uint256 val) private {
         pedigree[pos] = val;
     }
 
