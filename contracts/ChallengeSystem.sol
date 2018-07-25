@@ -179,6 +179,8 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
         Skill memory _challengerSkill = skills[_challenger.skillId];
         Skill memory _challengedSkill = skills[_challenged.skillId];
 
+        return 0;
+        /* TODO: Refactor
         if(_challengerSkill.elementalAdvantageBonus == true && _challengedSkill.elementalDisadvantageBonus == false) {
             return 1.2;
         } else if(_challengerSkill.elementalAdvantageBonus == true && _challengedSkill.elementalDisadvantageBonus == true) {
@@ -188,6 +190,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
         } else {
             return 1.1;
         }
+        */
     }
 }
 
