@@ -78887,13 +78887,13 @@
     "version": "0.4.24+commit.e67f0147.Emscripten.clang"
   },
   "networks": {
-    "5777": {
+    "1533260789838": {
       "events": {},
       "links": {},
-      "address": "0xaccf1c7991d37343b324d0a52ca2dc70ed49855d",
-      "transactionHash": "0x145750ff02dd6b3c20c2b7a9eb8b31b8703c2a136ca7641328eed8ed3ba6367c"
+      "address": "0xe3e94f8e3a6917c5bbc27e5d090614e2efb46ce4",
+      "transactionHash": "0xe285784c774f37d36ad029c851a4cb35ead76beb708e2b095628303df6a51a7d"
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-08-03T00:22:13.612Z"
+  "updatedAt": "2018-08-03T01:48:49.306Z"
 }
