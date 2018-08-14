@@ -23,5 +23,13 @@ contract('Beast', async (accounts) => {
         assert.equal(await beasts.cooAddress(), accounts[1]);
     })
 
+    it("Bestia inicial (Teseract) debe ser asignada al CEO", async () => {
+        assert.equal(await beasts.ownerOf(0), await beasts.ceoAddress());
+    })
 
+    it("Se debe crear una bestia Promo y asignar a una cuenta", async () => {
+        await beasts.createPromoBeast(1000, accounts[1]);
+        assert.equal(await beasts.balanceOf(accounts[1]), 1);
+        assert.equal(await beasts.ownerOf(1), accounts[1]);
+    })
 })
