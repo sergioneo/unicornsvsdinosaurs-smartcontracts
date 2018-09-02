@@ -14,11 +14,11 @@ contract Beasts is BeastMinting {
         cooAddress = msg.sender;
         cfoAddress = msg.sender;
 
-        // start with the mythical Beast 0 - so we don't have generation-0 parent issues
+        // start with the mythical Beasts 0, 1 & 2 - so we don't have generation-0 parent issues
         _createBeast(0, 0, 0, uint256(-1), ceoAddress);
         // TODO: Create beast 1 (UNI GOD) and 2 (DINO GOD)
-        // _createBeast(0, 0, 0, uint256(-1), ceoAddress);
-        // _createBeast(0, 0, 0, uint256(-1), ceoAddress);
+        _createBeast(0, 0, 0, uint256(-1), ceoAddress);
+        _createBeast(0, 0, 0, uint256(-1), ceoAddress);
     }
 
     /// @notice No tipping!

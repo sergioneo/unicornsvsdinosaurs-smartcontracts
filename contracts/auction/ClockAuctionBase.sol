@@ -32,15 +32,15 @@ contract ClockAuctionBase {
     // Map from token ID to their corresponding auction.
     mapping (uint256 => Auction) tokenIdToAuction;
     // List of tokens in auciton
-    uint256[] private tokensIdInAuction;
+    //uint256[] private tokensIdInAuction;
 
     event AuctionCreated(uint256 tokenId, uint256 startingPrice, uint256 endingPrice, uint256 duration);
     event AuctionSuccessful(uint256 tokenId, uint256 totalPrice, address winner);
     event AuctionCancelled(uint256 tokenId);
 
-    function _tokensInAuction() internal returns(uint256[]) {
-        return tokensIdInAuction;
-    }
+    //function _tokensInAuction() internal returns(uint256[]) {
+    //    return tokensIdInAuction;
+    //}
 
     /// @dev Returns true if the claimant owns the token.
     /// @param _claimant - Address claiming to own the token.
@@ -77,7 +77,7 @@ contract ClockAuctionBase {
         require(_auction.duration >= 1 minutes);
 
         tokenIdToAuction[_tokenId] = _auction;
-        tokensIdInAuction.push(_tokenId);
+        //tokensIdInAuction.push(_tokenId);
 
         emit AuctionCreated(
             uint256(_tokenId),
@@ -160,7 +160,7 @@ contract ClockAuctionBase {
     /// @dev Removes an auction from the list of open auctions.
     /// @param _tokenId - ID of NFT on auction.
     function _removeAuction(uint256 _tokenId) internal {
-        delete tokensIdInAuction[_tokenId];
+        //delete tokensIdInAuction[_tokenId];
         delete tokenIdToAuction[_tokenId];
     }
 
