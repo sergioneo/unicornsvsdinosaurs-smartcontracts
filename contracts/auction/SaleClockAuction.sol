@@ -1,8 +1,8 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import './ClockAuction.sol';
+import "./ClockAuction.sol";
 
-/// @title Clock auction modified for sale of kitties
+/// @title Clock auction modified for sale of beasts
 /// @notice We omit a fallback function to prevent accidental sends to this contract.
 contract SaleClockAuction is ClockAuction {
 
@@ -11,7 +11,7 @@ contract SaleClockAuction is ClockAuction {
     bool public isSaleClockAuction = true;
 
     // Delegate constructor
-    function SaleClockAuction(address _nftAddr, uint256 _cut) public ClockAuction(_nftAddr, _cut) { }
+    constructor(address _nftAddr, uint256 _cut) public ClockAuction(_nftAddr, _cut) { }
 
     /// @dev Creates and begins a new auction.
     /// @param _tokenId - ID of token to auction, sender must be owner.

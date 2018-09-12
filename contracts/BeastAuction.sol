@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
 import "./BeastBreeding.sol";
 import "./auction/ClockAuction.sol";
@@ -119,6 +119,7 @@ contract BeastAuction is BeastBreeding {
     /// @dev Transfers the balance of the sale auction contract
     /// to the Legends contract. We use two-step withdrawal to
     /// prevent two transfer calls in the auction bid function.
+    // TODO: Check if balance must go to Split Payment
     function withdrawAuctionBalances() external onlyCLevel {
         saleAuction.withdrawBalance();
         siringAuction.withdrawBalance();

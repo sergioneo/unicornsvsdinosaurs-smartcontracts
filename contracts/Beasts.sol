@@ -1,24 +1,24 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import './BeastMinting.sol';
+import "./BeastMinting.sol";
 
-contract Legends is BeastMinting {
+contract Beasts is BeastMinting {
   
     /// @notice Creates the main Legend smart contract instance.
-    function Legends() public {
+    constructor() public {
         // Starts paused.
         paused = false;
 
-        // the creator of the contract is the initial CEO
+        // the creator of the contract is the initial CEO, COO and CFO
         ceoAddress = msg.sender;
-
-        // the creator of the contract is also the initial COO
         cooAddress = msg.sender;
-
         cfoAddress = msg.sender;
 
-        // start with the mythical kitten 0 - so we don't have generation-0 parent issues
-        _createBeast(0, 0, 0, uint256(-1), address(0));
+        // start with the mythical Beasts 0, 1 & 2 - so we don't have generation-0 parent issues
+        _createBeast(0, 0, 0, uint256(-1), ceoAddress);
+        // TODO: Create beast 1 (UNI GOD) and 2 (DINO GOD)
+        _createBeast(0, 0, 0, uint256(-1), ceoAddress);
+        _createBeast(0, 0, 0, uint256(-1), ceoAddress);
     }
 
     /// @notice No tipping!
@@ -31,7 +31,9 @@ contract Legends is BeastMinting {
         );
     }
 
+    // TODO: Check gas usage
     function getLegend(uint256 _legendId) external view returns(
+        uint race,
         bool isGestating,
         bool isReady,
         uint256 cooldownEndBlock,
@@ -45,22 +47,24 @@ contract Legends is BeastMinting {
         uint256 generation,
         uint256 genes
     ) {
-      Beast storage legend = beasts[_legendId];
+        Beast storage legend = beasts[_legendId];
 
-      isGestating = (legend.siringWithId != 0);
-      isReady = (legend.cooldownEndBlock <= block.number);
-      cooldownEndBlock = uint256(legend.cooldownEndBlock);
-      isReadyToFight = (legend.challengeCoolDown <= block.number);
-      experience = uint256(legend.experience);
-      birthTime = uint256(legend.birthTime);
-      sireId = uint256(legend.sireId);
-      matronId = uint256(legend.matronId);
-      siringWithId = uint256(legend.siringWithId);
-      cooldownIndex = uint256(legend.cooldownIndex);
-      generation = uint256(legend.generation);
-      genes = legend.genes;
+        race = legend.race;
+        isGestating = (legend.siringWithId != 0);
+        isReady = (legend.cooldownEndBlock <= block.number);
+        cooldownEndBlock = uint256(legend.cooldownEndBlock);
+        isReadyToFight = (legend.challengeCoolDown <= block.number);
+        experience = uint256(legend.experience);
+        birthTime = uint256(legend.birthTime);
+        sireId = uint256(legend.sireId);
+        matronId = uint256(legend.matronId);
+        siringWithId = uint256(legend.siringWithId);
+        cooldownIndex = uint256(legend.cooldownIndex);
+        generation = uint256(legend.generation);
+        genes = legend.genes;
     }
 
+    // TODO: Check gas usage
     function getLegendAttrs(uint256 _legendId) external view returns(
         uint256 strength,
         uint256 dexterity,
@@ -80,7 +84,8 @@ contract Legends is BeastMinting {
     }
 
     // @dev Allows the CFO to capture the balance available to the contract.
-    function withdrawBalance() external onlyCFO {
+    // TODO: Check if this is a problem for the investors
+    function withdrawBalance() external onlyCEO {
         uint256 balance = this.balance;
         cfoAddress.transfer(balance);
     }

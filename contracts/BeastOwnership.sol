@@ -1,22 +1,21 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import './BeastBase.sol';
-import './token/ERC721Metadata.sol';
-import './token/ERC721.sol';
+import "./BeastBase.sol";
+import "./token/ERC721Metadata.sol";
+import "./token/ERC721.sol";
 
 contract BeastOwnership  is BeastBase, ERC721 {
 
     /// @notice Name and symbol of the non fungible token, as defined in ERC721.
-    string public constant name = "CryptoBeast";
-    string public constant symbol = "BST";
+    string public constant name = "RumbleLegendBeast";
+    string public constant symbol = "RLB";
 
-    // The contract that will return kitty metadata
+    // The contract that will return beast metadata
     ERC721Metadata public erc721Metadata;
 
-    bytes4 constant InterfaceSignature_ERC165 =
-        bytes4(keccak256("supportsInterface(bytes4)"));
+    bytes4 constant InterfaceSignature_ERC165 = bytes4(keccak256("supportsInterface(bytes4)"));
 
-    bytes4 constant InterfaceSignature_ERC721 =
+    bytes4 constant InterfaceSignature_ERC721 = 
         bytes4(keccak256("name()")) ^
         bytes4(keccak256("symbol()")) ^
         bytes4(keccak256("totalSupply()")) ^
@@ -48,16 +47,16 @@ contract BeastOwnership  is BeastBase, ERC721 {
     // are valid. We leave it to public methods to sanitize their inputs and follow
     // the required logic.
 
-    /// @dev Checks if a given address is the current owner of a particular Kitty.
+    /// @dev Checks if a given address is the current owner of a particular Beast.
     /// @param _claimant the address we are validating against.
-    /// @param _tokenId kitten id, only valid when > 0
+    /// @param _tokenId beast id, only valid when > 0
     function _owns(address _claimant, uint256 _tokenId) internal view returns (bool) {
         return beastIndexToOwner[_tokenId] == _claimant;
     }
 
-    /// @dev Checks if a given address currently has transferApproval for a particular Kitty.
-    /// @param _claimant the address we are confirming kitten is approved for.
-    /// @param _tokenId kitten id, only valid when > 0
+    /// @dev Checks if a given address currently has transferApproval for a particular Beast.
+    /// @param _claimant the address we are confirming beast is approved for.
+    /// @param _tokenId beast id, only valid when > 0
     function _approvedFor(address _claimant, uint256 _tokenId) internal view returns (bool) {
         return beastIndexToApproved[_tokenId] == _claimant;
     }
@@ -65,24 +64,24 @@ contract BeastOwnership  is BeastBase, ERC721 {
     /// @dev Marks an address as being approved for transferFrom(), overwriting any previous
     ///  approval. Setting _approved to address(0) clears all transfer approval.
     ///  NOTE: _approve() does NOT send the Approval event. This is intentional because
-    ///  _approve() and transferFrom() are used together for putting Kitties on auction, and
+    ///  _approve() and transferFrom() are used together for putting Beasts on auction, and
     ///  there is no value in spamming the log with Approval events in that case.
     function _approve(uint256 _tokenId, address _approved) internal {
         beastIndexToApproved[_tokenId] = _approved;
     }
 
-    /// @notice Returns the number of Kitties owned by a specific address.
+    /// @notice Returns the number of Beasts owned by a specific address.
     /// @param _owner The owner address to check.
     /// @dev Required for ERC-721 compliance
     function balanceOf(address _owner) public view returns (uint256 count) {
         return ownershipTokenCount[_owner];
     }
 
-    /// @notice Transfers a Kitty to another address. If transferring to a smart
+    /// @notice Transfers a Beast to another address. If transferring to a smart
     ///  contract be VERY CAREFUL to ensure that it is aware of ERC-721 (or
-    ///  CryptoKitties specifically) or your Kitty may be lost forever. Seriously.
+    ///  RumbleLegends specifically) or your Beast may be lost forever. Seriously.
     /// @param _to The address of the recipient, can be a user or contract.
-    /// @param _tokenId The ID of the Kitty to transfer.
+    /// @param _tokenId The ID of the Beast to transfer.
     /// @dev Required for ERC-721 compliance.
     function transfer(
         address _to,
@@ -94,11 +93,11 @@ contract BeastOwnership  is BeastBase, ERC721 {
         // Safety check to prevent against an unexpected 0x0 default.
         require(_to != address(0));
         // Disallow transfers to this contract to prevent accidental misuse.
-        // The contract should never own any kitties (except very briefly
+        // The contract should never own any beasts (except very briefly
         // after a gen0 cat is created and before it goes on auction).
         require(_to != address(this));
         // Disallow transfers to the auction contracts to prevent accidental
-        // misuse. Auction contracts should only take ownership of kitties
+        // misuse. Auction contracts should only take ownership of beasts
         // through the allow + transferFrom flow.
         
         require(_to != address(saleAuction));
@@ -111,11 +110,11 @@ contract BeastOwnership  is BeastBase, ERC721 {
         _transfer(msg.sender, _to, _tokenId);
     }
 
-    /// @notice Grant another address the right to transfer a specific Kitty via
+    /// @notice Grant another address the right to transfer a specific Beast via
     ///  transferFrom(). This is the preferred flow for transfering NFTs to contracts.
     /// @param _to The address to be granted transfer approval. Pass address(0) to
     ///  clear all approvals.
-    /// @param _tokenId The ID of the Kitty that can be transferred if this call succeeds.
+    /// @param _tokenId The ID of the Beast that can be transferred if this call succeeds.
     /// @dev Required for ERC-721 compliance.
     function approve(
         address _to,
@@ -134,12 +133,12 @@ contract BeastOwnership  is BeastBase, ERC721 {
         Approval(msg.sender, _to, _tokenId);
     }
 
-    /// @notice Transfer a Kitty owned by another address, for which the calling address
+    /// @notice Transfer a Beast owned by another address, for which the calling address
     ///  has previously been granted transfer approval by the owner.
-    /// @param _from The address that owns the Kitty to be transfered.
-    /// @param _to The address that should take ownership of the Kitty. Can be any address,
+    /// @param _from The address that owns the Beast to be transfered.
+    /// @param _to The address that should take ownership of the Beast. Can be any address,
     ///  including the caller.
-    /// @param _tokenId The ID of the Kitty to be transferred.
+    /// @param _tokenId The ID of the Beast to be transferred.
     /// @dev Required for ERC-721 compliance.
     function transferFrom(
         address _from,
@@ -152,7 +151,7 @@ contract BeastOwnership  is BeastBase, ERC721 {
         // Safety check to prevent against an unexpected 0x0 default.
         require(_to != address(0));
         // Disallow transfers to this contract to prevent accidental misuse.
-        // The contract should never own any kitties (except very briefly
+        // The contract should never own any beasts (except very briefly
         // after a gen0 cat is created and before it goes on auction).
         require(_to != address(this));
         // Check for approval and valid ownership
@@ -163,13 +162,13 @@ contract BeastOwnership  is BeastBase, ERC721 {
         _transfer(_from, _to, _tokenId);
     }
 
-    /// @notice Returns the total number of Kitties currently in existence.
+    /// @notice Returns the total number of beasts currently in existence.
     /// @dev Required for ERC-721 compliance.
     function totalSupply() public view returns (uint) {
         return beasts.length - 1;
     }
 
-    /// @notice Returns the address currently assigned ownership of a given Kitty.
+    /// @notice Returns the address currently assigned ownership of a given Beast.
     /// @dev Required for ERC-721 compliance.
     function ownerOf(uint256 _tokenId)
         external
@@ -181,10 +180,10 @@ contract BeastOwnership  is BeastBase, ERC721 {
         require(owner != address(0));
     }
 
-    /// @notice Returns a list of all Kitty IDs assigned to an address.
-    /// @param _owner The owner whose Kitties we are interested in.
+    /// @notice Returns a list of all Beast IDs assigned to an address.
+    /// @param _owner The owner whose beasts we are interested in.
     /// @dev This method MUST NEVER be called by smart contract code. First, it's fairly
-    ///  expensive (it walks the entire Kitty array looking for cats belonging to owner),
+    ///  expensive (it walks the entire Beast array looking for cats belonging to owner),
     ///  but it also returns a dynamic array, which is only supported for web3 calls, and
     ///  not contract-to-contract calls.
     function tokensOfOwner(address _owner) external view returns(uint256[] ownerTokens) {
@@ -255,7 +254,7 @@ contract BeastOwnership  is BeastBase, ERC721 {
 
     /// @notice Returns a URI pointing to a metadata package for this token conforming to
     ///  ERC-721 (https://github.com/ethereum/EIPs/issues/721)
-    /// @param _tokenId The ID number of the Kitty whose metadata should be returned.
+    /// @param _tokenId The ID number of the Beast whose metadata should be returned.
     function tokenMetadata(uint256 _tokenId, string _preferredTransport) external view returns (string infoUrl) {
         require(erc721Metadata != address(0));
         bytes32[4] memory buffer;

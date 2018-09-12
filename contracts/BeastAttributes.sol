@@ -1,15 +1,14 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import './BeastBase.sol';
+import "./BeastBase.sol";
 
 contract BeastAttributes is BeastBase {
     /*** EVENTS ***/
 
 
-    /// @dev Transfer event as defined in current draft of ERC721. Emitted every time a kitten
+    /// @dev Transfer event as defined in current draft of ERC721. Emitted every time a beast
     ///  ownership is assigned, including births.
     event Level(uint _beastID, uint _from, uint _to);
-
     event ChangePreferedAttribute(uint _beastID, uint _from, uint _to);
 
     /// Table indicating experience requiere for each level
@@ -59,7 +58,7 @@ contract BeastAttributes is BeastBase {
         Beast storage _beast = beasts[_tokenId];
         require(_beast.experience >= experienceRequiredForLevel[_toLevel - 1]);
         // emit the Level event
-        Level(_tokenId, _toLevel -1, _toLevel);
+        emit Level(_tokenId, _toLevel -1, _toLevel);
         // Add Prefered Skills
         if(_beast.preferedAttribute == 1) {
             _beast.attrs.strength += 1;
@@ -100,7 +99,7 @@ contract BeastAttributes is BeastBase {
         require(_beast.preferedAttribute != _preferedAttribute);
         require(_preferedAttribute <= 6 || _preferedAttribute > 0);
         // emit the Level event
-        ChangePreferedAttribute(_tokenId, _beast.preferedAttribute, _preferedAttribute);
+        emit ChangePreferedAttribute(_tokenId, _beast.preferedAttribute, _preferedAttribute);
         _beast.preferedAttribute = uint8(_preferedAttribute);
     }
 }

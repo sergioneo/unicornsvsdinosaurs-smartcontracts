@@ -1,21 +1,20 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import './util/AccessControl.sol';
+import "./util/AccessControl.sol";
 import "./auction/SaleClockAuction.sol";
 import "./auction/SiringClockAuction.sol";
 
-/// @title Base contract for CryptoKitties. Holds all common structs, events and base variables.
-/// @author Axiom Zen (https://www.axiomzen.co)
+/// @title Base contract for Rumble Legends. Holds all common structs, events and base variables.
 /// @dev See the BeastCore contract documentation to understand how the various contract facets are arranged.
 contract BeastBase is AccessControl {
     /*** EVENTS ***/
 
-    /// @dev The Birth event is fired whenever a new kitten comes into existence. This obviously
+    /// @dev The Birth event is fired whenever a new beasts comes into existence. This obviously
     ///  includes any time a beast is created through the giveBirth method, but it is also called
     ///  when a new gen0 beast is created.
     event Birth(address owner, uint256 beastId, uint256 matronId, uint256 sireId, uint256 genes);
 
-    /// @dev Transfer event as defined in current draft of ERC721. Emitted every time a kitten
+    /// @dev Transfer event as defined in current draft of ERC721. Emitted every time a beasts
     ///  ownership is assigned, including births.
     event Transfer(address from, address to, uint256 tokenId);
 
@@ -35,6 +34,7 @@ contract BeastBase is AccessControl {
     }
     // TODO: Describe
     struct Beast {
+        uint race;
         uint256 genes; // first bit represent the type ( uni or dino )
         uint64 experience; // the experience the beast has.
         uint64 challengeCoolDown;
@@ -103,7 +103,7 @@ contract BeastBase is AccessControl {
     ///  address for siring at any time. A zero value means no approval is outstanding.
     mapping (uint256 => address) public sireAllowedToAddress;
 
-    /// @dev The address of the ClockAuction contract that handles sales of Kitties. This
+    /// @dev The address of the ClockAuction contract that handles sales of beasts. This
     ///  same contract handles both peer-to-peer sales as well as the gen0 sales which are
     ///  initiated every 15 minutes.
     SaleClockAuction public saleAuction;
@@ -115,14 +115,14 @@ contract BeastBase is AccessControl {
 
     /// @dev Assigns ownership of a specific Beast to an address.
     function _transfer(address _from, address _to, uint256 _tokenId) internal {
-        // Since the number of kittens is capped to 2^32 we can't overflow this
+        // Since the number of beasts is capped to 2^32 we can't overflow this
         ownershipTokenCount[_to]++;
         // transfer ownership
         beastIndexToOwner[_tokenId] = _to;
-        // When creating new kittens _from is 0x0, but we can't account that address.
+        // When creating new beasts _from is 0x0, but we can't account that address.
         if (_from != address(0)) {
             ownershipTokenCount[_from]--;
-            // once the kitten is transferred also clear sire allowances
+            // once the beasts is transferred also clear sire allowances
             delete sireAllowedToAddress[_tokenId];
             // clear any previously approved ownership exchange
             delete beastIndexToApproved[_tokenId];
@@ -147,9 +147,10 @@ contract BeastBase is AccessControl {
         require(_sireId == uint256(uint32(_sireId)));
         require(_generation == uint256(uint16(_generation)));
 
-// TODO: Skill ID = 0 is not the right thing to do, we want to have random skills?
-// TODO: element = 0 is not right as well, should be taken out from ADN.
+        // TODO: Skill ID = 0 is not the right thing to do, we want to have random skills?
+        // TODO: element = 0 is not right as well, should be taken out from ADN.
         Beast memory _beast = Beast({
+            race: 0, // TODO: Extract from Genes
             genes: _genes,
             experience: 0,
             challengeCoolDown: 0,
@@ -180,7 +181,7 @@ contract BeastBase is AccessControl {
         require(newBeastId == uint256(uint32(newBeastId)));
 
         // emit the birth event
-        Birth(
+        emit Birth(
             _owner,
             newBeastId,
             uint256(_beast.matronId),

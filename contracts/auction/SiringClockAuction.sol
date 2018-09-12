@@ -1,6 +1,6 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
-import './ClockAuction.sol';
+import "./ClockAuction.sol";
 
 /// @title Reverse auction modified for siring
 /// @notice We omit a fallback function to prevent accidental sends to this contract.
@@ -11,7 +11,7 @@ contract SiringClockAuction is ClockAuction {
     bool public isSiringClockAuction = true;
 
     // Delegate constructor
-    function SiringClockAuction(address _nftAddr, uint256 _cut) public ClockAuction(_nftAddr, _cut) { }
+    constructor(address _nftAddr, uint256 _cut) public ClockAuction(_nftAddr, _cut) { }
 
     /// @dev Creates and begins a new auction. Since this function is wrapped,
     /// require sender to be Legends contract.
@@ -59,7 +59,7 @@ contract SiringClockAuction is ClockAuction {
         address seller = tokenIdToAuction[_tokenId].seller;
         // _bid checks that token ID is valid and will throw if bid fails
         _bid(_tokenId, msg.value);
-        // We transfer the kitty back to the seller, the winner will get
+        // We transfer the beast back to the seller, the winner will get
         // the offspring
         _transfer(seller, _tokenId);
     }
