@@ -5,6 +5,7 @@ const SaleClockAuction = artifacts.require("./auction/SaleClockAuction.sol");
 const SiringClockAuction = artifacts.require("./auction/SiringClockAuction.sol");
 
 // https://github.com/dapperlabs/cryptokitties-bounty/blob/master/test/kitty-core.test.js
+
 contract('Beast', async (accounts) => {
     before(() => util.measureGas(accounts));
     after(() => util.measureGas(accounts));
@@ -26,31 +27,31 @@ contract('Beast', async (accounts) => {
         await beasts.setSiringAuctionAddress(siringAuction.address, { from: ceo });
     }
 
-    describe("Control de Pertenencia", async () => {
+    describe("Contracts Ownership", async () => {
 
         before(async function () {
             await deployContract();
         });
 
-        it("El CEO, CFO y COO del contrato debe ser quien hace deploy", async () => {
+        it("CEO, CFO and COO must be settled with the deployer address", async () => {
             assert.equal(await beasts.ceoAddress(), ceo);
             assert.equal(await beasts.cfoAddress(), ceo);
             assert.equal(await beasts.cooAddress(), ceo);
         })
 
-        it("Bestias iniciales (Teseract y Dioses) deben ser asignada al CEO", async () => {
+        it("Initial beasts must be assigned to CEO address", async () => {
             assert.equal(await beasts.ownerOf(0), await beasts.ceoAddress());
             assert.equal(await beasts.ownerOf(1), await beasts.ceoAddress());
             assert.equal(await beasts.ownerOf(2), await beasts.ceoAddress());
         })
 
-        it("Se debe crear una bestia Promo y asignar a una cuenta", async () => {
+        it("Must create a promo beast and assign to a specific address", async () => {
             await beasts.createPromoBeast(1000, user3);
             assert.equal(await beasts.balanceOf(user3), 1);
             assert.equal(await beasts.ownerOf(3), user3);
         })
 
-        it("El CEO, CFO y COO se debe modificar", async () => {
+        it("CEO, CFO and COO can be edited", async () => {
 
             await beasts.setCOO(coo);
             await beasts.setCFO(cfo);
@@ -120,9 +121,8 @@ contract('Beast', async (accounts) => {
             const cooBal2 = await web3.eth.getBalance(user2);
             const kitty1Owner = await beasts.ownerOf(beastId1);
             assert.equal(kitty1Owner, user2);
-            //assert(cooBal2.gt(cooBal1));
             // Transfer the kitty back to coo for the rest of the tests
-            //await beasts.transfer(user1, beastId1, { from: user3 });
+            await beasts.transfer(user1, beastId1, { from: user2 });
         });
 
     });
