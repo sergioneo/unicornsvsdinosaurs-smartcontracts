@@ -76,14 +76,29 @@ contract BeastMinting is Random, BeastAuction {
      */
     function hatchEgg(uint256 _eggId, uint256 _amount) external {
 
+        uint256 customGene;
+        bool open;
+
+        (,,,customGene,,,,,open,) = eggFactory.eggs(_eggId);
+
+        require(open == true);
         require(eggsOwned[msg.sender][_eggId] + _amount <= eggFactory.eggsOwned(msg.sender,_eggId));
 
         for (uint256 i = 0; i < _amount; i++) {
             //TODO: Get base gens from Egg Scheme (_eggId)
-            //uint256 randomGens = random(1000000000000000); 
+            //uint256 randomGens = geneMagic(customGene);
+
             uint256 legendId = _createBeast(0, 0, 0, 0, msg.sender);
             eggsOwned[msg.sender][_eggId] += 1;
             emit EggOpened(legendId);
         }
+    }
+
+    function getEggInfo(uint256 _eggId) public returns(uint256, bool){
+        uint256 customGene;
+        bool open;
+
+        (,,,customGene,,,,,open,) = eggFactory.eggs(_eggId);
+        return (customGene, open);
     }
 }
