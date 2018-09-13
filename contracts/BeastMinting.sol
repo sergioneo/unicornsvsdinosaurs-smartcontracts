@@ -67,16 +67,23 @@ contract BeastMinting is Random, BeastAuction {
         emit LegendaryRandomBoxOpened(legendId);
     }
 
+    // Mapping of eggs owned by an address
+    // @dev: owner => ( eggId => eggsAmount )
+    mapping ( address => mapping ( uint256 => uint256 ) ) public eggsOwned;
+
     /**
      * Hatch an egg of Egg Factory
      */
     function hatchEgg(uint256 _eggId, uint256 _amount) external {
-        eggFactory.openEgg(_eggId, _amount); // TODO: check throw
 
-        //TODO: Get base gens from Egg Scheme (_eggId)
+        require(eggsOwned[msg.sender][_eggId] + _amount <= eggFactory.eggsOwned(msg.sender,_eggId));
 
-        uint256 randomGens = random(1000000000000000); 
-        uint256 legendId = _createBeast(0, 0, 0, randomGens, msg.sender);
-        emit EggOpened(legendId);
+        for (uint256 i = 0; i < _amount; i++) {
+            //TODO: Get base gens from Egg Scheme (_eggId)
+            //uint256 randomGens = random(1000000000000000); 
+            uint256 legendId = _createBeast(0, 0, 0, 0, msg.sender);
+            eggsOwned[msg.sender][_eggId] += 1;
+            emit EggOpened(legendId);
+        }
     }
 }
