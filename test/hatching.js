@@ -86,13 +86,12 @@ contract("Hatch", async (accounts) => {
             );
         })
 
-        /*
         it("User fail at open egg if egg hasn't the state of can be opened", async () => {
             await util.expectThrow(
-                await beasts.hatchEgg(1, 1, { from: user1 })
+                beasts.hatchEgg(1, 1, { from: user1 })
             );
         })
-        
+
 
         it("User fail at set egg state to can be opened", async () => {
             await util.expectThrow(
@@ -105,9 +104,15 @@ contract("Hatch", async (accounts) => {
             const egg = await eggFactory.eggs(1);
             assert.equal(egg[8], true);
         })
-        */
 
         it("User fail at open egg because try to open more of what he have", async () => {
+
+            /*
+            const getEggInfo = beasts.getEggInfo(1);
+            console.log(" customGene >>> " + getEggInfo[0].toNumber());
+            console.log(" open >>> " + getEggInfo[1]);
+            */
+
             await util.expectThrow(
                 beasts.hatchEgg(1, 10, { from: user1 })
             );
