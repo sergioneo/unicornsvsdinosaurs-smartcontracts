@@ -1,5 +1,8 @@
-pragma solidity ^0.4.0;
-contract GeneMagic {
+pragma solidity ^0.4.24;
+
+import "./util/Ownable.sol";
+
+contract GeneMagic is Ownable {
     
     uint8 constant BEAST_TYPE_LENGTH = 2;
     uint8 constant GENE_BASE_LENGTH = 254;
@@ -9,42 +12,55 @@ contract GeneMagic {
     uint8 constant DOMINANT_GENE_ABILITY = 23;
 
     // PROBABILITIES FOR ABILITIES
-    uint256[32] public abilities;
-    uint256[32] public second_abilities;
+    uint256[32] private abilities;
+    uint256[32] private second_abilities;
         
     // PROBABILITIES FOR ELEMENTS
-    uint256[32] public elements;
+    uint256[32] private elements;
 
     // PROBABILITIES FOR PEDIGREE
-    uint256[32] public pedigree;
+    uint256[32] private pedigree;
 
     // PROBABILITIES FOR COLOR COMBINATION
-    uint256[32] public color_combination;
+    uint256[32] private color_combination;
         
     // PROBABILITIES FOR UNICORNS
-    uint256[32] public u_type;
-    uint256[32] public u_eyes;
-    uint256[32] public u_horn;
-    uint256[32] public u_hair;
-    uint256[32] public u_tail;
-    uint256[32] public u_snout;
-    uint256[32] public u_legs;
+    uint256[32] private u_type;
+    uint256[32] private u_eyes;
+    uint256[32] private u_horn;
+    uint256[32] private u_hair;
+    uint256[32] private u_tail;
+    uint256[32] private u_snout;
+    uint256[32] private u_legs;
 
     // PROBABILITIES FOR DINOSAURS
-    uint256[32] public d_type;
-    uint256[32] public d_eyes;
-    uint256[32] public d_nose;
-    uint256[32] public d_mouth;
-    uint256[32] public d_tail;
-    uint256[32] public d_plume;
-    uint256[32] public d_legs;
-    uint256[32] public d_spikes;
-    uint256[32] public d_wings;
+    uint256[32] private d_type;
+    uint256[32] private d_eyes;
+    uint256[32] private d_nose;
+    uint256[32] private d_mouth;
+    uint256[32] private d_tail;
+    uint256[32] private d_plume;
+    uint256[32] private d_legs;
+    uint256[32] private d_spikes;
+    uint256[32] private d_wings;
     
     uint private mixesMade = 0;
 
     event readGene(string, uint256);
+
+    bool public isGeneMagic = true;
     
+    address private beastContract;
+
+    modifier onlyBeastContract() {
+        require(msg.sender == beastContract);
+        _;
+    }
+
+    function setBeastContract(address _beastContract) public onlyOwner {
+        beastContract = _beastContract;
+    }
+
     /**
      * Performs Gene Magic between two gene sequences.
      * @param genesMother - The gene sequence of the mother
@@ -52,7 +68,7 @@ contract GeneMagic {
      * @param incubatorId - The id of the incubator
      * @return {uint256} The gene configuration of the child
     */
-    function mixGenes(uint8 beastType, uint256 genesMother, uint256 genesFather, uint16 incubatorId) public returns (uint256) {
+    function mixGenes(uint8 beastType, uint256 genesMother, uint256 genesFather, uint16 incubatorId) onlyBeastContract public returns (uint256) {
         uint256 mixedGenes = 0;
         if (beastType == 0) {
             mixedGenes = mixGenesDinosaurs(genesMother, genesFather, incubatorId);
@@ -68,7 +84,7 @@ contract GeneMagic {
      * @param beastType - The beast type of this new beast
      * @return {uint256} The gene configuration of the new beast
     */
-    function createGenes(uint8 beastType, uint256 suggestedSequence) public returns(uint256) {
+    function createGenes(uint8 beastType, uint256 suggestedSequence) onlyBeastContract public returns(uint256) {
         uint256 mixedGenes = 0;
         if (beastType == 0) {
             mixedGenes = createGenesDinosaur(suggestedSequence);
@@ -82,8 +98,9 @@ contract GeneMagic {
      * Auxiliary function - Creates a brand new gene unicorn sequence
      * @return {uint256} The gene configuration of the new unicorn
     */
-    function createGenesUnicorn(uint256 suggestedSequence) private returns(uint256) {
+    function createGenesUnicorn(uint256 _suggestedSequence) private returns(uint256) {
         uint256 newGenes = 0;
+        uint256 suggestedSequence = _suggestedSequence;
         uint16 nextSuggestedGene = catchNextGene(suggestedSequence, GENE_SIZE);
         suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
         
@@ -154,13 +171,14 @@ contract GeneMagic {
     
     /**
      * Auxiliary function - Performs Gene Magic between two unicorn gene sequences.
-     * @param genesMother - The gene sequence of the unicorn mother
-     * @param genesFather - The gene sequence of the unicorn father
+     * @param _genesMother - The gene sequence of the unicorn mother
+     * @param _genesFather - The gene sequence of the unicorn father
      * @param incubatorId - The id of the incubator
      * @return {uint256} The gene configuration of the unicorn child
     */
-    function mixGenesUnicorns(uint256 genesMother, uint256 genesFather, uint16 incubatorId) private returns(uint256) {
-        
+    function mixGenesUnicorns(uint256 _genesMother, uint256 _genesFather, uint16 incubatorId) private returns(uint256) {
+        uint256 genesMother = _genesMother;
+        uint256 genesFather = _genesFather;
         
         if (incubatorId < 4) {
             elements[incubatorId] *= 3;
@@ -235,7 +253,8 @@ contract GeneMagic {
      * Auxiliary function - Creates a brand new gene dinosaur sequence
      * @return {uint256} The gene configuration of the new dinosaur
     */
-    function createGenesDinosaur(uint256 suggestedSequence) private returns(uint256) {
+    function createGenesDinosaur(uint256 _suggestedSequence) private returns(uint256) {
+        uint256 suggestedSequence = _suggestedSequence;
         uint256 newGenes = 0;
         uint16 nextSuggestedGene = catchNextGene(suggestedSequence, GENE_SIZE);
         suggestedSequence = remainingGenes(suggestedSequence, GENE_SIZE);
@@ -317,12 +336,16 @@ contract GeneMagic {
  
     /**
      * Auxiliary function - Performs Gene Magic between two dinosaur gene sequences.
-     * @param genesMother - The gene sequence of the dinosaur mother
-     * @param genesFather - The gene sequence of the dinosaur father
+     * @param _genesMother - The gene sequence of the dinosaur mother
+     * @param _genesFather - The gene sequence of the dinosaur father
      * @param incubatorId - The id of the incubator
      * @return {uint256} The gene configuration of the dinosaur child
     */
-    function mixGenesDinosaurs(uint256 genesMother, uint256 genesFather, uint16 incubatorId) private returns(uint256) {
+    function mixGenesDinosaurs(uint256 _genesMother, uint256 _genesFather, uint16 incubatorId) private returns(uint256) {
+
+        uint256 genesMother = _genesMother;
+        uint256 genesFather = _genesFather;
+
         if (incubatorId < 4) {
             elements[incubatorId] *= 3;
         }
@@ -412,7 +435,7 @@ contract GeneMagic {
      * @param attributeProbabilities - The probability distribution of the gene values.
      * @return {uint16} The new gene value
     */
-    function createGene(uint[32] attributeProbabilities, uint16 suggestedGene) private returns(uint16) {
+    function createGene(uint[32] attributeProbabilities, uint16 suggestedGene) onlyBeastContract public returns(uint16) {
         
         if (suggestedGene != 0) {
             return suggestedGene;
@@ -451,7 +474,7 @@ contract GeneMagic {
      * @param attributeProbabilities - The probability distribution of the gene values.
      * @return {uint16} The new gene value
     */
-    function mixGene(uint8 geneSize, uint256 genesMother, uint256 genesFather, uint[32] attributeProbabilities, bool useAbilities, uint16 abilityMother, uint16 abilityFather) private returns(uint16) {
+    function mixGene(uint8 geneSize, uint256 genesMother, uint256 genesFather, uint[32] attributeProbabilities, bool useAbilities, uint16 abilityMother, uint16 abilityFather) onlyBeastContract public returns(uint16) {
         
         mixesMade++;
         
@@ -549,87 +572,87 @@ contract GeneMagic {
 
     // Unicorn setters
 
-    function set_u_type(uint32 pos, uint256 val) public {
+    function set_u_type(uint32 pos, uint256 val) onlyOwner public {
         u_type[pos] = val;
     }
 
-    function set_u_eyes(uint32 pos, uint256 val) public {
+    function set_u_eyes(uint32 pos, uint256 val) onlyOwner public {
         u_eyes[pos] = val;
     }
 
-    function set_u_horn(uint32 pos, uint256 val) public {
+    function set_u_horn(uint32 pos, uint256 val) onlyOwner public {
         u_horn[pos] = val;
     }
 
-    function set_u_hair(uint32 pos, uint256 val) public {
+    function set_u_hair(uint32 pos, uint256 val) onlyOwner public {
         u_hair[pos] = val;
     }
 
-    function set_u_tail(uint32 pos, uint256 val) public {
+    function set_u_tail(uint32 pos, uint256 val) onlyOwner public {
         u_tail[pos] = val;
     }
 
-    function set_u_snout(uint32 pos, uint256 val) public {
+    function set_u_snout(uint32 pos, uint256 val) onlyOwner public {
         u_snout[pos] = val;
     }
 
-    function set_u_legs(uint32 pos, uint256 val) public {
+    function set_u_legs(uint32 pos, uint256 val) onlyOwner public {
         u_legs[pos] = val;
     }
 
     // Dinosaur setters
 
-    function set_d_type(uint32 pos, uint256 val) public {
+    function set_d_type(uint32 pos, uint256 val) onlyOwner public {
         d_type[pos] = val;
     }
 
-    function set_d_eyes(uint32 pos, uint256 val) public {
+    function set_d_eyes(uint32 pos, uint256 val) onlyOwner public {
         d_eyes[pos] = val;
     }
 
-    function set_d_nose(uint32 pos, uint256 val) public {
+    function set_d_nose(uint32 pos, uint256 val) onlyOwner public {
         d_nose[pos] = val;
     }
 
-    function set_d_mouth(uint32 pos, uint256 val) public {
+    function set_d_mouth(uint32 pos, uint256 val) onlyOwner public {
         d_mouth[pos] = val;
     }
 
-    function set_d_tail(uint32 pos, uint256 val) public {
+    function set_d_tail(uint32 pos, uint256 val) onlyOwner public {
         d_tail[pos] = val;
     }
 
-    function set_d_plume(uint32 pos, uint256 val) public {
+    function set_d_plume(uint32 pos, uint256 val) onlyOwner public {
         d_plume[pos] = val;
     }
 
-    function set_d_legs(uint32 pos, uint256 val) public {
+    function set_d_legs(uint32 pos, uint256 val) onlyOwner public {
         d_legs[pos] = val;
     }
 
-    function set_d_spikes(uint32 pos, uint256 val) public {
+    function set_d_spikes(uint32 pos, uint256 val) onlyOwner public {
         d_spikes[pos] = val;
     }
 
-    function set_d_wings(uint32 pos, uint256 val) public {
+    function set_d_wings(uint32 pos, uint256 val) onlyOwner public {
         d_wings[pos] = val;
     }
 
     // COMMON SETTERS
 
-    function set_abilities(uint32 pos, uint256 val) public {
+    function set_abilities(uint32 pos, uint256 val) onlyOwner public {
         abilities[pos] = val;
     }
 
-    function set_second_abilities(uint32 pos, uint256 val) public {
+    function set_second_abilities(uint32 pos, uint256 val) onlyOwner public {
         second_abilities[pos] = val;
     }
 
-    function set_elements(uint32 pos, uint256 val) public {
+    function set_elements(uint32 pos, uint256 val) onlyOwner public {
         elements[pos] = val;
     }
 
-    function set_pedigree(uint32 pos, uint256 val) public {
+    function set_pedigree(uint32 pos, uint256 val) onlyOwner public {
         pedigree[pos] = val;
     }
 
