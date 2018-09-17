@@ -572,28 +572,56 @@ contract GeneMagic is Ownable {
 
     // Unicorn setters
 
+    function set_arr_u_type(uint256[32] vals) onlyOwner public {
+        u_type = vals;
+    }
+
     function set_u_type(uint32 pos, uint256 val) onlyOwner public {
         u_type[pos] = val;
+    }
+
+    function set_arr_u_eyes(uint256[32] vals) onlyOwner public {
+        u_eyes = vals;
     }
 
     function set_u_eyes(uint32 pos, uint256 val) onlyOwner public {
         u_eyes[pos] = val;
     }
 
+    function set_arr_u_horn(uint256[32] vals) onlyOwner public {
+        u_horn = vals;
+    }
+
     function set_u_horn(uint32 pos, uint256 val) onlyOwner public {
         u_horn[pos] = val;
+    }
+
+    function set_arr_u_hair(uint256[32] vals) onlyOwner public {
+        u_hair = vals;
     }
 
     function set_u_hair(uint32 pos, uint256 val) onlyOwner public {
         u_hair[pos] = val;
     }
 
+    function set_arr_u_tail(uint256[32] vals) onlyOwner public {
+        u_tail = vals;
+    }
+
     function set_u_tail(uint32 pos, uint256 val) onlyOwner public {
         u_tail[pos] = val;
     }
 
+    function set_arr_u_snout(uint256[32] vals) onlyOwner public {
+        u_snout = vals;
+    }
+
     function set_u_snout(uint32 pos, uint256 val) onlyOwner public {
         u_snout[pos] = val;
+    }
+
+    function set_arr_u_legs(uint256[32] vals) onlyOwner public {
+        u_legs = vals;
     }
 
     function set_u_legs(uint32 pos, uint256 val) onlyOwner public {
@@ -602,36 +630,72 @@ contract GeneMagic is Ownable {
 
     // Dinosaur setters
 
+    function set_arr_d_type(uint256[32] vals) onlyOwner public {
+        d_type = vals;
+    }
+
     function set_d_type(uint32 pos, uint256 val) onlyOwner public {
         d_type[pos] = val;
+    }
+
+    function set_arr_d_eyes(uint256[32] vals) onlyOwner public {
+        d_eyes = vals;
     }
 
     function set_d_eyes(uint32 pos, uint256 val) onlyOwner public {
         d_eyes[pos] = val;
     }
 
+    function set_arr_d_nose(uint256[32] vals) onlyOwner public {
+        d_nose = vals;
+    }
+
     function set_d_nose(uint32 pos, uint256 val) onlyOwner public {
         d_nose[pos] = val;
+    }
+
+    function set_arr_d_mouth(uint256[32] vals) onlyOwner public {
+        d_mouth = vals;
     }
 
     function set_d_mouth(uint32 pos, uint256 val) onlyOwner public {
         d_mouth[pos] = val;
     }
 
+    function set_arr_d_tail(uint256[32] vals) onlyOwner public {
+        d_tail = vals;
+    }
+
     function set_d_tail(uint32 pos, uint256 val) onlyOwner public {
         d_tail[pos] = val;
     }
 
+    function set_arr_d_plume(uint256[32] vals) onlyOwner public {
+        d_plume = vals;
+    }
+
     function set_d_plume(uint32 pos, uint256 val) onlyOwner public {
         d_plume[pos] = val;
+    }
+    
+    function set_arr_d_legs(uint256[32] vals) onlyOwner public {
+        d_legs = vals;
     }
 
     function set_d_legs(uint32 pos, uint256 val) onlyOwner public {
         d_legs[pos] = val;
     }
 
+    function set_arr_d_spikes(uint256[32] vals) onlyOwner public {
+        d_spikes = vals;
+    }
+
     function set_d_spikes(uint32 pos, uint256 val) onlyOwner public {
         d_spikes[pos] = val;
+    }
+
+    function set_arr_d_wings(uint256[32] vals) onlyOwner public {
+        d_wings = vals;
     }
 
     function set_d_wings(uint32 pos, uint256 val) onlyOwner public {
@@ -640,16 +704,32 @@ contract GeneMagic is Ownable {
 
     // COMMON SETTERS
 
+    function set_arr_abilities(uint256[32] vals) onlyOwner public {
+        abilities = vals;
+    }
+
     function set_abilities(uint32 pos, uint256 val) onlyOwner public {
         abilities[pos] = val;
+    }
+
+    function set_arr_second_abilities(uint256[32] vals) onlyOwner public {
+        second_abilities = vals;
     }
 
     function set_second_abilities(uint32 pos, uint256 val) onlyOwner public {
         second_abilities[pos] = val;
     }
 
+    function set_arr_elements(uint256[32] vals) onlyOwner public {
+        elements = vals;
+    }
+
     function set_elements(uint32 pos, uint256 val) onlyOwner public {
         elements[pos] = val;
+    }
+
+    function set_arr_pedigree(uint256[32] vals) onlyOwner public {
+        pedigree = vals;
     }
 
     function set_pedigree(uint32 pos, uint256 val) onlyOwner public {
