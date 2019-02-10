@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24;
 
 import "../token/ERC721.sol";
 import "../util/Pausable.sol";
@@ -33,14 +33,14 @@ contract ClockAuction is Pausable, ClockAuctionBase {
     ///  Always transfers to the NFT contract, but can be called either by
     ///  the owner or the NFT contract.
     function withdrawBalance() external {
-        address nftAddress = address(nonFungibleContract);
+        address payable nftAddress = address(nonFungibleContract);
 
         require(
             msg.sender == owner ||
             msg.sender == nftAddress
         );
         // We are using this boolean method to make sure that even if one fails it will still work
-        bool res = nftAddress.send(this.balance);
+        bool res = nftAddress.send(address(this).balance);
     }
 
     /// @dev Creates and begins a new auction.

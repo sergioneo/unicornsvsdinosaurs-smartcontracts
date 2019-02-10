@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24;
 
 contract EggFactoryInterface {
     function isEggFactory() public pure returns (bool);

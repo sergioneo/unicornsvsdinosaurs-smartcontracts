@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24;
 
 import "./util/AccessControl.sol";
 
@@ -9,7 +9,7 @@ contract AuctionFactory is AccessControl {
         string description;
         uint256 price;
         uint minimumIncrement;
-        address currentOwner;
+        address payable currentOwner;
         uint timeCreated;
         uint duration;
         uint increaseTime;
@@ -27,16 +27,16 @@ contract AuctionFactory is AccessControl {
 
     address ceoAddress;
 
-    address public vaultAddress;
+    address payable public vaultAddress;
 
-    constructor(address _vaultAddress) public {
+    constructor(address payable _vaultAddress) public {
         ceoAddress = msg.sender;
         vaultAddress = _vaultAddress;
     }
 
     function createAuctionScheme(
         uint _auctionId, 
-        string _description, 
+        string memory _description, 
         uint _price, 
         uint _minimumIncrement, 
         uint _duration, 
@@ -90,12 +90,12 @@ contract AuctionFactory is AccessControl {
         return auctions[_auctionId].isAuctionScheme;
     }
 
-    function listAuctionIds() external view returns(uint256[]){
+    function listAuctionIds() external view returns( uint256[] memory ){
         return auctionIndexes;
     }
 
     // Set a new address for vault contract
-    function setVaultAddress(address _vaultAddress) public onlyCEO {
+    function setVaultAddress(address payable _vaultAddress) public onlyCEO {
         require(_vaultAddress != address(0x0));
         vaultAddress = _vaultAddress;
     }

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24;
 
 import "./util/Ownable.sol";
 
@@ -466,7 +466,7 @@ contract GeneMagic is Ownable {
      * @param attributeProbabilities - The probability distribution of the gene values.
      * @return {uint16} The new gene value
     */
-    function createGene(uint[32] attributeProbabilities, uint16 suggestedGene) onlyBeastContract public returns(uint16) {
+    function createGene(uint[32] memory attributeProbabilities, uint16 suggestedGene) onlyBeastContract public returns(uint16) {
         
         if (suggestedGene != 0) {
             return suggestedGene;
@@ -505,7 +505,7 @@ contract GeneMagic is Ownable {
      * @param attributeProbabilities - The probability distribution of the gene values.
      * @return {uint16} The new gene value
     */
-    function mixGene(uint8 geneSize, uint256 genesMother, uint256 genesFather, uint[32] attributeProbabilities, bool useAbilities, uint16 abilityMother, uint16 abilityFather) onlyBeastContract public returns(uint16) {
+    function mixGene(uint8 geneSize, uint256 genesMother, uint256 genesFather, uint[32] memory attributeProbabilities, bool useAbilities, uint16 abilityMother, uint16 abilityFather) onlyBeastContract public returns(uint16) {
         
         mixesMade++;
         
@@ -595,7 +595,7 @@ contract GeneMagic is Ownable {
      * Returns a random number using block difficulty, time and mixes previously made as seed.
      * @return {number} The random value.
     */
-    function randomNumber(uint b) private constant returns (uint) {
+    function randomNumber(uint b) private returns (uint) {
         return uint(keccak256(block.difficulty, now, mixesMade))%b;
     }
 
@@ -603,7 +603,7 @@ contract GeneMagic is Ownable {
 
     // Unicorn setters
 
-    function set_arr_u_type(uint256[32] vals) onlyOwner public {
+    function set_arr_u_type(uint256[32] memory vals) onlyOwner public {
         u_type = vals;
     }
 
@@ -611,7 +611,7 @@ contract GeneMagic is Ownable {
         u_type[pos] = val;
     }
 
-    function set_arr_u_eyes(uint256[32] vals) onlyOwner public {
+    function set_arr_u_eyes(uint256[32] memory vals) onlyOwner public {
         u_eyes = vals;
     }
 
@@ -619,7 +619,7 @@ contract GeneMagic is Ownable {
         u_eyes[pos] = val;
     }
 
-    function set_arr_u_horn(uint256[32] vals) onlyOwner public {
+    function set_arr_u_horn(uint256[32] memory vals) onlyOwner public {
         u_horn = vals;
     }
 
@@ -627,7 +627,7 @@ contract GeneMagic is Ownable {
         u_horn[pos] = val;
     }
 
-    function set_arr_u_hair(uint256[32] vals) onlyOwner public {
+    function set_arr_u_hair(uint256[32] memory vals) onlyOwner public {
         u_hair = vals;
     }
 
@@ -635,7 +635,7 @@ contract GeneMagic is Ownable {
         u_hair[pos] = val;
     }
 
-    function set_arr_u_tail(uint256[32] vals) onlyOwner public {
+    function set_arr_u_tail(uint256[32] memory vals) onlyOwner public {
         u_tail = vals;
     }
 
@@ -643,7 +643,7 @@ contract GeneMagic is Ownable {
         u_tail[pos] = val;
     }
 
-    function set_arr_u_snout(uint256[32] vals) onlyOwner public {
+    function set_arr_u_snout(uint256[32] memory vals) onlyOwner public {
         u_snout = vals;
     }
 
@@ -651,7 +651,7 @@ contract GeneMagic is Ownable {
         u_snout[pos] = val;
     }
 
-    function set_arr_u_legs(uint256[32] vals) onlyOwner public {
+    function set_arr_u_legs(uint256[32] memory vals) onlyOwner public {
         u_legs = vals;
     }
 
@@ -661,7 +661,7 @@ contract GeneMagic is Ownable {
 
     // Dinosaur setters
 
-    function set_arr_d_type(uint256[32] vals) onlyOwner public {
+    function set_arr_d_type(uint256[32] memory vals) onlyOwner public {
         d_type = vals;
     }
 
@@ -669,7 +669,7 @@ contract GeneMagic is Ownable {
         d_type[pos] = val;
     }
 
-    function set_arr_d_eyes(uint256[32] vals) onlyOwner public {
+    function set_arr_d_eyes(uint256[32] memory vals) onlyOwner public {
         d_eyes = vals;
     }
 
@@ -677,7 +677,7 @@ contract GeneMagic is Ownable {
         d_eyes[pos] = val;
     }
 
-    function set_arr_d_nose(uint256[32] vals) onlyOwner public {
+    function set_arr_d_nose(uint256[32] memory vals) onlyOwner public {
         d_nose = vals;
     }
 
@@ -685,7 +685,7 @@ contract GeneMagic is Ownable {
         d_nose[pos] = val;
     }
 
-    function set_arr_d_mouth(uint256[32] vals) onlyOwner public {
+    function set_arr_d_mouth(uint256[32] memory vals) onlyOwner public {
         d_mouth = vals;
     }
 
@@ -693,7 +693,7 @@ contract GeneMagic is Ownable {
         d_mouth[pos] = val;
     }
 
-    function set_arr_d_tail(uint256[32] vals) onlyOwner public {
+    function set_arr_d_tail(uint256[32] memory vals) onlyOwner public {
         d_tail = vals;
     }
 
@@ -701,7 +701,7 @@ contract GeneMagic is Ownable {
         d_tail[pos] = val;
     }
 
-    function set_arr_d_plume(uint256[32] vals) onlyOwner public {
+    function set_arr_d_plume(uint256[32] memory vals) onlyOwner public {
         d_plume = vals;
     }
 
@@ -709,7 +709,7 @@ contract GeneMagic is Ownable {
         d_plume[pos] = val;
     }
     
-    function set_arr_d_legs(uint256[32] vals) onlyOwner public {
+    function set_arr_d_legs(uint256[32] memory vals) onlyOwner public {
         d_legs = vals;
     }
 
@@ -717,7 +717,7 @@ contract GeneMagic is Ownable {
         d_legs[pos] = val;
     }
 
-    function set_arr_d_spikes(uint256[32] vals) onlyOwner public {
+    function set_arr_d_spikes(uint256[32] memory vals) onlyOwner public {
         d_spikes = vals;
     }
 
@@ -725,7 +725,7 @@ contract GeneMagic is Ownable {
         d_spikes[pos] = val;
     }
 
-    function set_arr_d_wings(uint256[32] vals) onlyOwner public {
+    function set_arr_d_wings(uint256[32] memory vals) onlyOwner public {
         d_wings = vals;
     }
 
@@ -735,7 +735,7 @@ contract GeneMagic is Ownable {
 
     // COMMON SETTERS
 
-    function set_arr_abilities(uint256[32] vals) onlyOwner public {
+    function set_arr_abilities(uint256[32] memory vals) onlyOwner public {
         abilities = vals;
     }
 
@@ -743,7 +743,7 @@ contract GeneMagic is Ownable {
         abilities[pos] = val;
     }
 
-    function set_arr_second_abilities(uint256[32] vals) onlyOwner public {
+    function set_arr_second_abilities(uint256[32] memory vals) onlyOwner public {
         second_abilities = vals;
     }
 
@@ -751,7 +751,7 @@ contract GeneMagic is Ownable {
         second_abilities[pos] = val;
     }
 
-    function set_arr_elements(uint256[32] vals) onlyOwner public {
+    function set_arr_elements(uint256[32] memory vals) onlyOwner public {
         elements = vals;
     }
 
@@ -759,7 +759,7 @@ contract GeneMagic is Ownable {
         elements[pos] = val;
     }
 
-    function set_arr_pedigree(uint256[32] vals) onlyOwner public {
+    function set_arr_pedigree(uint256[32] memory vals) onlyOwner public {
         pedigree = vals;
     }
 

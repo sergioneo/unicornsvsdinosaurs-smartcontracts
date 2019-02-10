@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24;
 
 import "../token/ERC721.sol";
 
@@ -10,7 +10,7 @@ contract ClockAuctionBase {
     // Represents an auction on an NFT
     struct Auction {
         // Current owner of NFT
-        address seller;
+        address payable seller;
         // Price (in wei) at beginning of auction
         uint128 startingPrice;
         // Price (in wei) at end of auction
@@ -55,7 +55,7 @@ contract ClockAuctionBase {
     /// @param _tokenId - ID of token whose approval to verify.
     function _escrow(address _owner, uint256 _tokenId) internal {
         // it will throw if transfer fails
-        nonFungibleContract.transferFrom(_owner, this, _tokenId);
+        nonFungibleContract.transferFrom(_owner, address(this), _tokenId);
     }
 
     /// @dev Transfers an NFT owned by this contract to another address.
@@ -71,7 +71,7 @@ contract ClockAuctionBase {
     ///  AuctionCreated event.
     /// @param _tokenId The ID of the token to be put on auction.
     /// @param _auction Auction to add.
-    function _addAuction(uint256 _tokenId, Auction _auction) internal {
+    function _addAuction(uint256 _tokenId, Auction storage _auction) internal {
         // Require that all auctions have a duration of
         // at least one minute. (Keeps our math from getting hairy!)
         require(_auction.duration >= 1 minutes);
@@ -115,7 +115,7 @@ contract ClockAuctionBase {
 
         // Grab a reference to the seller before the auction struct
         // gets deleted.
-        address seller = auction.seller;
+        address payable seller = auction.seller;
 
         // The bid is good! Remove the auction before sending the fees
         // to the sender so we can't have a reentrancy attack.

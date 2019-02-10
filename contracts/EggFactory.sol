@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity >=0.4.18;
 
 import "./util/AccessControl.sol";
 
@@ -43,7 +43,7 @@ contract EggFactory is AccessControl {
     
 
     // Extend constructor
-    function EggFactory(address _vaultAddress) public {
+    constructor (address _vaultAddress) public {
         vaultAddress = _vaultAddress;
         ceoAddress = msg.sender;
     }
@@ -53,11 +53,11 @@ contract EggFactory is AccessControl {
         return eggs[_eggId].isEggScheme;
     }
 
-    function listEggsIds() external view returns(uint256[]){
+    function listEggsIds() external view returns(uint256[] memory){
         return eggsIndexes;
     }
     
-    function listActiveEggs() external view returns(uint256[]){
+    function listActiveEggs() external view returns(uint256[] memory ){
         return activeEggs;
     }
 

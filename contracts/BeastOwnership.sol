@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24;
 
 import "./BeastBase.sol";
 import "./token/ERC721Metadata.sol";
@@ -186,7 +186,7 @@ contract BeastOwnership  is BeastBase, ERC721 {
     ///  expensive (it walks the entire Beast array looking for cats belonging to owner),
     ///  but it also returns a dynamic array, which is only supported for web3 calls, and
     ///  not contract-to-contract calls.
-    function tokensOfOwner(address _owner) external view returns(uint256[] ownerTokens) {
+    function tokensOfOwner(address _owner) external view returns(uint256[] memory ownerTokens) {
         uint256 tokenCount = balanceOf(_owner);
 
         if (tokenCount == 0) {
@@ -237,7 +237,7 @@ contract BeastOwnership  is BeastBase, ERC721 {
     /// @dev Adapted from toString(slice) by @arachnid (Nick Johnson <arachnid@notdot.net>)
     ///  This method is licenced under the Apache License.
     ///  Ref: https://github.com/Arachnid/solidity-stringutils/blob/2f6ca9accb48ae14c66f1437ec50ed19a0616f78/strings.sol
-    function _toString(bytes32[4] _rawBytes, uint256 _stringLength) private view returns (string) {
+    function _toString(bytes32[4] memory _rawBytes, uint256 _stringLength) private view returns (string memory) {
         var outputString = new string(_stringLength);
         uint256 outputPtr;
         uint256 bytesPtr;
@@ -255,7 +255,7 @@ contract BeastOwnership  is BeastBase, ERC721 {
     /// @notice Returns a URI pointing to a metadata package for this token conforming to
     ///  ERC-721 (https://github.com/ethereum/EIPs/issues/721)
     /// @param _tokenId The ID number of the Beast whose metadata should be returned.
-    function tokenMetadata(uint256 _tokenId, string _preferredTransport) external view returns (string infoUrl) {
+    function tokenMetadata(uint256 _tokenId, string calldata _preferredTransport) external view returns (string memory infoUrl) {
         require(erc721Metadata != address(0));
         bytes32[4] memory buffer;
         uint256 count;
