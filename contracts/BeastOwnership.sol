@@ -130,7 +130,7 @@ contract BeastOwnership  is BeastBase, ERC721 {
         _approve(_tokenId, _to);
 
         // Emit approval event.
-        Approval(msg.sender, _to, _tokenId);
+        emit Approval(msg.sender, _to, _tokenId);
     }
 
     /// @notice Transfer a Beast owned by another address, for which the calling address
@@ -238,7 +238,7 @@ contract BeastOwnership  is BeastBase, ERC721 {
     ///  This method is licenced under the Apache License.
     ///  Ref: https://github.com/Arachnid/solidity-stringutils/blob/2f6ca9accb48ae14c66f1437ec50ed19a0616f78/strings.sol
     function _toString(bytes32[4] memory _rawBytes, uint256 _stringLength) private view returns (string memory) {
-        var outputString = new string(_stringLength);
+        string memory outputString = new string(_stringLength);
         uint256 outputPtr;
         uint256 bytesPtr;
 
@@ -256,7 +256,7 @@ contract BeastOwnership  is BeastBase, ERC721 {
     ///  ERC-721 (https://github.com/ethereum/EIPs/issues/721)
     /// @param _tokenId The ID number of the Beast whose metadata should be returned.
     function tokenMetadata(uint256 _tokenId, string calldata _preferredTransport) external view returns (string memory infoUrl) {
-        require(erc721Metadata != address(0));
+        require(address(erc721Metadata) != address(0));
         bytes32[4] memory buffer;
         uint256 count;
         (buffer, count) = erc721Metadata.getMetadata(_tokenId, _preferredTransport);

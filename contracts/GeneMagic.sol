@@ -539,7 +539,7 @@ contract GeneMagic is Ownable {
         
         int _randomNumber = int(randomNumber(total));
         
-        uint16 r = 2 ** geneSize;
+        uint16 r = uint16(2) ** geneSize;
         
         for (uint z = 0; z < attributeProbabilities.length; z++) {
             _randomNumber -= int(attributeProbabilities[z]);
@@ -549,7 +549,7 @@ contract GeneMagic is Ownable {
             }
         }
         
-        if (r == 2 ** geneSize) {
+        if (r == uint16(2) ** geneSize) {
             r = 0;
         }
         
@@ -596,7 +596,13 @@ contract GeneMagic is Ownable {
      * @return {number} The random value.
     */
     function randomNumber(uint b) private returns (uint) {
-        return uint(keccak256(block.difficulty, now, mixesMade))%b;
+        uint forRandom = block.difficulty + now + mixesMade;
+        return uint(keccak256(toBytes(forRandom)))%b;
+    }
+
+    function toBytes(uint x) returns (bytes memory b) {
+        b = new bytes(32);
+        assembly { mstore(add(b, 32), x) }
     }
 
 

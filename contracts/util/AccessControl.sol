@@ -8,9 +8,9 @@ contract AccessControl {
     event ContractUpgrade(address newContract);
 
     // The addresses of the accounts (or contracts) that can execute actions within each roles.
-    address public ceoAddress;
-    address public cfoAddress;
-    address public cooAddress;
+    address payable public ceoAddress;
+    address payable public cfoAddress;
+    address payable public cooAddress;
 
     // @dev Keeps track whether the contract is paused. When that is true, most actions are blocked
     bool public paused = false;

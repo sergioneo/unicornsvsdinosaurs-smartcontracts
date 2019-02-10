@@ -16,13 +16,9 @@ contract Random {
     }
 
     function maxRandom() private returns (uint256 randomNumber) {
+        uint forRandom = _seed + block.number + block.difficulty;
         _seed = uint256(
-            keccak256(
-                _seed,
-                block.blockhash(block.number - 1),
-                block.coinbase,
-                block.difficulty
-            )
+            keccak256(toBytes(forRandom))
         );
         return _seed;
     }
@@ -41,6 +37,11 @@ contract Random {
         //arr[6] = uint256(470664748120145920);
         //arr[7] = uint256(470665847631773696);
         
-        return arr[uint256(keccak256(block.timestamp))%5 +1];
+        return arr[uint256(keccak256(toBytes(block.timestamp)))%5 +1];
+    }
+
+    function toBytes(uint x) returns (bytes memory b) {
+        b = new bytes(32);
+        assembly { mstore(add(b, 32), x) }
     }
 }

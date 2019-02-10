@@ -11,7 +11,7 @@ contract EggFactory is AccessControl {
     //  right auction in our setEggFactoryAddress() call.
     bool public isEggFactory = true;
 
-    address public vaultAddress;
+    address payable public vaultAddress;
 
     // @dev Scheme of egg
     struct EggScheme{
@@ -43,7 +43,7 @@ contract EggFactory is AccessControl {
     
 
     // Extend constructor
-    constructor (address _vaultAddress) public {
+    constructor (address payable _vaultAddress) public {
         vaultAddress = _vaultAddress;
         ceoAddress = msg.sender;
     }
@@ -67,7 +67,7 @@ contract EggFactory is AccessControl {
     }
 
     // Set a new address for vault contract
-    function setVaultAddress(address _vaultAddress) public onlyCEO returns (bool) {
+    function setVaultAddress(address payable _vaultAddress) public onlyCEO returns (bool) {
         require( _vaultAddress != address(0x0) );
         vaultAddress = _vaultAddress;
     }

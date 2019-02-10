@@ -86,7 +86,7 @@ contract Beasts is BeastMinting {
     // @dev Allows the CFO to capture the balance available to the contract.
     // TODO: Check if this is a problem for the investors
     function withdrawBalance() external onlyCEO {
-        uint256 balance = this.balance;
+        uint256 balance = address(this).balance;
         cfoAddress.transfer(balance);
     }
 

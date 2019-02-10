@@ -128,7 +128,7 @@ contract BeastBase is AccessControl {
             delete beastIndexToApproved[_tokenId];
         }
         // Emit the transfer event.
-        Transfer(_from, _to, _tokenId);
+        emit Transfer(_from, _to, _tokenId);
     }
 
     /// TODO: Description
@@ -191,7 +191,7 @@ contract BeastBase is AccessControl {
 
         // This will assign ownership, and also emit the Transfer event as
         // per ERC721 draft
-        _transfer(0, _owner, newBeastId);
+        _transfer(address(0), _owner, newBeastId);
 
         return newBeastId;
     }

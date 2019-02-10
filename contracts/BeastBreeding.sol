@@ -222,7 +222,7 @@ contract BeastBreeding is Random, BeastOwnership {
         pregnantBeasts++;
 
         // Emit the pregnancy event.
-        Pregnant(beastIndexToOwner[_matronId], _matronId, _sireId, matron.cooldownEndBlock);
+        emit Pregnant(beastIndexToOwner[_matronId], _matronId, _sireId, matron.cooldownEndBlock);
     }
 
     /// @notice Breed a Beast you own (as matron) with a sire that you own, or for which you

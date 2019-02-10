@@ -75,7 +75,8 @@ contract BeastAttributes is BeastBase {
         }
         // Add remaining Random Skills
         for(uint i = 0; i < 3; i++) {
-            uint randomAttribute = uint(keccak256(block.difficulty, now, beasts, i, _tokenId)) % 6 + 1;
+            uint forRandom = block.difficulty + now + i + _tokenId;
+            uint randomAttribute = uint(keccak256(toBytes(forRandom))) % 6 + 1;
             if(randomAttribute == 1) {
                 _beast.attrs.strength += 1;
             } else if(randomAttribute == 2) {
@@ -90,6 +91,11 @@ contract BeastAttributes is BeastBase {
                 _beast.attrs.charisma += 1;
             }
         }
+    }
+
+    function toBytes(uint x) returns (bytes memory b) {
+        b = new bytes(32);
+        assembly { mstore(add(b, 32), x) }
     }
 
     function changePreferedAttribute(uint _tokenId, uint _preferedAttribute) public {

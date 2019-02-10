@@ -32,13 +32,13 @@ contract SplitPayment {
     /**
      * @dev payable fallback
      */
-    function () public payable {}
+    function () external payable {}
 
     /**
      * @dev Claim your share of the balance.
      */
     function claim() public {
-        address payee = msg.sender;
+        address payable payee = msg.sender;
 
         require(shares[payee] > 0);
 

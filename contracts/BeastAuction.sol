@@ -49,7 +49,7 @@ contract BeastAuction is BeastBreeding {
         // contract accidentally receiving ownership of the child.
         // NOTE: the beast IS allowed to be in a cooldown.
         require(!isPregnant(_beastId));
-        _approve(_beastId, saleAuction);
+        _approve(_beastId, address(saleAuction));
         // Sale auction throws if inputs are invalid and clears
         // transfer and sire approval after escrowing the beast.
         saleAuction.createAuction(
@@ -78,7 +78,7 @@ contract BeastAuction is BeastBreeding {
         // because it will be owned by the auction contract.
         require(_owns(msg.sender, _beastId));
         require(isReadyToBreed(_beastId));
-        _approve(_beastId, siringAuction);
+        _approve(_beastId, address(siringAuction));
         // Siring auction throws if inputs are invalid and clears
         // transfer and sire approval after escrowing the beast.
         siringAuction.createAuction(
