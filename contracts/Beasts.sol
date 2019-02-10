@@ -3,7 +3,7 @@ pragma solidity ^0.4.24;
 import "./BeastMinting.sol";
 
 contract Beasts is BeastMinting {
-  
+    /*
     /// @notice Creates the main Legend smart contract instance.
     constructor() public {
         // Starts paused.
@@ -89,5 +89,5 @@ contract Beasts is BeastMinting {
         uint256 balance = this.balance;
         cfoAddress.transfer(balance);
     }
-
+*/
 }

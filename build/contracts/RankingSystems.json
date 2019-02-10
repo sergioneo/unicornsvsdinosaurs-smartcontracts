@@ -1,0 +1,167 @@
+{
+  "contractName": "RankingSystems",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a723058201f7b99f0bd5d418b579a357ffdae0279bb397cb69cb6c1cfbb88de851c9392970029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a723058201f7b99f0bd5d418b579a357ffdae0279bb397cb69cb6c1cfbb88de851c9392970029",
+  "sourceMap": "53:5519:13:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;53:5519:13;;;;;;;",
+  "deployedSourceMap": "53:5519:13:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./BeastBase.sol\";\n\ncontract RankingSystems is BeastBase {\n/*\n    uint256 private constant TOP_RANK_PER_GAME = 10;\n\n    struct RankingStruct {\n        mapping (bytes32 => uint256) rankingCount; // beastId => winnings\n        uint256[TOP_RANK_PER_GAME] rankingList; // beastIds\n        uint256 minToRank;\n        uint256 mappingVersion;\n        bool isRanking;\n    } \n\n    // @dev: uint256 is the ID of the game\n    mapping (uint256 => RankingStruct) public rankings;\n    uint256[] rankingsIndexes;\n    \n    mapping (uint8 => uint256) public globalRank; // races rank, index will be the bits, as int, of the race\n    uint8[] globalRankIndexes;\n    \n    // @dev onlyCEO\n    function resetRankings() public onlyCEO {\n        // reset global ranking\n        for ( uint i = 0; i<globalRankIndexes.length; i++ ) {\n            delete globalRank[globalRankIndexes[i]];\n        }\n        \n        // reset winnings counts\n        for ( uint j = 0; j<rankingsIndexes.length; j++ ) {\n            rankings[rankingsIndexes[j]].mappingVersion++;\n            delete rankings[rankingsIndexes[j]].rankingList;\n            delete rankings[rankingsIndexes[j]].minToRank;\n        }\n    } \n\n    function rankingExists( uint256 rankingId) internal view returns(bool) {\n        return rankings[rankingId].isRanking;\n    }\n\n    // TODO: refactor\n    // @dev: keep eye on GAS !!\n    function registerWinner( uint256 gameId, uint256 beastId ) internal {\n        \n        if (!rankingExists(gameId)) { // create the ranking\n            rankings[gameId].isRanking = true;\n            rankingsIndexes.push(gameId);\n        }\n\n        bytes32 beastIdRef = keccak256(rankings[gameId].mappingVersion, beastId);\n        rankings[gameId].rankingCount[beastIdRef] += 1; // add a winning to the beast\n        \n        // TODO: get race to add to global rank\n\n        _sort(gameId); // sort array based on amount of winnigs\n\n        if (rankings[gameId].rankingList.length < TOP_RANK_PER_GAME) { // easy add\n            if ( !_findInFixedArray(rankings[gameId].rankingList, beastId ) ) {\n                rankings[gameId].rankingList[rankings[gameId].rankingList.length] = beastId;\n            }\n            \n            if ( rankings[gameId].rankingList.length == 1 || rankings[gameId].rankingCount[beastIdRef] < rankings[gameId].minToRank ) {\n                rankings[gameId].minToRank = rankings[gameId].rankingCount[beastIdRef];\n            }\n\n        } else { // dificult add\n            if ( _findInFixedArray(rankings[gameId].rankingList, beastId) ) {\n                if ( rankings[gameId].rankingList.length == 1 || rankings[gameId].rankingCount[beastIdRef] < rankings[gameId].minToRank ) {\n                    rankings[gameId].minToRank = rankings[gameId].rankingCount[beastIdRef];\n                }\n            } else { // we need remove a value from the list\n                // if greater than minimum rank then add to list\n                if( rankings[gameId].rankingCount[beastIdRef] > rankings[gameId].minToRank ) {\n                    // add to list, sort and remove the last\n                    //rankings[gameId].rankingList[ rankings[gameId].rankingList.length - 1 ] = beastId;\n                    rankings[gameId].rankingList[0] = beastId;\n                    rankings[gameId].minToRank = rankings[gameId].rankingCount[beastIdRef];\n                }\n                \n            }\n        }\n    }\n\n    // @dev: web must convert to ascii the byte32 array\n    //       the array is returned in increase order (from less winnings to most winnings)\n    function getRanking( uint256 gameId ) public view returns(bytes32[TOP_RANK_PER_GAME]) {\n        \n        bytes32[TOP_RANK_PER_GAME] memory beastList;\n        uint256[TOP_RANK_PER_GAME] memory rankingList = rankings[gameId].rankingList;\n\n        for (uint i = 0; i < rankingList.length; i++) {\n            bytes32 rankingMember = bytes32(rankingList[i]);\n            beastList[i] = rankingMember;\n        }\n        \n        return beastList;\n    }\n\n    // @dev: confirm if item exist in array of fixed length\n    function _findInFixedArray( uint256[TOP_RANK_PER_GAME] arrayOfValues, uint256 valueToFind ) private pure returns(bool) {\n        for (uint i = 0; i < arrayOfValues.length; i++) {\n            if (arrayOfValues[i] == valueToFind) {\n                return true;\n            }\n        }\n        return false;\n    }\n    \n    // @dev ref from    https://github.com/alianse777/solidity-standard-library/blob/master/Array.sol\n    // rankings[gameId].rankingCount[beastId]\n    function _sort_item(uint256 gameId, uint pos) private returns (bool) {\n            \n        uint w_min = pos;\n        for(uint i = pos;i < rankings[gameId].rankingList.length;i++) {\n            bytes32 beastIdRef = keccak256(rankings[gameId].mappingVersion, rankings[gameId].rankingList[i]);\n            bytes32 beastIdRefMin = keccak256(rankings[gameId].mappingVersion, rankings[gameId].rankingList[w_min]);\n            \n            if( rankings[gameId].rankingCount[beastIdRef] < rankings[gameId].rankingCount[beastIdRefMin]) {\n                w_min = i;\n            }\n        }\n        if(w_min == pos) return false;\n        uint tmp = rankings[gameId].rankingList[pos];\n        rankings[gameId].rankingList[pos] = rankings[gameId].rankingList[w_min];\n        rankings[gameId].rankingList[w_min] = tmp;\n        return true;\n    }\n        \n    \n    function _sort( uint256 gameId ) private {\n        for( uint i = 0; i < rankings[gameId].rankingList.length-1; i++ ) {\n            _sort_item(gameId, i);\n        }\n    }\n    */\n}",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/RankingSystems.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/RankingSystems.sol",
+    "exportedSymbols": {
+      "RankingSystems": [
+        104
+      ]
+    },
+    "id": 105,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 100,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:13"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastBase.sol",
+        "file": "./BeastBase.sol",
+        "id": 101,
+        "nodeType": "ImportDirective",
+        "scope": 105,
+        "sourceUnit": 28,
+        "src": "26:25:13",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 102,
+              "name": "BeastBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 27,
+              "src": "80:9:13",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastBase_$27",
+                "typeString": "contract BeastBase"
+              }
+            },
+            "id": 103,
+            "nodeType": "InheritanceSpecifier",
+            "src": "80:9:13"
+          }
+        ],
+        "contractDependencies": [
+          27,
+          151
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 104,
+        "linearizedBaseContracts": [
+          104,
+          27,
+          151
+        ],
+        "name": "RankingSystems",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 105,
+        "src": "53:5519:13"
+      }
+    ],
+    "src": "0:5572:13"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/RankingSystems.sol",
+    "exportedSymbols": {
+      "RankingSystems": [
+        104
+      ]
+    },
+    "id": 105,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 100,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:13"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastBase.sol",
+        "file": "./BeastBase.sol",
+        "id": 101,
+        "nodeType": "ImportDirective",
+        "scope": 105,
+        "sourceUnit": 28,
+        "src": "26:25:13",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 102,
+              "name": "BeastBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 27,
+              "src": "80:9:13",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastBase_$27",
+                "typeString": "contract BeastBase"
+              }
+            },
+            "id": 103,
+            "nodeType": "InheritanceSpecifier",
+            "src": "80:9:13"
+          }
+        ],
+        "contractDependencies": [
+          27,
+          151
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 104,
+        "linearizedBaseContracts": [
+          104,
+          27,
+          151
+        ],
+        "name": "RankingSystems",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 105,
+        "src": "53:5519:13"
+      }
+    ],
+    "src": "0:5572:13"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:01:57.846Z"
+}

@@ -1,0 +1,178 @@
+{
+  "contractName": "Pausable",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060e98061001f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680638da5cb5b146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a7230582044557914d23ff7c9f1092da43b84e2cd44ebba31910d565be1782d59456451aa0029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680638da5cb5b146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a7230582044557914d23ff7c9f1092da43b84e2cd44ebba31910d565be1782d59456451aa0029",
+  "sourceMap": "163:34:12:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;163:34:12;;;;;;;",
+  "deployedSourceMap": "163:34:12:-;;;;;;;;;;;;;;;;;;;;;;;;239:20:11;;8:9:-1;5:2;;;30:1;27;20:12;5:2;239:20:11;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./Ownable.sol\";\n/**\n * @title Pausable\n * @dev Base contract which allows children to implement an emergency stop mechanism.\n */\ncontract Pausable is Ownable {\n \n}",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/Pausable.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/Pausable.sol",
+    "exportedSymbols": {
+      "Pausable": [
+        130
+      ]
+    },
+    "id": 131,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 126,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:12"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/Ownable.sol",
+        "file": "./Ownable.sol",
+        "id": 127,
+        "nodeType": "ImportDirective",
+        "scope": 131,
+        "sourceUnit": 125,
+        "src": "26:23:12",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 128,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 124,
+              "src": "184:7:12",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$124",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 129,
+            "nodeType": "InheritanceSpecifier",
+            "src": "184:7:12"
+          }
+        ],
+        "contractDependencies": [
+          124
+        ],
+        "contractKind": "contract",
+        "documentation": "@title Pausable\n@dev Base contract which allows children to implement an emergency stop mechanism.",
+        "fullyImplemented": true,
+        "id": 130,
+        "linearizedBaseContracts": [
+          130,
+          124
+        ],
+        "name": "Pausable",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 131,
+        "src": "163:34:12"
+      }
+    ],
+    "src": "0:197:12"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/Pausable.sol",
+    "exportedSymbols": {
+      "Pausable": [
+        130
+      ]
+    },
+    "id": 131,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 126,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:12"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/Ownable.sol",
+        "file": "./Ownable.sol",
+        "id": 127,
+        "nodeType": "ImportDirective",
+        "scope": 131,
+        "sourceUnit": 125,
+        "src": "26:23:12",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 128,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 124,
+              "src": "184:7:12",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$124",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 129,
+            "nodeType": "InheritanceSpecifier",
+            "src": "184:7:12"
+          }
+        ],
+        "contractDependencies": [
+          124
+        ],
+        "contractKind": "contract",
+        "documentation": "@title Pausable\n@dev Base contract which allows children to implement an emergency stop mechanism.",
+        "fullyImplemented": true,
+        "id": 130,
+        "linearizedBaseContracts": [
+          130,
+          124
+        ],
+        "name": "Pausable",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 131,
+        "src": "163:34:12"
+      }
+    ],
+    "src": "0:197:12"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:03:11.590Z"
+}

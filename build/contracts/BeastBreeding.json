@@ -1,0 +1,259 @@
+{
+  "contractName": "BeastBreeding",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820a037388964fbe1d89221eceb4d218c399863f7b5f8e335c82cf09184a7a5fe610029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820a037388964fbe1d89221eceb4d218c399863f7b5f8e335c82cf09184a7a5fe610029",
+  "sourceMap": "131:14201:4:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;131:14201:4;;;;;;;",
+  "deployedSourceMap": "131:14201:4:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./BeastOwnership.sol\";\nimport \"./interface/GeneMagicInterface.sol\";\nimport \"./util/Random.sol\";\n\ncontract BeastBreeding is Random, BeastOwnership {\n/*\n    /// @dev The Pregnant event is fired when two beast successfully breed and the pregnancy\n    ///  timer begins for the matron.\n    event Pregnant(address owner, uint256 matronId, uint256 sireId, uint256 cooldownEndBlock);\n\n    /// @notice The minimum payment required to use breedWithAuto(). This fee goes towards\n    ///  the gas cost paid by whatever calls giveBirth(), and can be dynamically updated by\n    ///  the COO role as the gas price changes.\n    uint256 public autoBirthFee = 2 finney;\n\n    // Keeps track of number of pregnant beasts.\n    uint256 public pregnantBeasts;\n\n    /// @dev The address of the sibling contract that is used to implement the sooper-sekret\n    ///  genetic combination algorithm.\n    GeneMagicInterface public geneMagic;\n\n    /// @dev Update the address of the genetic contract, can only be called by the CEO.\n    /// @param _address An address of a GeneMagic contract instance to be used from this point forward.\n    function setGeneMagicAddress(address _address) external onlyCEO {\n        GeneMagicInterface candidateContract = GeneMagicInterface(_address);\n\n        // NOTE: verify that a contract is what we expect - https://github.com/Lunyr/crowdsale-contracts/blob/cfadd15986c30521d8ba7d5b6f57b4fefcc7ac38/contracts/LunyrToken.sol#L117\n        require(candidateContract.isGeneMagic());\n\n        // Set the new contract address\n        geneMagic = candidateContract;\n    }\n\n    /// @dev Checks that a given beast is able to breed. Requires that the\n    ///  current cooldown is finished (for sires) and also checks that there is\n    ///  no pending pregnancy.\n    function _isReadyToBreed(Beast _beast) internal view returns (bool) {\n        // In addition to checking the cooldownEndBlock, we also need to check to see if\n        // the beast has a pending birth; there can be some period of time between the end\n        // of the pregnacy timer and the birth event.\n        return (_beast.siringWithId == 0) && (_beast.cooldownEndBlock <= uint64(block.number));\n    }\n\n    /// @dev Check if a sire has authorized breeding with this matron. True if both sire\n    ///  and matron have the same owner, or if the sire has given siring permission to\n    ///  the matron's owner (via approveSiring()).\n    function _isSiringPermitted(uint256 _sireId, uint256 _matronId) internal view returns (bool) {\n        address matronOwner = beastIndexToOwner[_matronId];\n        address sireOwner = beastIndexToOwner[_sireId];\n\n        // Siring is okay if they have same owner, or if the matron's owner was given\n        // permission to breed with this sire.\n        return (matronOwner == sireOwner || sireAllowedToAddress[_sireId] == matronOwner);\n    }\n\n    /// @dev Set the cooldownEndTime for the given Beast, based on its current cooldownIndex.\n    ///  Also increments the cooldownIndex (unless it has hit the cap).\n    /// @param _beast A reference to the Beast in storage which needs its timer started.\n    function _triggerCooldown(Beast storage _beast) internal {\n        // Compute an estimation of the cooldown time in blocks (based on current cooldownIndex).\n        _beast.cooldownEndBlock = uint64((cooldowns[_beast.cooldownIndex]/secondsPerBlock) + block.number);\n\n        // Increment the breeding count, clamping it at 13, which is the length of the\n        // cooldowns array. We could check the array size dynamically, but hard-coding\n        // this as a constant saves gas. Yay, Solidity!\n        if (_beast.cooldownIndex < 13) {\n            _beast.cooldownIndex += 1;\n        }\n    }\n\n    /// @notice Grants approval to another user to sire with one of your Beasts.\n    /// @param _addr The address that will be able to sire with your Beast. Set to\n    ///  address(0) to clear all siring approvals for this Beast.\n    /// @param _sireId A Beast that you own that _addr will now be able to sire with.\n    function approveSiring(address _addr, uint256 _sireId)\n        external\n        whenNotPaused\n    {\n        //require(_owns(msg.sender, _sireId));\n        sireAllowedToAddress[_sireId] = _addr;\n    }\n\n    /// @dev Updates the minimum payment required for calling giveBirthAuto(). Can only\n    ///  be called by the COO address. (This fee is used to offset the gas cost incurred\n    ///  by the autobirth daemon).\n    function setAutoBirthFee(uint256 val) external onlyCOO {\n        autoBirthFee = val;\n    }\n\n    /// @dev Checks to see if a given Beast is pregnant and (if so) if the gestation\n    ///  period has passed.\n    function _isReadyToGiveBirth(Beast _matron) private view returns (bool) {\n        return (_matron.siringWithId != 0) && (_matron.cooldownEndBlock <= uint64(block.number));\n    }\n\n    /// @notice Checks that a given beast is able to breed (i.e. it is not pregnant or\n    ///  in the middle of a siring cooldown).\n    /// @param _beastId reference the id of the beast, any user can inquire about it\n    function isReadyToBreed(uint256 _beastId)\n        public\n        view\n        returns (bool)\n    {\n        require(_beastId > 0);\n        Beast storage bst = beasts[_beastId];\n        return _isReadyToBreed(bst);\n    }\n\n    /// @dev Checks whether a beast is currently pregnant.\n    /// @param _beastId reference the id of the beast, any user can inquire about it\n    function isPregnant(uint256 _beastId)\n        public\n        view\n        returns (bool)\n    {\n        require(_beastId > 0);\n        // A beast is pregnant if and only if this field is set\n        return beasts[_beastId].siringWithId != 0;\n    }\n\n    /// @dev Internal check to see if a given sire and matron are a valid mating pair. DOES NOT\n    ///  check ownership permissions (that is up to the caller).\n    /// @param _matron A reference to the Beast struct of the potential matron.\n    /// @param _matronId The matron's ID.\n    /// @param _sire A reference to the Beast struct of the potential sire.\n    /// @param _sireId The sire's ID\n    function _isValidMatingPair(\n        Beast storage _matron,\n        uint256 _matronId,\n        Beast storage _sire,\n        uint256 _sireId\n    )\n        private\n        view\n        returns(bool)\n    {\n        // A Beast can't breed with itself!\n        if (_matronId == _sireId) {\n            return false;\n        }\n\n        // Beasts can't breed with their parents.\n        if (_matron.matronId == _sireId || _matron.sireId == _sireId) {\n            return false;\n        }\n        if (_sire.matronId == _matronId || _sire.sireId == _matronId) {\n            return false;\n        }\n\n        // We can short circuit the sibling check (below) if either beast is\n        // gen zero (has a matron ID of zero).\n        if (_sire.matronId == 0 || _matron.matronId == 0) {\n            return true;\n        }\n\n        // Beasts can't breed with full or half siblings.\n        if (_sire.matronId == _matron.matronId || _sire.matronId == _matron.sireId) {\n            return false;\n        }\n        if (_sire.sireId == _matron.matronId || _sire.sireId == _matron.sireId) {\n            return false;\n        }\n\n        // Everything seems cool! Let's get DTF.\n        return true;\n    }\n\n    /// @dev Internal check to see if a given sire and matron are a valid mating pair for\n    ///  breeding via auction (i.e. skips ownership and siring approval checks).\n    function _canBreedWithViaAuction(uint256 _matronId, uint256 _sireId)\n        internal\n        view\n        returns (bool)\n    {\n        Beast storage matron = beasts[_matronId];\n        Beast storage sire = beasts[_sireId];\n        return _isValidMatingPair(matron, _matronId, sire, _sireId);\n    }\n\n    /// @notice Checks to see if two beasts can breed together, including checks for\n    ///  ownership and siring approvals. Does NOT check that both beasts are ready for\n    ///  breeding (i.e. breedWith could still fail until the cooldowns are finished).\n    ///  TODO: Shouldn't this check pregnancy and cooldowns?!?\n    /// @param _matronId The ID of the proposed matron.\n    /// @param _sireId The ID of the proposed sire.\n    function canBreedWith(uint256 _matronId, uint256 _sireId)\n        external\n        view\n        returns(bool)\n    {\n        require(_matronId > 0);\n        require(_sireId > 0);\n        Beast storage matron = beasts[_matronId];\n        Beast storage sire = beasts[_sireId];\n        return _isValidMatingPair(matron, _matronId, sire, _sireId) &&\n            _isSiringPermitted(_sireId, _matronId);\n    }\n\n    /// @dev Internal utility function to initiate breeding, assumes that all breeding\n    ///  requirements have been checked.\n    function _breedWith(uint256 _matronId, uint256 _sireId) internal {\n        // Grab a reference to the Beasts from storage.\n        Beast storage sire = beasts[_sireId];\n        Beast storage matron = beasts[_matronId];\n\n        // Mark the matron as pregnant, keeping track of who the sire is.\n        matron.siringWithId = uint32(_sireId);\n\n        // Trigger the cooldown for both parents.\n        _triggerCooldown(sire);\n        _triggerCooldown(matron);\n\n        // Clear siring permission for both parents. This may not be strictly necessary\n        // but it's likely to avoid confusion!\n        delete sireAllowedToAddress[_matronId];\n        delete sireAllowedToAddress[_sireId];\n\n        // Every time a beast gets pregnant, counter is incremented.\n        pregnantBeasts++;\n\n        // Emit the pregnancy event.\n        Pregnant(beastIndexToOwner[_matronId], _matronId, _sireId, matron.cooldownEndBlock);\n    }\n\n    /// @notice Breed a Beast you own (as matron) with a sire that you own, or for which you\n    ///  have previously been given Siring approval. Will either make your beast pregnant, or will\n    ///  fail entirely. Requires a pre-payment of the fee given out to the first caller of giveBirth()\n    /// @param _matronId The ID of the Beast acting as matron (will end up pregnant if successful)\n    /// @param _sireId The ID of the Beast acting as sire (will begin its siring cooldown if successful)\n    function breedWithAuto(uint256 _matronId, uint256 _sireId)\n        external\n        payable\n        whenNotPaused\n    {\n        // Checks for payment.\n        require(msg.value >= autoBirthFee);\n\n        // Caller must own the matron.\n        //require(_owns(msg.sender, _matronId));\n\n        // Neither sire nor matron are allowed to be on auction during a normal\n        // breeding operation, but we don't need to check that explicitly.\n        // For matron: The caller of this function can't be the owner of the matron\n        //   because the owner of a Beast on auction is the auction house, and the\n        //   auction house will never call breedWith().\n        // For sire: Similarly, a sire on auction will be owned by the auction house\n        //   and the act of transferring ownership will have cleared any oustanding\n        //   siring approval.\n        // Thus we don't need to spend gas explicitly checking to see if either beast\n        // is on auction.\n\n        // Check that matron and sire are both owned by caller, or that the sire\n        // has given siring permission to caller (i.e. matron's owner).\n        // Will fail for _sireId = 0\n        require(_isSiringPermitted(_sireId, _matronId));\n\n        // Grab a reference to the potential matron\n        Beast storage matron = beasts[_matronId];\n\n        // Make sure matron isn't pregnant, or in the middle of a siring cooldown\n        require(_isReadyToBreed(matron));\n\n        // Grab a reference to the potential sire\n        Beast storage sire = beasts[_sireId];\n\n        // Make sure sire isn't pregnant, or in the middle of a siring cooldown\n        require(_isReadyToBreed(sire));\n\n        // Test that these cats are a valid mating pair.\n        require(_isValidMatingPair(matron, _matronId, sire, _sireId));\n\n        // All checks passed, beast gets pregnant!\n        _breedWith(_matronId, _sireId);\n    }\n\n    /// @notice Have a pregnant Beast give birth!\n    /// @param _matronId A Beast ready to give birth.\n    /// @return The Beast ID of the new beast.\n    /// @dev Looks at a given Beast and, if pregnant and if the gestation period has passed,\n    ///  combines the genes of the two parents to create a new beast. The new Beast is assigned\n    ///  to the current owner of the matron. Upon successful completion, both the matron and the\n    ///  new beast will be ready to breed again. Note that anyone can call this function (if they\n    ///  are willing to pay the gas!), but the new beast always goes to the mother's owner.\n    function giveBirth(uint256 _matronId)\n        external\n        whenNotPaused\n        returns(uint256)\n    {\n        // Grab a reference to the matron in storage.\n        Beast storage matron = beasts[_matronId];\n\n        // Check that the matron is a valid cat.\n        require(matron.birthTime != 0);\n\n        // Check that the matron is pregnant, and that its time has come!\n        require(_isReadyToGiveBirth(matron));\n\n        // Grab a reference to the sire in storage.\n        uint256 sireId = matron.siringWithId;\n        Beast storage sire = beasts[sireId];\n\n        // Determine the higher generation number of the two parents\n        uint16 parentGen = matron.generation;\n        if (sire.generation > matron.generation) {\n            parentGen = sire.generation;\n        }\n\n        // Call the sooper-sekret gene mixing operation.\n        //uint256 childGenes = geneScience.mixGenes(matron.genes, sire.genes, matron.cooldownEndBlock - 1);\n        uint256 childGenes = random(1000000000000000);\n\n        // Make the new beast!\n        address owner = beastIndexToOwner[_matronId];\n        uint256 beastId = _createBeast(_matronId, matron.siringWithId, parentGen + 1, childGenes, owner);\n\n        // Clear the reference to sire from the matron (REQUIRED! Having siringWithId\n        // set is what marks a matron as being pregnant.)\n        delete matron.siringWithId;\n\n        // Every time a beast gives birth counter is decremented.\n        pregnantBeasts--;\n\n        // Send the balance fee to the person who made birth happen.\n        msg.sender.transfer(autoBirthFee);\n\n        // return the new beast's ID\n        return beastId;\n    }\n    */\n}\n",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastBreeding.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastBreeding.sol",
+    "exportedSymbols": {
+      "BeastBreeding": [
+        37
+      ]
+    },
+    "id": 38,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 29,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:4"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastOwnership.sol",
+        "file": "./BeastOwnership.sol",
+        "id": 30,
+        "nodeType": "ImportDirective",
+        "scope": 38,
+        "sourceUnit": 59,
+        "src": "26:30:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/interface/GeneMagicInterface.sol",
+        "file": "./interface/GeneMagicInterface.sol",
+        "id": 31,
+        "nodeType": "ImportDirective",
+        "scope": 38,
+        "sourceUnit": 143,
+        "src": "57:44:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/Random.sol",
+        "file": "./util/Random.sol",
+        "id": 32,
+        "nodeType": "ImportDirective",
+        "scope": 38,
+        "sourceUnit": 166,
+        "src": "102:27:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 33,
+              "name": "Random",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 165,
+              "src": "157:6:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Random_$165",
+                "typeString": "contract Random"
+              }
+            },
+            "id": 34,
+            "nodeType": "InheritanceSpecifier",
+            "src": "157:6:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 35,
+              "name": "BeastOwnership",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 58,
+              "src": "165:14:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastOwnership_$58",
+                "typeString": "contract BeastOwnership"
+              }
+            },
+            "id": 36,
+            "nodeType": "InheritanceSpecifier",
+            "src": "165:14:4"
+          }
+        ],
+        "contractDependencies": [
+          27,
+          58,
+          145,
+          151,
+          165
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 37,
+        "linearizedBaseContracts": [
+          37,
+          58,
+          145,
+          27,
+          151,
+          165
+        ],
+        "name": "BeastBreeding",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 38,
+        "src": "131:14201:4"
+      }
+    ],
+    "src": "0:14333:4"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastBreeding.sol",
+    "exportedSymbols": {
+      "BeastBreeding": [
+        37
+      ]
+    },
+    "id": 38,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 29,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:4"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastOwnership.sol",
+        "file": "./BeastOwnership.sol",
+        "id": 30,
+        "nodeType": "ImportDirective",
+        "scope": 38,
+        "sourceUnit": 59,
+        "src": "26:30:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/interface/GeneMagicInterface.sol",
+        "file": "./interface/GeneMagicInterface.sol",
+        "id": 31,
+        "nodeType": "ImportDirective",
+        "scope": 38,
+        "sourceUnit": 143,
+        "src": "57:44:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/Random.sol",
+        "file": "./util/Random.sol",
+        "id": 32,
+        "nodeType": "ImportDirective",
+        "scope": 38,
+        "sourceUnit": 166,
+        "src": "102:27:4",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 33,
+              "name": "Random",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 165,
+              "src": "157:6:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Random_$165",
+                "typeString": "contract Random"
+              }
+            },
+            "id": 34,
+            "nodeType": "InheritanceSpecifier",
+            "src": "157:6:4"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 35,
+              "name": "BeastOwnership",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 58,
+              "src": "165:14:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastOwnership_$58",
+                "typeString": "contract BeastOwnership"
+              }
+            },
+            "id": 36,
+            "nodeType": "InheritanceSpecifier",
+            "src": "165:14:4"
+          }
+        ],
+        "contractDependencies": [
+          27,
+          58,
+          145,
+          151,
+          165
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 37,
+        "linearizedBaseContracts": [
+          37,
+          58,
+          145,
+          27,
+          151,
+          165
+        ],
+        "name": "BeastBreeding",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 38,
+        "src": "131:14201:4"
+      }
+    ],
+    "src": "0:14333:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:01:57.845Z"
+}

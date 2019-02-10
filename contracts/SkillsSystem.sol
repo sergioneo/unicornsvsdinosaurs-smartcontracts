@@ -18,8 +18,6 @@ contract SkillsSystem is AccessControl {
         bool has5LevelBonus;
         bool preferedAttributeIncreasedChance;
         bool fertileSpeedBonus;
-        bool dominantGene;
-        bool recesiveGene;
         bool isSkill;
     }
 
@@ -28,7 +26,7 @@ contract SkillsSystem is AccessControl {
     function skillExists( uint skillId) internal view returns(bool) {
         return skills[skillId].isSkill;
     }
-
+/*
     // Create a new skill, important to have Unique ID
     function createSkill(
         uint _id, 
@@ -105,5 +103,5 @@ contract SkillsSystem is AccessControl {
         _skill.dominantGene = _dominantGene;
         _skill.recesiveGene = _recesiveGene;
     }
-
+*/
 }

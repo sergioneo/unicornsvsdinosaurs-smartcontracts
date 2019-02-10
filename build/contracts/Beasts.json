@@ -1,0 +1,191 @@
+{
+  "contractName": "Beasts",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820b0c38642199a7178ead840fdc239dfdbc32b6ef905ff7d50b3f0d6342ca38e460029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820b0c38642199a7178ead840fdc239dfdbc32b6ef905ff7d50b3f0d6342ca38e460029",
+  "sourceMap": "56:3082:7:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;56:3082:7;;;;;;;",
+  "deployedSourceMap": "56:3082:7:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./BeastMinting.sol\";\n\ncontract Beasts is BeastMinting {\n    /*\n    /// @notice Creates the main Legend smart contract instance.\n    constructor() public {\n        // Starts paused.\n        paused = false;\n\n        // the creator of the contract is the initial CEO, COO and CFO\n        ceoAddress = msg.sender;\n        cooAddress = msg.sender;\n        cfoAddress = msg.sender;\n\n        // start with the mythical Beast 0 - so we don't have generation-0 parent issues\n        _createBeast(0, 0, 0, uint256(-1), ceoAddress);\n        // TODO: Create beast 1 (UNI GOD) and 2 (DINO GOD)\n        // _createBeast(0, 0, 0, uint256(-1), ceoAddress);\n        // _createBeast(0, 0, 0, uint256(-1), ceoAddress);\n    }\n\n    /// @notice No tipping!\n    /// @dev Reject all Ether from being sent here, unless it's from one of the\n    ///  two auction contracts. (Hopefully, we can prevent user accidents.)\n    function() external payable {\n        require(\n            msg.sender == address(saleAuction) ||\n            msg.sender == address(siringAuction)\n        );\n    }\n\n    // TODO: Check gas usage\n    function getLegend(uint256 _legendId) external view returns(\n        uint race,\n        bool isGestating,\n        bool isReady,\n        uint256 cooldownEndBlock,\n        bool isReadyToFight,\n        uint256 experience,\n        uint256 birthTime,\n        uint256 sireId,\n        uint256 matronId,\n        uint256 siringWithId,\n        uint256 cooldownIndex,\n        uint256 generation,\n        uint256 genes\n    ) {\n        Beast storage legend = beasts[_legendId];\n\n        race = legend.race;\n        isGestating = (legend.siringWithId != 0);\n        isReady = (legend.cooldownEndBlock <= block.number);\n        cooldownEndBlock = uint256(legend.cooldownEndBlock);\n        isReadyToFight = (legend.challengeCoolDown <= block.number);\n        experience = uint256(legend.experience);\n        birthTime = uint256(legend.birthTime);\n        sireId = uint256(legend.sireId);\n        matronId = uint256(legend.matronId);\n        siringWithId = uint256(legend.siringWithId);\n        cooldownIndex = uint256(legend.cooldownIndex);\n        generation = uint256(legend.generation);\n        genes = legend.genes;\n    }\n\n    // TODO: Check gas usage\n    function getLegendAttrs(uint256 _legendId) external view returns(\n        uint256 strength,\n        uint256 dexterity,\n        uint256 endurance,\n        uint256 knowledge,\n        uint256 wisdom,\n        uint256 charisma\n    ) {\n        Beast storage legend = beasts[_legendId];\n\n        strength = uint256(legend.attrs.strength);\n        dexterity = uint256(legend.attrs.dexterity);\n        endurance = uint256(legend.attrs.endurance);\n        knowledge = uint256(legend.attrs.knowledge);\n        wisdom = uint256(legend.attrs.wisdom);\n        charisma = uint256(legend.attrs.charisma);\n    }\n\n    // @dev Allows the CFO to capture the balance available to the contract.\n    // TODO: Check if this is a problem for the investors\n    function withdrawBalance() external onlyCEO {\n        uint256 balance = this.balance;\n        cfoAddress.transfer(balance);\n    }\n*/\n}\n",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/Beasts.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/Beasts.sol",
+    "exportedSymbols": {
+      "Beasts": [
+        64
+      ]
+    },
+    "id": 65,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 60,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:7"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastMinting.sol",
+        "file": "./BeastMinting.sol",
+        "id": 61,
+        "nodeType": "ImportDirective",
+        "scope": 65,
+        "sourceUnit": 49,
+        "src": "26:28:7",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 62,
+              "name": "BeastMinting",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 48,
+              "src": "75:12:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastMinting_$48",
+                "typeString": "contract BeastMinting"
+              }
+            },
+            "id": 63,
+            "nodeType": "InheritanceSpecifier",
+            "src": "75:12:7"
+          }
+        ],
+        "contractDependencies": [
+          19,
+          27,
+          37,
+          48,
+          58,
+          145,
+          151,
+          165
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 64,
+        "linearizedBaseContracts": [
+          64,
+          48,
+          19,
+          37,
+          58,
+          145,
+          27,
+          151,
+          165
+        ],
+        "name": "Beasts",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 65,
+        "src": "56:3082:7"
+      }
+    ],
+    "src": "0:3139:7"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/Beasts.sol",
+    "exportedSymbols": {
+      "Beasts": [
+        64
+      ]
+    },
+    "id": 65,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 60,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:7"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastMinting.sol",
+        "file": "./BeastMinting.sol",
+        "id": 61,
+        "nodeType": "ImportDirective",
+        "scope": 65,
+        "sourceUnit": 49,
+        "src": "26:28:7",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 62,
+              "name": "BeastMinting",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 48,
+              "src": "75:12:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastMinting_$48",
+                "typeString": "contract BeastMinting"
+              }
+            },
+            "id": 63,
+            "nodeType": "InheritanceSpecifier",
+            "src": "75:12:7"
+          }
+        ],
+        "contractDependencies": [
+          19,
+          27,
+          37,
+          48,
+          58,
+          145,
+          151,
+          165
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 64,
+        "linearizedBaseContracts": [
+          64,
+          48,
+          19,
+          37,
+          58,
+          145,
+          27,
+          151,
+          165
+        ],
+        "name": "Beasts",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 65,
+        "src": "56:3082:7"
+      }
+    ],
+    "src": "0:3139:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:01:57.845Z"
+}

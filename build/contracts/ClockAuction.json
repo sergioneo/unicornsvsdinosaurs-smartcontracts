@@ -1,0 +1,266 @@
+{
+  "contractName": "ClockAuction",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060e98061001f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680638da5cb5b146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820b9dfe485d6603464b172929fc2e6050d04b3ba123346382e26929d93dd4ca50f0029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680638da5cb5b146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820b9dfe485d6603464b172929fc2e6050d04b3ba123346382e26929d93dd4ca50f0029",
+  "sourceMap": "257:56:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;257:56:5;;;;;;;",
+  "deployedSourceMap": "257:56:5:-;;;;;;;;;;;;;;;;;;;;;;;;239:20:11;;8:9:-1;5:2;;;30:1;27;20:12;5:2;239:20:11;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"../token/ERC721.sol\";\nimport \"../util/Pausable.sol\";\nimport \"./ClockAuctionBase.sol\";\n\n/// @title Clock auction for non-fungible tokens.\n/// @notice We omit a fallback function to prevent accidental sends to this contract.\ncontract ClockAuction is Pausable, ClockAuctionBase {\n\n}",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuction.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuction.sol",
+    "exportedSymbols": {
+      "ClockAuction": [
+        97
+      ]
+    },
+    "id": 98,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 89,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/token/ERC721.sol",
+        "file": "../token/ERC721.sol",
+        "id": 90,
+        "nodeType": "ImportDirective",
+        "scope": 98,
+        "sourceUnit": 117,
+        "src": "26:29:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/Pausable.sol",
+        "file": "../util/Pausable.sol",
+        "id": 91,
+        "nodeType": "ImportDirective",
+        "scope": 98,
+        "sourceUnit": 131,
+        "src": "56:30:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuctionBase.sol",
+        "file": "./ClockAuctionBase.sol",
+        "id": 92,
+        "nodeType": "ImportDirective",
+        "scope": 98,
+        "sourceUnit": 102,
+        "src": "87:32:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 93,
+              "name": "Pausable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 130,
+              "src": "282:8:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Pausable_$130",
+                "typeString": "contract Pausable"
+              }
+            },
+            "id": 94,
+            "nodeType": "InheritanceSpecifier",
+            "src": "282:8:5"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 95,
+              "name": "ClockAuctionBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 101,
+              "src": "292:16:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ClockAuctionBase_$101",
+                "typeString": "contract ClockAuctionBase"
+              }
+            },
+            "id": 96,
+            "nodeType": "InheritanceSpecifier",
+            "src": "292:16:5"
+          }
+        ],
+        "contractDependencies": [
+          101,
+          124,
+          130
+        ],
+        "contractKind": "contract",
+        "documentation": "@title Clock auction for non-fungible tokens.\n @notice We omit a fallback function to prevent accidental sends to this contract.",
+        "fullyImplemented": true,
+        "id": 97,
+        "linearizedBaseContracts": [
+          97,
+          101,
+          130,
+          124
+        ],
+        "name": "ClockAuction",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 98,
+        "src": "257:56:5"
+      }
+    ],
+    "src": "0:313:5"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuction.sol",
+    "exportedSymbols": {
+      "ClockAuction": [
+        97
+      ]
+    },
+    "id": 98,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 89,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/token/ERC721.sol",
+        "file": "../token/ERC721.sol",
+        "id": 90,
+        "nodeType": "ImportDirective",
+        "scope": 98,
+        "sourceUnit": 117,
+        "src": "26:29:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/Pausable.sol",
+        "file": "../util/Pausable.sol",
+        "id": 91,
+        "nodeType": "ImportDirective",
+        "scope": 98,
+        "sourceUnit": 131,
+        "src": "56:30:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuctionBase.sol",
+        "file": "./ClockAuctionBase.sol",
+        "id": 92,
+        "nodeType": "ImportDirective",
+        "scope": 98,
+        "sourceUnit": 102,
+        "src": "87:32:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 93,
+              "name": "Pausable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 130,
+              "src": "282:8:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Pausable_$130",
+                "typeString": "contract Pausable"
+              }
+            },
+            "id": 94,
+            "nodeType": "InheritanceSpecifier",
+            "src": "282:8:5"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 95,
+              "name": "ClockAuctionBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 101,
+              "src": "292:16:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ClockAuctionBase_$101",
+                "typeString": "contract ClockAuctionBase"
+              }
+            },
+            "id": 96,
+            "nodeType": "InheritanceSpecifier",
+            "src": "292:16:5"
+          }
+        ],
+        "contractDependencies": [
+          101,
+          124,
+          130
+        ],
+        "contractKind": "contract",
+        "documentation": "@title Clock auction for non-fungible tokens.\n @notice We omit a fallback function to prevent accidental sends to this contract.",
+        "fullyImplemented": true,
+        "id": 97,
+        "linearizedBaseContracts": [
+          97,
+          101,
+          130,
+          124
+        ],
+        "name": "ClockAuction",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 98,
+        "src": "257:56:5"
+      }
+    ],
+    "src": "0:313:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:03:11.588Z"
+}

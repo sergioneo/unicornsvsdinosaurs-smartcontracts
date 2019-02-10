@@ -3,7 +3,7 @@ pragma solidity ^0.4.24;
 import "./util/AccessControl.sol";
 
 contract ItemsSystem is AccessControl {
-
+/*
     struct Item {
         uint id;
         string name;
@@ -53,5 +53,5 @@ contract ItemsSystem is AccessControl {
         _item.attirbuteId2 = _attirbuteId2;
         _item.attribute2Bonus = _attribute2Bonus;
     }
-
+*/
 }

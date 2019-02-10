@@ -5,7 +5,7 @@ import "./SkillsSystem.sol";
 import "./util/Random.sol";
 
 contract ExperienceSystems is Random, BeastAttributes, SkillsSystem{
-
+    /*
     struct ExperienceSystem {
         uint id;
         uint base;
@@ -120,9 +120,8 @@ contract ExperienceSystems is Random, BeastAttributes, SkillsSystem{
         }
     }
 
-    /**
-     * Listed by suggerences
-     */
+    //Listed by suggerences
+
     uint constant DIVIDER = 10;
     mapping( uint => uint256[] ) private suggestionsList;
     mapping( uint256 => uint256 ) private suggestionsIndexOfBeast;
@@ -196,4 +195,5 @@ contract ExperienceSystems is Random, BeastAttributes, SkillsSystem{
         }
         return false;
     }
+    */
 }

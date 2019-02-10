@@ -1,0 +1,367 @@
+{
+  "contractName": "ExperienceSystems",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "skills",
+      "outputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "attirbuteId",
+          "type": "uint256"
+        },
+        {
+          "name": "addAttributePercentaje",
+          "type": "bool"
+        },
+        {
+          "name": "attributeBonus",
+          "type": "uint256"
+        },
+        {
+          "name": "winExperienceBonus",
+          "type": "uint256"
+        },
+        {
+          "name": "loseExperienceBonus",
+          "type": "uint256"
+        },
+        {
+          "name": "elementalAdvantageBonus",
+          "type": "uint256"
+        },
+        {
+          "name": "elementalDisadvantageBonus",
+          "type": "uint256"
+        },
+        {
+          "name": "randomAttributeBonus",
+          "type": "uint256"
+        },
+        {
+          "name": "has5LevelBonus",
+          "type": "bool"
+        },
+        {
+          "name": "preferedAttributeIncreasedChance",
+          "type": "bool"
+        },
+        {
+          "name": "fertileSpeedBonus",
+          "type": "bool"
+        },
+        {
+          "name": "isSkill",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b506102cc806100206000396000f300608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806350d15fbe14610046575b600080fd5b34801561005257600080fd5b506100716004803603810190808035906020019092919050505061015b565b604051808f8152602001806020018e81526020018d1515151581526020018c81526020018b81526020018a81526020018981526020018881526020018781526020018615151515815260200185151515158152602001841515151581526020018315151515815260200182810382528f818151815260200191508051906020019080838360005b838110156101135780820151818401526020810190506100f8565b50505050905090810190601f1680156101405780820380516001836020036101000a031916815260200191505b509f5050505050505050505050505050505060405180910390f35b6000602052806000526040600020600091509050806000015490806001018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561020d5780601f106101e25761010080835404028352916020019161020d565b820191906000526020600020905b8154815290600101906020018083116101f057829003601f168201915b5050505050908060020154908060030160009054906101000a900460ff169080600401549080600501549080600601549080600701549080600801549080600901549080600a0160009054906101000a900460ff169080600a0160019054906101000a900460ff169080600a0160029054906101000a900460ff169080600a0160039054906101000a900460ff1690508e5600a165627a7a72305820f938659b1e34ba8ad15852aec5d5fcb1c460c84e8a06f8c573f6a6948c3cdba80029",
+  "deployedBytecode": "0x608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806350d15fbe14610046575b600080fd5b34801561005257600080fd5b506100716004803603810190808035906020019092919050505061015b565b604051808f8152602001806020018e81526020018d1515151581526020018c81526020018b81526020018a81526020018981526020018881526020018781526020018615151515815260200185151515158152602001841515151581526020018315151515815260200182810382528f818151815260200191508051906020019080838360005b838110156101135780820151818401526020810190506100f8565b50505050905090810190601f1680156101405780820380516001836020036101000a031916815260200191505b509f5050505050505050505050505050505060405180910390f35b6000602052806000526040600020600091509050806000015490806001018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561020d5780601f106101e25761010080835404028352916020019161020d565b820191906000526020600020905b8154815290600101906020018083116101f057829003601f168201915b5050505050908060020154908060030160009054906101000a900460ff169080600401549080600501549080600601549080600701549080600801549080600901549080600a0160009054906101000a900460ff169080600a0160019054906101000a900460ff169080600a0160029054906101000a900460ff169080600a0160039054906101000a900460ff1690508e5600a165627a7a72305820f938659b1e34ba8ad15852aec5d5fcb1c460c84e8a06f8c573f6a6948c3cdba80029",
+  "sourceMap": "116:8139:3:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;116:8139:3;;;;;;;",
+  "deployedSourceMap": "116:8139:3:-;;;;;;;;;;;;;;;;;;;;;;;;575:37:4;;8:9:-1;5:2;;;30:1;27;20:12;5:2;575:37:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;575:37:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./BeastAttributes.sol\";\nimport \"./SkillsSystem.sol\";\nimport \"./util/Random.sol\";\n\ncontract ExperienceSystems is Random, BeastAttributes, SkillsSystem{\n    /*\n    struct ExperienceSystem {\n        uint id;\n        uint base;\n        uint percentaje;\n        bool isJustBase;\n        bool isJustPercentaje;\n        uint dinosaurBonus;\n        uint unicornBonus;\n        bool isExperience;\n    }\n\n    mapping (uint => ExperienceSystem) public experienceSystems;  \n\n    function experienceExists( uint experienceId) internal view returns(bool) {\n        return experienceSystems[experienceId].isExperience;\n    }\n\n    // Create a new experience ExperienceSystem\n    // Impotant, ID must me unique.\n    // Default Dinosaur and Unicorn Bonus is 1\n    function createExperienceSystem(\n        uint _id, \n        uint _base, \n        uint _percentaje, \n        bool _isJustBase, \n        bool _isJustPercentaje, \n        uint _dinosaurBonus, \n        uint _unicornBonus\n    ) internal onlyCOO {\n        require(!experienceExists(_id)); // prevents destruction of existing experience with same ID\n        require(_isJustPercentaje == false || _isJustBase == false);\n        ExperienceSystem memory _experienceSystems = ExperienceSystem({\n            id: _id,\n            base: _base,\n            percentaje: _percentaje,\n            isJustBase: _isJustBase,\n            isJustPercentaje: _isJustPercentaje,\n            dinosaurBonus: _dinosaurBonus,\n            unicornBonus: _unicornBonus,\n            isExperience: true\n        });\n        experienceSystems[_id] = _experienceSystems;\n    }\n\n    // Calculate experience based on system ID and modify winner and looser experiece attribute\n    function calculateExperience(uint _experienceSystemId, uint256 _winnerId, uint256 _looserId) internal {\n        ExperienceSystem memory _experienceSystem = experienceSystems[_experienceSystemId];\n        Beast storage winner = beasts[_winnerId];\n        Beast storage looser = beasts[_looserId];\n\n        // TODO: Here we need to assing Dinosaur or Unicorn bonus, but we need to check from ADN wich\n        // one is Dinosaur and wich one is Unicorn\n\n        uint winnerExperienceIncrement = 0;\n        uint looserExperienceIncrement = 0;\n\n        // It is not possible to have: isJustBase = true and isJustPercentaje  = true option.\n        if (_experienceSystem.isJustBase) {\n            winnerExperienceIncrement += uint64(_experienceSystem.base);\n            looserExperienceIncrement -= uint64(_experienceSystem.base);\n        } else if (_experienceSystem.isJustPercentaje) {\n            winnerExperienceIncrement += uint64(looser.experience * _experienceSystem.percentaje);\n            looserExperienceIncrement -= uint64(looser.experience * _experienceSystem.percentaje);\n        } else {\n            uint looserExperience = looser.experience;\n            winnerExperienceIncrement += uint64(_experienceSystem.base);\n            looserExperienceIncrement -= uint64(_experienceSystem.base);\n            winnerExperienceIncrement += uint64(looserExperience * _experienceSystem.percentaje);\n            looserExperienceIncrement -= uint64(looserExperience * _experienceSystem.percentaje);\n        }\n        // Is there a Skill Bonus to Win more exp or loss less exp?\n        Skill memory winnerSkills = skills[winner.skillId];\n        Skill memory looserSkills = skills[looser.skillId];\n        winnerExperienceIncrement += winnerExperienceIncrement * winnerSkills.winExperienceBonus;\n        looserExperienceIncrement += looserExperienceIncrement * looserSkills.loseExperienceBonus;\n\n        winner.experience += uint64((winnerExperienceIncrement * getExperienceBonusBasedOnRarity(winner.pedigree))/100);\n        looser.experience -= uint64((looserExperienceIncrement * getExperienceBonusBasedOnRarity(looser.pedigree))/100);\n        if (looser.experience < experienceRequiredForLevel[looser.level - 1]) {\n            looser.experience = uint64(experienceRequiredForLevel[looser.level - 1]);\n        }\n\n        _addToSuggestionList(looser.experience, _looserId);\n        _addToSuggestionList(winner.experience, _winnerId);\n    }\n\n    function getExperienceBonusBasedOnRarity(Pedigree _pedigree) internal returns(uint) {\n        if (_pedigree == Pedigree.Common) {\n            return 100;\n        } else if(_pedigree == Pedigree.Rare) {\n            return 105;\n        } else if(_pedigree == Pedigree.Epic) {\n            return 115;\n        } else if(_pedigree == Pedigree.Legendary) {\n            return 130;\n        } else {\n            return 100;\n        }\n    }\n\n    function calculateLevel(uint _experience, uint _currentLevel) internal returns(uint) {\n        if(_experience >= experienceRequiredForLevel[_currentLevel - 1]) {\n            return _currentLevel + 1;\n        } else {\n            if(_currentLevel == 1) {\n                return 1;\n            } else if(_experience <= experienceRequiredForLevel[_currentLevel - 2]) {\n                return _currentLevel - 1;\n            } else {\n                return _currentLevel;\n            }\n        }\n    }\n\n    //Listed by suggerences\n\n    uint constant DIVIDER = 10;\n    mapping( uint => uint256[] ) private suggestionsList;\n    mapping( uint256 => uint256 ) private suggestionsIndexOfBeast;\n    mapping( uint256 => uint ) private beastRange;\n\n    uint[] private activeRanges;\n    uint private maxRange;\n\n    // must not consume gas !!\n    function getRandomSuggestionBattles(uint256 _beastId) public returns (bytes32[6]) {\n\n        bytes32[6] memory suggestionList;\n        uint currentRange = beastRange[_beastId];\n        uint lowerRange = currentRange - 1 <= 1 ? 1 : currentRange - 1;\n        uint upperRange = currentRange + 1 >= maxRange ? maxRange : currentRange + 1;\n\n        uint256 lenLowerRange = suggestionsList[lowerRange].length - 1;\n        uint256 lenUpperRange = suggestionsList[upperRange].length - 1;\n\n        suggestionList[0] = bytes32(suggestionsList[lowerRange][random(lenLowerRange)]);\n        suggestionList[1] = bytes32(suggestionsList[lowerRange][random(lenLowerRange)]);\n        suggestionList[2] = bytes32(suggestionsList[lowerRange][random(lenLowerRange)]);\n        suggestionList[3] = bytes32(suggestionsList[upperRange][random(lenUpperRange)]);\n        suggestionList[4] = bytes32(suggestionsList[upperRange][random(lenUpperRange)]);\n        suggestionList[5] = bytes32(suggestionsList[upperRange][random(lenUpperRange)]);\n\n        return suggestionList;\n    }\n\n    function _addToSuggestionList(uint64 _beastExp, uint _beastId) internal {\n        uint range = uint(_beastExp/DIVIDER) + 1; // range start from 1 to avoid problems with defaults values of 0s \n        _addToActiveRanges(range);\n        if( beastRange[_beastId] != range ) { // if beast change range\n            if( beastRange[_beastId] > 0 ) {\n                _deleteFromSuggestionsList(beastRange[_beastId], _beastId);\n            }\n            uint256 newIndex = suggestionsList[range].push(_beastId);\n            suggestionsIndexOfBeast[_beastId] = newIndex - 1;\n            beastRange[_beastId] = range; \n        }\n    }\n\n    function _deleteFromSuggestionsList(uint range, uint256 _beastId) internal {\n        delete suggestionsList[range][suggestionsIndexOfBeast[_beastId]];\n        suggestionsList[range][suggestionsIndexOfBeast[_beastId]] = suggestionsList[range][suggestionsList[range].length-1];\n        suggestionsList[range].length--;\n    }\n\n    function _addToActiveRanges(uint range) internal {\n        if(!_valueExistsInArray(activeRanges, range)){\n            activeRanges.push(range);\n        }\n        maxRange = _maxValueInArray(activeRanges);\n    }\n\n    function _maxValueInArray(uint[] arrayToSearch) private pure returns (uint) {\n        uint max = 0;\n        for( uint i = 0; i < arrayToSearch.length; i++ ){\n            if( arrayToSearch[i] > max ){\n                max = arrayToSearch[i];\n            }\n        }\n        return max;\n    } \n\n    function _valueExistsInArray(uint[] arrayToSearch, uint valueToSearch) private pure returns (bool) {\n        for( uint i = 0; i < arrayToSearch.length; i++ ){\n            if( arrayToSearch[i] == valueToSearch ){\n                return true;\n            }\n        }\n        return false;\n    }\n    */\n}\n",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/ExperienceSystems.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/ExperienceSystems.sol",
+    "exportedSymbols": {
+      "ExperienceSystems": [
+        35
+      ]
+    },
+    "id": 36,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 25,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:3"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastAttributes.sol",
+        "file": "./BeastAttributes.sol",
+        "id": 26,
+        "nodeType": "ImportDirective",
+        "scope": 36,
+        "sourceUnit": 6,
+        "src": "26:31:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/SkillsSystem.sol",
+        "file": "./SkillsSystem.sol",
+        "id": 27,
+        "nodeType": "ImportDirective",
+        "scope": 36,
+        "sourceUnit": 88,
+        "src": "58:28:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/Random.sol",
+        "file": "./util/Random.sol",
+        "id": 28,
+        "nodeType": "ImportDirective",
+        "scope": 36,
+        "sourceUnit": 134,
+        "src": "87:27:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 29,
+              "name": "Random",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 133,
+              "src": "146:6:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Random_$133",
+                "typeString": "contract Random"
+              }
+            },
+            "id": 30,
+            "nodeType": "InheritanceSpecifier",
+            "src": "146:6:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 31,
+              "name": "BeastAttributes",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5,
+              "src": "154:15:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastAttributes_$5",
+                "typeString": "contract BeastAttributes"
+              }
+            },
+            "id": 32,
+            "nodeType": "InheritanceSpecifier",
+            "src": "154:15:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 33,
+              "name": "SkillsSystem",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 87,
+              "src": "171:12:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SkillsSystem_$87",
+                "typeString": "contract SkillsSystem"
+              }
+            },
+            "id": 34,
+            "nodeType": "InheritanceSpecifier",
+            "src": "171:12:3"
+          }
+        ],
+        "contractDependencies": [
+          5,
+          13,
+          87,
+          119,
+          133
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 35,
+        "linearizedBaseContracts": [
+          35,
+          87,
+          5,
+          13,
+          119,
+          133
+        ],
+        "name": "ExperienceSystems",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 36,
+        "src": "116:8139:3"
+      }
+    ],
+    "src": "0:8256:3"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/ExperienceSystems.sol",
+    "exportedSymbols": {
+      "ExperienceSystems": [
+        35
+      ]
+    },
+    "id": 36,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 25,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:3"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastAttributes.sol",
+        "file": "./BeastAttributes.sol",
+        "id": 26,
+        "nodeType": "ImportDirective",
+        "scope": 36,
+        "sourceUnit": 6,
+        "src": "26:31:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/SkillsSystem.sol",
+        "file": "./SkillsSystem.sol",
+        "id": 27,
+        "nodeType": "ImportDirective",
+        "scope": 36,
+        "sourceUnit": 88,
+        "src": "58:28:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/Random.sol",
+        "file": "./util/Random.sol",
+        "id": 28,
+        "nodeType": "ImportDirective",
+        "scope": 36,
+        "sourceUnit": 134,
+        "src": "87:27:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 29,
+              "name": "Random",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 133,
+              "src": "146:6:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Random_$133",
+                "typeString": "contract Random"
+              }
+            },
+            "id": 30,
+            "nodeType": "InheritanceSpecifier",
+            "src": "146:6:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 31,
+              "name": "BeastAttributes",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5,
+              "src": "154:15:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastAttributes_$5",
+                "typeString": "contract BeastAttributes"
+              }
+            },
+            "id": 32,
+            "nodeType": "InheritanceSpecifier",
+            "src": "154:15:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 33,
+              "name": "SkillsSystem",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 87,
+              "src": "171:12:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SkillsSystem_$87",
+                "typeString": "contract SkillsSystem"
+              }
+            },
+            "id": 34,
+            "nodeType": "InheritanceSpecifier",
+            "src": "171:12:3"
+          }
+        ],
+        "contractDependencies": [
+          5,
+          13,
+          87,
+          119,
+          133
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 35,
+        "linearizedBaseContracts": [
+          35,
+          87,
+          5,
+          13,
+          119,
+          133
+        ],
+        "name": "ExperienceSystems",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 36,
+        "src": "116:8139:3"
+      }
+    ],
+    "src": "0:8256:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:03:11.587Z"
+}

@@ -1,0 +1,167 @@
+{
+  "contractName": "BeastAttributes",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a723058204bda2611d26e40896e7a86a1971b633b5e29483853148c6b48668c089d30ecb50029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a723058204bda2611d26e40896e7a86a1971b633b5e29483853148c6b48668c089d30ecb50029",
+  "sourceMap": "53:3683:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;53:3683:0;;;;;;;",
+  "deployedSourceMap": "53:3683:0:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./BeastBase.sol\";\n\ncontract BeastAttributes is BeastBase {\n    /*** EVENTS ***/\n\n    /*\n    /// @dev Transfer event as defined in current draft of ERC721. Emitted every time a beast\n    ///  ownership is assigned, including births.\n    event Level(uint _beastID, uint _from, uint _to);\n    event ChangePreferedAttribute(uint _beastID, uint _from, uint _to);\n\n    /// Table indicating experience requiere for each level\n    uint[20] public experienceRequiredForLevel = [\n        uint(2),\n        uint(4),\n        uint(8),\n        uint(16),\n        uint(32),\n        uint(64),\n        uint(128),\n        uint(256),\n        uint(512),\n        uint(1024),\n        uint(2048),\n        uint(4096),\n        uint(8192),\n        uint(16384),\n        uint(32768),\n        uint(65536),\n        uint(131072),\n        uint(262144),\n        uint(524288),\n        uint(1048576)\n    ];\n\n    // Return Skill Value based on Attribute ID for specific beast\n    function skillValue(uint _attributeID, uint _tokenId) public returns (uint) {\n        Beast storage _beast = beasts[_tokenId];\n        if (_attributeID == 1) {\n            return _beast.attrs.strength;\n        } else if(_attributeID == 2) {\n            return _beast.attrs.dexterity;\n        } else if(_attributeID == 3) {\n            return _beast.attrs.endurance;\n        } else if(_attributeID == 4) {\n            return _beast.attrs.knowledge;\n        } else if(_attributeID == 5) {\n            return _beast.attrs.wisdom;\n        } else if(_attributeID == 6) {\n            return _beast.attrs.charisma;\n        }\n    }\n\n\n    function levelUp(uint _tokenId, uint _toLevel) internal {\n        Beast storage _beast = beasts[_tokenId];\n        require(_beast.experience >= experienceRequiredForLevel[_toLevel - 1]);\n        // emit the Level event\n        emit Level(_tokenId, _toLevel -1, _toLevel);\n        // Add Prefered Skills\n        if(_beast.preferedAttribute == 1) {\n            _beast.attrs.strength += 1;\n        } else if(_beast.preferedAttribute == 2) {\n            _beast.attrs.dexterity += 1;\n        } else if(_beast.preferedAttribute == 3) {\n            _beast.attrs.endurance += 1;\n        } else if(_beast.preferedAttribute == 4) {\n            _beast.attrs.knowledge += 1;\n        } else if(_beast.preferedAttribute == 5) {\n            _beast.attrs.wisdom += 1;\n        } else if(_beast.preferedAttribute == 6) {\n            _beast.attrs.charisma += 1;\n        }\n        // Add remaining Random Skills\n        for(uint i = 0; i < 3; i++) {\n            uint randomAttribute = uint(keccak256(block.difficulty, now, beasts, i, _tokenId)) % 6 + 1;\n            if(randomAttribute == 1) {\n                _beast.attrs.strength += 1;\n            } else if(randomAttribute == 2) {\n                _beast.attrs.dexterity += 1;\n            } else if(randomAttribute == 3) {\n                _beast.attrs.endurance += 1;\n            } else if(randomAttribute == 4) {\n                _beast.attrs.knowledge += 1;\n            } else if(randomAttribute == 5) {\n                _beast.attrs.wisdom += 1;\n            } else if(randomAttribute == 6) {\n                _beast.attrs.charisma += 1;\n            }\n        }\n    }\n\n    function changePreferedAttribute(uint _tokenId, uint _preferedAttribute) public {\n        require(beastIndexToOwner[_tokenId] == msg.sender);\n\n        Beast storage _beast = beasts[_tokenId];\n        require(_beast.preferedAttribute != _preferedAttribute);\n        require(_preferedAttribute <= 6 || _preferedAttribute > 0);\n        // emit the Level event\n        emit ChangePreferedAttribute(_tokenId, _beast.preferedAttribute, _preferedAttribute);\n        _beast.preferedAttribute = uint8(_preferedAttribute);\n    }\n    */\n}",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastAttributes.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastAttributes.sol",
+    "exportedSymbols": {
+      "BeastAttributes": [
+        5
+      ]
+    },
+    "id": 6,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastBase.sol",
+        "file": "./BeastBase.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 6,
+        "sourceUnit": 14,
+        "src": "26:25:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3,
+              "name": "BeastBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 13,
+              "src": "81:9:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastBase_$13",
+                "typeString": "contract BeastBase"
+              }
+            },
+            "id": 4,
+            "nodeType": "InheritanceSpecifier",
+            "src": "81:9:0"
+          }
+        ],
+        "contractDependencies": [
+          13,
+          119
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 5,
+        "linearizedBaseContracts": [
+          5,
+          13,
+          119
+        ],
+        "name": "BeastAttributes",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 6,
+        "src": "53:3683:0"
+      }
+    ],
+    "src": "0:3736:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastAttributes.sol",
+    "exportedSymbols": {
+      "BeastAttributes": [
+        5
+      ]
+    },
+    "id": 6,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastBase.sol",
+        "file": "./BeastBase.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 6,
+        "sourceUnit": 14,
+        "src": "26:25:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3,
+              "name": "BeastBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 13,
+              "src": "81:9:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastBase_$13",
+                "typeString": "contract BeastBase"
+              }
+            },
+            "id": 4,
+            "nodeType": "InheritanceSpecifier",
+            "src": "81:9:0"
+          }
+        ],
+        "contractDependencies": [
+          13,
+          119
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 5,
+        "linearizedBaseContracts": [
+          5,
+          13,
+          119
+        ],
+        "name": "BeastAttributes",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 6,
+        "src": "53:3683:0"
+      }
+    ],
+    "src": "0:3736:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:03:11.586Z"
+}

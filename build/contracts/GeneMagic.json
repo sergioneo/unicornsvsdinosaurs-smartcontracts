@@ -1,0 +1,97 @@
+{
+  "contractName": "GeneMagic",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a723058208fe5d90da73fe0a44e8391205c20fe9c0704eb09d2c621ab57ccfc9e7cf21f520029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a723058208fe5d90da73fe0a44e8391205c20fe9c0704eb09d2c621ab57ccfc9e7cf21f520029",
+  "sourceMap": "25:29:10:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:29:10;;;;;;;",
+  "deployedSourceMap": "25:29:10:-;;;;;",
+  "source": "pragma solidity ^0.4.0;\r\ncontract GeneMagic {\r\n    \r\n}",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/GeneMagic.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/GeneMagic.sol",
+    "exportedSymbols": {
+      "GeneMagic": [
+        89
+      ]
+    },
+    "id": 90,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 88,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:10"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 89,
+        "linearizedBaseContracts": [
+          89
+        ],
+        "name": "GeneMagic",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 90,
+        "src": "25:29:10"
+      }
+    ],
+    "src": "0:54:10"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/GeneMagic.sol",
+    "exportedSymbols": {
+      "GeneMagic": [
+        89
+      ]
+    },
+    "id": 90,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 88,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:10"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 89,
+        "linearizedBaseContracts": [
+          89
+        ],
+        "name": "GeneMagic",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 90,
+        "src": "25:29:10"
+      }
+    ],
+    "src": "0:54:10"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:01:57.846Z"
+}

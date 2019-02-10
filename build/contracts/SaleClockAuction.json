@@ -1,0 +1,190 @@
+{
+  "contractName": "SaleClockAuction",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060e98061001f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680638da5cb5b146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820283848bb2c7fe19eea84785b72efa6d846168317f132022db73415c6ade497ff0029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680638da5cb5b146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820283848bb2c7fe19eea84785b72efa6d846168317f132022db73415c6ade497ff0029",
+  "sourceMap": "195:50:7:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;195:50:7;;;;;;;",
+  "deployedSourceMap": "195:50:7:-;;;;;;;;;;;;;;;;;;;;;;;;239:20:11;;8:9:-1;5:2;;;30:1;27;20:12;5:2;239:20:11;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./ClockAuction.sol\";\n\n/// @title Clock auction modified for sale of beasts\n/// @notice We omit a fallback function to prevent accidental sends to this contract.\ncontract SaleClockAuction is ClockAuction {\n\n   \n}\n\n",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/SaleClockAuction.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/SaleClockAuction.sol",
+    "exportedSymbols": {
+      "SaleClockAuction": [
+        107
+      ]
+    },
+    "id": 108,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 103,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:7"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuction.sol",
+        "file": "./ClockAuction.sol",
+        "id": 104,
+        "nodeType": "ImportDirective",
+        "scope": 108,
+        "sourceUnit": 98,
+        "src": "26:28:7",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 105,
+              "name": "ClockAuction",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 97,
+              "src": "224:12:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ClockAuction_$97",
+                "typeString": "contract ClockAuction"
+              }
+            },
+            "id": 106,
+            "nodeType": "InheritanceSpecifier",
+            "src": "224:12:7"
+          }
+        ],
+        "contractDependencies": [
+          101,
+          97,
+          124,
+          130
+        ],
+        "contractKind": "contract",
+        "documentation": "@title Clock auction modified for sale of beasts\n @notice We omit a fallback function to prevent accidental sends to this contract.",
+        "fullyImplemented": true,
+        "id": 107,
+        "linearizedBaseContracts": [
+          107,
+          97,
+          101,
+          130,
+          124
+        ],
+        "name": "SaleClockAuction",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 108,
+        "src": "195:50:7"
+      }
+    ],
+    "src": "0:247:7"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/SaleClockAuction.sol",
+    "exportedSymbols": {
+      "SaleClockAuction": [
+        107
+      ]
+    },
+    "id": 108,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 103,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:7"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuction.sol",
+        "file": "./ClockAuction.sol",
+        "id": 104,
+        "nodeType": "ImportDirective",
+        "scope": 108,
+        "sourceUnit": 98,
+        "src": "26:28:7",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 105,
+              "name": "ClockAuction",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 97,
+              "src": "224:12:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ClockAuction_$97",
+                "typeString": "contract ClockAuction"
+              }
+            },
+            "id": 106,
+            "nodeType": "InheritanceSpecifier",
+            "src": "224:12:7"
+          }
+        ],
+        "contractDependencies": [
+          101,
+          97,
+          124,
+          130
+        ],
+        "contractKind": "contract",
+        "documentation": "@title Clock auction modified for sale of beasts\n @notice We omit a fallback function to prevent accidental sends to this contract.",
+        "fullyImplemented": true,
+        "id": 107,
+        "linearizedBaseContracts": [
+          107,
+          97,
+          101,
+          130,
+          124
+        ],
+        "name": "SaleClockAuction",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 108,
+        "src": "195:50:7"
+      }
+    ],
+    "src": "0:247:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:03:11.589Z"
+}

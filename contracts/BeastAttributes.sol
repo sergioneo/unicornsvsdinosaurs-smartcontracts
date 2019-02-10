@@ -5,7 +5,7 @@ import "./BeastBase.sol";
 contract BeastAttributes is BeastBase {
     /*** EVENTS ***/
 
-
+    /*
     /// @dev Transfer event as defined in current draft of ERC721. Emitted every time a beast
     ///  ownership is assigned, including births.
     event Level(uint _beastID, uint _from, uint _to);
@@ -102,4 +102,5 @@ contract BeastAttributes is BeastBase {
         emit ChangePreferedAttribute(_tokenId, _beast.preferedAttribute, _preferedAttribute);
         _beast.preferedAttribute = uint8(_preferedAttribute);
     }
+    */
 }

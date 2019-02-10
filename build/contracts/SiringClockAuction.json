@@ -1,0 +1,190 @@
+{
+  "contractName": "SiringClockAuction",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060e98061001f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680638da5cb5b146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a723058201c4fe7a625f1a00584015809259a7f1a14bd1238f0d539b8542f12552e7503400029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680638da5cb5b146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a723058201c4fe7a625f1a00584015809259a7f1a14bd1238f0d539b8542f12552e7503400029",
+  "sourceMap": "189:50:8:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;189:50:8;;;;;;;",
+  "deployedSourceMap": "189:50:8:-;;;;;;;;;;;;;;;;;;;;;;;;239:20:11;;8:9:-1;5:2;;;30:1;27;20:12;5:2;239:20:11;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./ClockAuction.sol\";\n\n/// @title Reverse auction modified for siring\n/// @notice We omit a fallback function to prevent accidental sends to this contract.\ncontract SiringClockAuction is ClockAuction {\n\n \n}\n\n",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/SiringClockAuction.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/SiringClockAuction.sol",
+    "exportedSymbols": {
+      "SiringClockAuction": [
+        113
+      ]
+    },
+    "id": 114,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 109,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:8"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuction.sol",
+        "file": "./ClockAuction.sol",
+        "id": 110,
+        "nodeType": "ImportDirective",
+        "scope": 114,
+        "sourceUnit": 98,
+        "src": "26:28:8",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 111,
+              "name": "ClockAuction",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 97,
+              "src": "220:12:8",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ClockAuction_$97",
+                "typeString": "contract ClockAuction"
+              }
+            },
+            "id": 112,
+            "nodeType": "InheritanceSpecifier",
+            "src": "220:12:8"
+          }
+        ],
+        "contractDependencies": [
+          101,
+          97,
+          124,
+          130
+        ],
+        "contractKind": "contract",
+        "documentation": "@title Reverse auction modified for siring\n @notice We omit a fallback function to prevent accidental sends to this contract.",
+        "fullyImplemented": true,
+        "id": 113,
+        "linearizedBaseContracts": [
+          113,
+          97,
+          101,
+          130,
+          124
+        ],
+        "name": "SiringClockAuction",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 114,
+        "src": "189:50:8"
+      }
+    ],
+    "src": "0:241:8"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/SiringClockAuction.sol",
+    "exportedSymbols": {
+      "SiringClockAuction": [
+        113
+      ]
+    },
+    "id": 114,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 109,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:8"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuction.sol",
+        "file": "./ClockAuction.sol",
+        "id": 110,
+        "nodeType": "ImportDirective",
+        "scope": 114,
+        "sourceUnit": 98,
+        "src": "26:28:8",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 111,
+              "name": "ClockAuction",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 97,
+              "src": "220:12:8",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ClockAuction_$97",
+                "typeString": "contract ClockAuction"
+              }
+            },
+            "id": 112,
+            "nodeType": "InheritanceSpecifier",
+            "src": "220:12:8"
+          }
+        ],
+        "contractDependencies": [
+          101,
+          97,
+          124,
+          130
+        ],
+        "contractKind": "contract",
+        "documentation": "@title Reverse auction modified for siring\n @notice We omit a fallback function to prevent accidental sends to this contract.",
+        "fullyImplemented": true,
+        "id": 113,
+        "linearizedBaseContracts": [
+          113,
+          97,
+          101,
+          130,
+          124
+        ],
+        "name": "SiringClockAuction",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 114,
+        "src": "189:50:8"
+      }
+    ],
+    "src": "0:241:8"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:03:11.589Z"
+}

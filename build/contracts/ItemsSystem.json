@@ -1,0 +1,163 @@
+{
+  "contractName": "ItemsSystem",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a723058202704c7bc5834b06cb18ef5964d451080436e0a1e1087792741692fde699dcc910029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a723058202704c7bc5834b06cb18ef5964d451080436e0a1e1087792741692fde699dcc910029",
+  "sourceMap": "62:1358:11:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;62:1358:11;;;;;;;",
+  "deployedSourceMap": "62:1358:11:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./util/AccessControl.sol\";\n\ncontract ItemsSystem is AccessControl {\n/*\n    struct Item {\n        uint id;\n        string name;\n        uint attirbuteId1;\n        uint attribute1Bonus;\n        uint attirbuteId2;\n        uint attribute2Bonus;\n\n    }\n\n    mapping (uint => Item) public items;\n\n    // Create a new Item, important to have Unique ID\n    function createItem(\n        uint _id, \n        string _name, \n        uint _attirbuteId1, \n        uint _attribute1Bonus, \n        uint _attirbuteId2, \n        uint _attribute2Bonus\n    ) external onlyCOO {\n        Item memory _item = Item({\n            id: _id,\n            name: _name,\n            attirbuteId1: _attirbuteId1,\n            attribute1Bonus: _attribute1Bonus,\n            attirbuteId2: _attirbuteId2,\n            attribute2Bonus: _attribute2Bonus\n        });\n\n        items[_id] = _item;\n    }\n\n    // Edit a Item, important to have Unique ID\n    function editItem(\n        uint _id, \n        string _name, \n        uint _attirbuteId1, \n        uint _attribute1Bonus, \n        uint _attirbuteId2, \n        uint _attribute2Bonus\n    ) external onlyCOO {\n        Item storage _item = items[_id];\n        _item.name = _name;\n        _item.attirbuteId1 = _attirbuteId1;\n        _item.attribute1Bonus = _attribute1Bonus;\n        _item.attirbuteId2 = _attirbuteId2;\n        _item.attribute2Bonus = _attribute2Bonus;\n    }\n*/\n}",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/ItemsSystem.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/ItemsSystem.sol",
+    "exportedSymbols": {
+      "ItemsSystem": [
+        95
+      ]
+    },
+    "id": 96,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 91,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:11"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/AccessControl.sol",
+        "file": "./util/AccessControl.sol",
+        "id": 92,
+        "nodeType": "ImportDirective",
+        "scope": 96,
+        "sourceUnit": 152,
+        "src": "26:34:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 93,
+              "name": "AccessControl",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 151,
+              "src": "86:13:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_AccessControl_$151",
+                "typeString": "contract AccessControl"
+              }
+            },
+            "id": 94,
+            "nodeType": "InheritanceSpecifier",
+            "src": "86:13:11"
+          }
+        ],
+        "contractDependencies": [
+          151
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 95,
+        "linearizedBaseContracts": [
+          95,
+          151
+        ],
+        "name": "ItemsSystem",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 96,
+        "src": "62:1358:11"
+      }
+    ],
+    "src": "0:1420:11"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/ItemsSystem.sol",
+    "exportedSymbols": {
+      "ItemsSystem": [
+        95
+      ]
+    },
+    "id": 96,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 91,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:11"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/AccessControl.sol",
+        "file": "./util/AccessControl.sol",
+        "id": 92,
+        "nodeType": "ImportDirective",
+        "scope": 96,
+        "sourceUnit": 152,
+        "src": "26:34:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 93,
+              "name": "AccessControl",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 151,
+              "src": "86:13:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_AccessControl_$151",
+                "typeString": "contract AccessControl"
+              }
+            },
+            "id": 94,
+            "nodeType": "InheritanceSpecifier",
+            "src": "86:13:11"
+          }
+        ],
+        "contractDependencies": [
+          151
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 95,
+        "linearizedBaseContracts": [
+          95,
+          151
+        ],
+        "name": "ItemsSystem",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 96,
+        "src": "62:1358:11"
+      }
+    ],
+    "src": "0:1420:11"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:01:57.846Z"
+}

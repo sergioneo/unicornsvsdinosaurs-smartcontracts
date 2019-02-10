@@ -5,7 +5,7 @@ import "./auction/ClockAuction.sol";
 import "./auction/SaleClockAuction.sol";
 
 contract BeastAuction is BeastBreeding {
-
+/*
     /// @dev Sets the reference to the sale auction.
     /// @param _address - Address of sale contract.
     function setSaleAuctionAddress(address _address) public onlyCEO {
@@ -124,4 +124,5 @@ contract BeastAuction is BeastBreeding {
         saleAuction.withdrawBalance();
         siringAuction.withdrawBalance();
     }
+    */
 }

@@ -3,7 +3,7 @@ pragma solidity ^0.4.24;
 import "./BeastBase.sol";
 
 contract RankingSystems is BeastBase {
-
+/*
     uint256 private constant TOP_RANK_PER_GAME = 10;
 
     struct RankingStruct {
@@ -128,12 +128,11 @@ contract RankingSystems is BeastBase {
         return true;
     }
         
-    /**
-        * @dev Sort the array
-        */
+    
     function _sort( uint256 gameId ) private {
         for( uint i = 0; i < rankings[gameId].rankingList.length-1; i++ ) {
             _sort_item(gameId, i);
         }
     }
+    */
 }

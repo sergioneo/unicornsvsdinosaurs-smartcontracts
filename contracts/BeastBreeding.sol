@@ -5,7 +5,7 @@ import "./interface/GeneMagicInterface.sol";
 import "./util/Random.sol";
 
 contract BeastBreeding is Random, BeastOwnership {
-
+/*
     /// @dev The Pregnant event is fired when two beast successfully breed and the pregnancy
     ///  timer begins for the matron.
     event Pregnant(address owner, uint256 matronId, uint256 sireId, uint256 cooldownEndBlock);
@@ -79,7 +79,7 @@ contract BeastBreeding is Random, BeastOwnership {
         external
         whenNotPaused
     {
-        require(_owns(msg.sender, _sireId));
+        //require(_owns(msg.sender, _sireId));
         sireAllowedToAddress[_sireId] = _addr;
     }
 
@@ -239,7 +239,7 @@ contract BeastBreeding is Random, BeastOwnership {
         require(msg.value >= autoBirthFee);
 
         // Caller must own the matron.
-        require(_owns(msg.sender, _matronId));
+        //require(_owns(msg.sender, _matronId));
 
         // Neither sire nor matron are allowed to be on auction during a normal
         // breeding operation, but we don't need to check that explicitly.
@@ -329,4 +329,5 @@ contract BeastBreeding is Random, BeastOwnership {
         // return the new beast's ID
         return beastId;
     }
+    */
 }

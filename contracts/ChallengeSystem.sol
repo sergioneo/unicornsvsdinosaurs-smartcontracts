@@ -5,7 +5,7 @@ import "./ExperienceSystems.sol";
 import "./SkillsSystem.sol";
 
 contract ChallengeSystem is AccessControl, ExperienceSystems {
-
+     /*
     struct Challenge {
         uint id;
         string name;
@@ -32,7 +32,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
     function challengeExists( uint challengeId) internal view returns(bool) {
         return challenges[challengeId].isChallenge;
     }
-
+   
     // Create a new challenge, important to have Unique ID
     function createChallenge(
         uint _id, 
@@ -180,7 +180,7 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
         Skill memory _challengedSkill = skills[_challenged.skillId];
 
         return 0;
-        /* TODO: Refactor
+        // TODO: Refactor
         if(_challengerSkill.elementalAdvantageBonus == true && _challengedSkill.elementalDisadvantageBonus == false) {
             return 1.2;
         } else if(_challengerSkill.elementalAdvantageBonus == true && _challengedSkill.elementalDisadvantageBonus == true) {
@@ -190,7 +190,8 @@ contract ChallengeSystem is AccessControl, ExperienceSystems {
         } else {
             return 1.1;
         }
-        */
+        
     }
+    */
 }
 

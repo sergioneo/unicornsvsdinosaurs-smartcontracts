@@ -1,0 +1,97 @@
+{
+  "contractName": "GeneMagicInterface",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820bcbc38bf317a6064d268aacd318bbc2ce30b0befdfc1ea657d16503d6a5ba6470029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820bcbc38bf317a6064d268aacd318bbc2ce30b0befdfc1ea657d16503d6a5ba6470029",
+  "sourceMap": "47:31:20:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;47:31:20;;;;;;;",
+  "deployedSourceMap": "47:31:20:-;;;;;",
+  "source": "pragma solidity ^0.4.0;\n\n/// @title SEKRETOOOO\ncontract GeneMagicInterface {\n}",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/interface/GeneMagicInterface.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/interface/GeneMagicInterface.sol",
+    "exportedSymbols": {
+      "GeneMagicInterface": [
+        142
+      ]
+    },
+    "id": 143,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 141,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:20"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title SEKRETOOOO",
+        "fullyImplemented": true,
+        "id": 142,
+        "linearizedBaseContracts": [
+          142
+        ],
+        "name": "GeneMagicInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 143,
+        "src": "47:31:20"
+      }
+    ],
+    "src": "0:78:20"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/interface/GeneMagicInterface.sol",
+    "exportedSymbols": {
+      "GeneMagicInterface": [
+        142
+      ]
+    },
+    "id": 143,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 141,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:20"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title SEKRETOOOO",
+        "fullyImplemented": true,
+        "id": 142,
+        "linearizedBaseContracts": [
+          142
+        ],
+        "name": "GeneMagicInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 143,
+        "src": "47:31:20"
+      }
+    ],
+    "src": "0:78:20"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:01:57.847Z"
+}

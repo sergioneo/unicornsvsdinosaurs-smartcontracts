@@ -3,7 +3,7 @@ pragma solidity ^0.4.24;
 import "./util/AccessControl.sol";
 
 contract AuctionFactory is AccessControl {
-
+/*
     struct AuctionScheme {
         uint id;
         string description;
@@ -99,4 +99,5 @@ contract AuctionFactory is AccessControl {
         require(_vaultAddress != address(0x0));
         vaultAddress = _vaultAddress;
     }
+    */
 }

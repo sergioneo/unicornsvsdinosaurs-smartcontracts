@@ -1,0 +1,227 @@
+{
+  "contractName": "BeastAuction",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820593d92b1373304f5e61bc7a669a40bdc8c5715f97860ce7e49e587e32ca8ab6d0029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820593d92b1373304f5e61bc7a669a40bdc8c5715f97860ce7e49e587e32ca8ab6d0029",
+  "sourceMap": "135:4640:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;135:4640:2;;;;;;;",
+  "deployedSourceMap": "135:4640:2:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./BeastBreeding.sol\";\nimport \"./auction/ClockAuction.sol\";\nimport \"./auction/SaleClockAuction.sol\";\n\ncontract BeastAuction is BeastBreeding {\n/*\n    /// @dev Sets the reference to the sale auction.\n    /// @param _address - Address of sale contract.\n    function setSaleAuctionAddress(address _address) public onlyCEO {\n        SaleClockAuction candidateContract = SaleClockAuction(_address);\n\n        // NOTE: verify that a contract is what we expect - https://github.com/Lunyr/crowdsale-contracts/blob/cfadd15986c30521d8ba7d5b6f57b4fefcc7ac38/contracts/LunyrToken.sol#L117\n        require(candidateContract.isSaleClockAuction());\n\n        // Set the new contract address\n        saleAuction = candidateContract;\n    }\n\n    /// @dev Sets the reference to the siring auction.\n    /// @param _address - Address of siring contract.\n    function setSiringAuctionAddress(address _address) external onlyCEO {\n        SiringClockAuction candidateContract = SiringClockAuction(_address);\n\n        // NOTE: verify that a contract is what we expect - https://github.com/Lunyr/crowdsale-contracts/blob/cfadd15986c30521d8ba7d5b6f57b4fefcc7ac38/contracts/LunyrToken.sol#L117\n        require(candidateContract.isSiringClockAuction());\n\n        // Set the new contract address\n        siringAuction = candidateContract;\n    }\n\n    /// @dev Put a beast up for auction.\n    ///  Does some ownership trickery to create auctions in one tx.\n    function createSaleAuction(\n        uint256 _beastId,\n        uint256 _startingPrice,\n        uint256 _endingPrice,\n        uint256 _duration\n    )\n        public\n        whenNotPaused\n    {\n        // Auction contract checks input sizes\n        // If beast is already on any auction, this will throw\n        // because it will be owned by the auction contract.\n        require(_owns(msg.sender, _beastId));\n        // Ensure the beast is not pregnant to prevent the auction\n        // contract accidentally receiving ownership of the child.\n        // NOTE: the beast IS allowed to be in a cooldown.\n        require(!isPregnant(_beastId));\n        _approve(_beastId, saleAuction);\n        // Sale auction throws if inputs are invalid and clears\n        // transfer and sire approval after escrowing the beast.\n        saleAuction.createAuction(\n            _beastId,\n            _startingPrice,\n            _endingPrice,\n            _duration,\n            msg.sender\n        );\n    }\n\n    /// @dev Put a beast up for auction to be sire.\n    ///  Performs checks to ensure the beast can be sired, then\n    ///  delegates to reverse auction.\n    function createSiringAuction(\n        uint256 _beastId,\n        uint256 _startingPrice,\n        uint256 _endingPrice,\n        uint256 _duration\n    )\n        external\n        whenNotPaused\n    {\n        // Auction contract checks input sizes\n        // If beast is already on any auction, this will throw\n        // because it will be owned by the auction contract.\n        require(_owns(msg.sender, _beastId));\n        require(isReadyToBreed(_beastId));\n        _approve(_beastId, siringAuction);\n        // Siring auction throws if inputs are invalid and clears\n        // transfer and sire approval after escrowing the beast.\n        siringAuction.createAuction(\n            _beastId,\n            _startingPrice,\n            _endingPrice,\n            _duration,\n            msg.sender\n        );\n    }\n\n    /// @dev Completes a siring auction by bidding.\n    ///  Immediately breeds the winning matron with the sire on auction.\n    /// @param _sireId - ID of the sire on auction.\n    /// @param _matronId - ID of the matron owned by the bidder.\n    function bidOnSiringAuction(\n        uint256 _sireId,\n        uint256 _matronId\n    )\n        external\n        payable\n        whenNotPaused\n    {\n        // Auction contract checks input sizes\n        require(_owns(msg.sender, _matronId));\n        require(isReadyToBreed(_matronId));\n        require(_canBreedWithViaAuction(_matronId, _sireId));\n\n        // Define the current price of the auction.\n        uint256 currentPrice = siringAuction.getCurrentPrice(_sireId);\n        require(msg.value >= currentPrice + autoBirthFee);\n\n        // Siring auction will throw if the bid fails.\n        siringAuction.bid.value(msg.value - autoBirthFee)(_sireId);\n        _breedWith(uint32(_matronId), uint32(_sireId));\n    }\n\n    /// @dev Transfers the balance of the sale auction contract\n    /// to the Legends contract. We use two-step withdrawal to\n    /// prevent two transfer calls in the auction bid function.\n    // TODO: Check if balance must go to Split Payment\n    function withdrawAuctionBalances() external onlyCLevel {\n        saleAuction.withdrawBalance();\n        siringAuction.withdrawBalance();\n    }\n    */\n}",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastAuction.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastAuction.sol",
+    "exportedSymbols": {
+      "BeastAuction": [
+        19
+      ]
+    },
+    "id": 20,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastBreeding.sol",
+        "file": "./BeastBreeding.sol",
+        "id": 14,
+        "nodeType": "ImportDirective",
+        "scope": 20,
+        "sourceUnit": 38,
+        "src": "26:29:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuction.sol",
+        "file": "./auction/ClockAuction.sol",
+        "id": 15,
+        "nodeType": "ImportDirective",
+        "scope": 20,
+        "sourceUnit": 121,
+        "src": "56:36:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/SaleClockAuction.sol",
+        "file": "./auction/SaleClockAuction.sol",
+        "id": 16,
+        "nodeType": "ImportDirective",
+        "scope": 20,
+        "sourceUnit": 131,
+        "src": "93:40:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 17,
+              "name": "BeastBreeding",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 37,
+              "src": "160:13:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastBreeding_$37",
+                "typeString": "contract BeastBreeding"
+              }
+            },
+            "id": 18,
+            "nodeType": "InheritanceSpecifier",
+            "src": "160:13:2"
+          }
+        ],
+        "contractDependencies": [
+          27,
+          37,
+          58,
+          145,
+          151,
+          165
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 19,
+        "linearizedBaseContracts": [
+          19,
+          37,
+          58,
+          145,
+          27,
+          151,
+          165
+        ],
+        "name": "BeastAuction",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 20,
+        "src": "135:4640:2"
+      }
+    ],
+    "src": "0:4775:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastAuction.sol",
+    "exportedSymbols": {
+      "BeastAuction": [
+        19
+      ]
+    },
+    "id": 20,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastBreeding.sol",
+        "file": "./BeastBreeding.sol",
+        "id": 14,
+        "nodeType": "ImportDirective",
+        "scope": 20,
+        "sourceUnit": 38,
+        "src": "26:29:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuction.sol",
+        "file": "./auction/ClockAuction.sol",
+        "id": 15,
+        "nodeType": "ImportDirective",
+        "scope": 20,
+        "sourceUnit": 121,
+        "src": "56:36:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/SaleClockAuction.sol",
+        "file": "./auction/SaleClockAuction.sol",
+        "id": 16,
+        "nodeType": "ImportDirective",
+        "scope": 20,
+        "sourceUnit": 131,
+        "src": "93:40:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 17,
+              "name": "BeastBreeding",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 37,
+              "src": "160:13:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastBreeding_$37",
+                "typeString": "contract BeastBreeding"
+              }
+            },
+            "id": 18,
+            "nodeType": "InheritanceSpecifier",
+            "src": "160:13:2"
+          }
+        ],
+        "contractDependencies": [
+          27,
+          37,
+          58,
+          145,
+          151,
+          165
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 19,
+        "linearizedBaseContracts": [
+          19,
+          37,
+          58,
+          145,
+          27,
+          151,
+          165
+        ],
+        "name": "BeastAuction",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 20,
+        "src": "135:4640:2"
+      }
+    ],
+    "src": "0:4775:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:01:57.844Z"
+}

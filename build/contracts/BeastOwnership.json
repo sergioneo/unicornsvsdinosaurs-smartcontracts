@@ -1,0 +1,251 @@
+{
+  "contractName": "BeastOwnership",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820db1d6eb2c196c8b63cf4302ee3f61064fb6e638362c4a8830a64975bdd67fc350029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820db1d6eb2c196c8b63cf4302ee3f61064fb6e638362c4a8830a64975bdd67fc350029",
+  "sourceMap": "119:50:6:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;119:50:6;;;;;;;",
+  "deployedSourceMap": "119:50:6:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./BeastBase.sol\";\nimport \"./token/ERC721Metadata.sol\";\nimport \"./token/ERC721.sol\";\n\ncontract BeastOwnership  is BeastBase, ERC721 {\n\n}\n",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastOwnership.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastOwnership.sol",
+    "exportedSymbols": {
+      "BeastOwnership": [
+        58
+      ]
+    },
+    "id": 59,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 50,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:6"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastBase.sol",
+        "file": "./BeastBase.sol",
+        "id": 51,
+        "nodeType": "ImportDirective",
+        "scope": 59,
+        "sourceUnit": 28,
+        "src": "26:25:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/token/ERC721Metadata.sol",
+        "file": "./token/ERC721Metadata.sol",
+        "id": 52,
+        "nodeType": "ImportDirective",
+        "scope": 59,
+        "sourceUnit": 149,
+        "src": "52:36:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/token/ERC721.sol",
+        "file": "./token/ERC721.sol",
+        "id": 53,
+        "nodeType": "ImportDirective",
+        "scope": 59,
+        "sourceUnit": 146,
+        "src": "89:28:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 54,
+              "name": "BeastBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 27,
+              "src": "147:9:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastBase_$27",
+                "typeString": "contract BeastBase"
+              }
+            },
+            "id": 55,
+            "nodeType": "InheritanceSpecifier",
+            "src": "147:9:6"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 56,
+              "name": "ERC721",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 145,
+              "src": "158:6:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ERC721_$145",
+                "typeString": "contract ERC721"
+              }
+            },
+            "id": 57,
+            "nodeType": "InheritanceSpecifier",
+            "src": "158:6:6"
+          }
+        ],
+        "contractDependencies": [
+          27,
+          145,
+          151
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 58,
+        "linearizedBaseContracts": [
+          58,
+          145,
+          27,
+          151
+        ],
+        "name": "BeastOwnership",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 59,
+        "src": "119:50:6"
+      }
+    ],
+    "src": "0:170:6"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastOwnership.sol",
+    "exportedSymbols": {
+      "BeastOwnership": [
+        58
+      ]
+    },
+    "id": 59,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 50,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:6"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/BeastBase.sol",
+        "file": "./BeastBase.sol",
+        "id": 51,
+        "nodeType": "ImportDirective",
+        "scope": 59,
+        "sourceUnit": 28,
+        "src": "26:25:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/token/ERC721Metadata.sol",
+        "file": "./token/ERC721Metadata.sol",
+        "id": 52,
+        "nodeType": "ImportDirective",
+        "scope": 59,
+        "sourceUnit": 149,
+        "src": "52:36:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/token/ERC721.sol",
+        "file": "./token/ERC721.sol",
+        "id": 53,
+        "nodeType": "ImportDirective",
+        "scope": 59,
+        "sourceUnit": 146,
+        "src": "89:28:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 54,
+              "name": "BeastBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 27,
+              "src": "147:9:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_BeastBase_$27",
+                "typeString": "contract BeastBase"
+              }
+            },
+            "id": 55,
+            "nodeType": "InheritanceSpecifier",
+            "src": "147:9:6"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 56,
+              "name": "ERC721",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 145,
+              "src": "158:6:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ERC721_$145",
+                "typeString": "contract ERC721"
+              }
+            },
+            "id": 57,
+            "nodeType": "InheritanceSpecifier",
+            "src": "158:6:6"
+          }
+        ],
+        "contractDependencies": [
+          27,
+          145,
+          151
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 58,
+        "linearizedBaseContracts": [
+          58,
+          145,
+          27,
+          151
+        ],
+        "name": "BeastOwnership",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 59,
+        "src": "119:50:6"
+      }
+    ],
+    "src": "0:170:6"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:01:57.845Z"
+}

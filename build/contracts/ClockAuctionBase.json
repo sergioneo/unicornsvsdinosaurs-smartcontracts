@@ -1,0 +1,119 @@
+{
+  "contractName": "ClockAuctionBase",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a7230582069281db48c26fa87667eaf8c23918de11f4372302d6ae3b042dda95940b0f4480029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a7230582069281db48c26fa87667eaf8c23918de11f4372302d6ae3b042dda95940b0f4480029",
+  "sourceMap": "242:30:6:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;242:30:6;;;;;;;",
+  "deployedSourceMap": "242:30:6:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"../token/ERC721.sol\";\n\n/// @title Auction Core\n/// @dev Contains models, variables, and internal methods for the auction.\n/// @notice We omit a fallback function to prevent accidental sends to this contract.\ncontract ClockAuctionBase {\n\n}\n",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuctionBase.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuctionBase.sol",
+    "exportedSymbols": {
+      "ClockAuctionBase": [
+        101
+      ]
+    },
+    "id": 102,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 99,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:6"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/token/ERC721.sol",
+        "file": "../token/ERC721.sol",
+        "id": 100,
+        "nodeType": "ImportDirective",
+        "scope": 102,
+        "sourceUnit": 117,
+        "src": "26:29:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Auction Core\n @dev Contains models, variables, and internal methods for the auction.\n @notice We omit a fallback function to prevent accidental sends to this contract.",
+        "fullyImplemented": true,
+        "id": 101,
+        "linearizedBaseContracts": [
+          101
+        ],
+        "name": "ClockAuctionBase",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 102,
+        "src": "242:30:6"
+      }
+    ],
+    "src": "0:273:6"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/auction/ClockAuctionBase.sol",
+    "exportedSymbols": {
+      "ClockAuctionBase": [
+        101
+      ]
+    },
+    "id": 102,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 99,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:6"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/token/ERC721.sol",
+        "file": "../token/ERC721.sol",
+        "id": 100,
+        "nodeType": "ImportDirective",
+        "scope": 102,
+        "sourceUnit": 117,
+        "src": "26:29:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Auction Core\n @dev Contains models, variables, and internal methods for the auction.\n @notice We omit a fallback function to prevent accidental sends to this contract.",
+        "fullyImplemented": true,
+        "id": 101,
+        "linearizedBaseContracts": [
+          101
+        ],
+        "name": "ClockAuctionBase",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 102,
+        "src": "242:30:6"
+      }
+    ],
+    "src": "0:273:6"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:03:11.588Z"
+}

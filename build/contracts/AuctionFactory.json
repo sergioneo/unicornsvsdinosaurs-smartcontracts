@@ -1,0 +1,163 @@
+{
+  "contractName": "AuctionFactory",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820b97ef57875426f8ce24d34ae511b4d5f7d64a6ccccf4edee593096d701b7c2630029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820b97ef57875426f8ce24d34ae511b4d5f7d64a6ccccf4edee593096d701b7c2630029",
+  "sourceMap": "62:3552:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;62:3552:0;;;;;;;",
+  "deployedSourceMap": "62:3552:0:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./util/AccessControl.sol\";\n\ncontract AuctionFactory is AccessControl {\n/*\n    struct AuctionScheme {\n        uint id;\n        string description;\n        uint256 price;\n        uint minimumIncrement;\n        address currentOwner;\n        uint timeCreated;\n        uint duration;\n        uint increaseTime;\n        bool isAuctionScheme;\n        bool hasBeenSwaped;\n        bool canBeSwaped;\n    }\n\n    event NewBid(address newBidder, uint256 _auctionId, uint256 amount);\n    event AuctionFinished(address auctionOwner, uint256 _auctionId, uint256 amount);\n\n    mapping (uint => AuctionScheme) public auctions;\n\n    uint256[] public auctionIndexes;\n\n    address ceoAddress;\n\n    address public vaultAddress;\n\n    constructor(address _vaultAddress) public {\n        ceoAddress = msg.sender;\n        vaultAddress = _vaultAddress;\n    }\n\n    function createAuctionScheme(\n        uint _auctionId, \n        string _description, \n        uint _price, \n        uint _minimumIncrement, \n        uint _duration, \n        uint _increaseTime\n    ) public {\n        require(!auctionExists(_auctionId));\n        auctions[_auctionId].isAuctionScheme = true;\n        auctions[_auctionId].id = _auctionId;\n        auctions[_auctionId].description = _description;\n        auctions[_auctionId].price = _price;\n\n        auctions[_auctionId].minimumIncrement = _minimumIncrement;\n        auctions[_auctionId].duration = _duration;\n        auctions[_auctionId].increaseTime = _increaseTime;\n        auctions[_auctionId].timeCreated = block.timestamp;\n\n        auctionIndexes.push(_auctionId);\n    }\n\n    function bid(uint _auctionId) public payable {\n        require(auctionExists(_auctionId));\n        require((auctions[_auctionId].timeCreated + auctions[_auctionId].duration) < block.timestamp);\n        require (msg.value >= auctions[_auctionId].price + auctions[_auctionId].minimumIncrement);\n        auctions[_auctionId].currentOwner.transfer(auctions[_auctionId].price);\n        auctions[_auctionId].currentOwner = msg.sender;\n        auctions[_auctionId].timeCreated += auctions[_auctionId].increaseTime; \n        auctions[_auctionId].price = msg.value;\n        emit NewBid(msg.sender, _auctionId, msg.value);\n    }\n\n    function endAuction(uint _auctionId) public {\n        require((auctions[_auctionId].timeCreated + auctions[_auctionId].duration) > block.timestamp);\n        vaultAddress.transfer(auctions[_auctionId].price);\n        emit AuctionFinished(auctions[_auctionId].currentOwner, _auctionId, auctions[_auctionId].price);\n    }\n\n    function swapAuction(uint _auctionId) public {\n        require (auctions[_auctionId].canBeSwaped == true);\n        require((auctions[_auctionId].timeCreated + auctions[_auctionId].duration) > block.timestamp);\n        require(auctions[_auctionId].currentOwner == msg.sender);\n        auctions[_auctionId].hasBeenSwaped = true;\n    }\n\n    function enableSwap(uint _auctionId) public onlyCEO {\n        require((auctions[_auctionId].timeCreated + auctions[_auctionId].duration) > block.timestamp);\n        auctions[_auctionId].canBeSwaped = true;\n    }\n\n    // Verify existence of id to avoid collision\n    function auctionExists( uint _auctionId) internal view returns(bool) {\n        return auctions[_auctionId].isAuctionScheme;\n    }\n\n    function listAuctionIds() external view returns(uint256[]){\n        return auctionIndexes;\n    }\n\n    // Set a new address for vault contract\n    function setVaultAddress(address _vaultAddress) public onlyCEO {\n        require(_vaultAddress != address(0x0));\n        vaultAddress = _vaultAddress;\n    }\n    */\n}",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/AuctionFactory.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/AuctionFactory.sol",
+    "exportedSymbols": {
+      "AuctionFactory": [
+        5
+      ]
+    },
+    "id": 6,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/AccessControl.sol",
+        "file": "./util/AccessControl.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 6,
+        "sourceUnit": 152,
+        "src": "26:34:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3,
+              "name": "AccessControl",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 151,
+              "src": "89:13:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_AccessControl_$151",
+                "typeString": "contract AccessControl"
+              }
+            },
+            "id": 4,
+            "nodeType": "InheritanceSpecifier",
+            "src": "89:13:0"
+          }
+        ],
+        "contractDependencies": [
+          151
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 5,
+        "linearizedBaseContracts": [
+          5,
+          151
+        ],
+        "name": "AuctionFactory",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 6,
+        "src": "62:3552:0"
+      }
+    ],
+    "src": "0:3614:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/AuctionFactory.sol",
+    "exportedSymbols": {
+      "AuctionFactory": [
+        5
+      ]
+    },
+    "id": 6,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/util/AccessControl.sol",
+        "file": "./util/AccessControl.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 6,
+        "sourceUnit": 152,
+        "src": "26:34:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3,
+              "name": "AccessControl",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 151,
+              "src": "89:13:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_AccessControl_$151",
+                "typeString": "contract AccessControl"
+              }
+            },
+            "id": 4,
+            "nodeType": "InheritanceSpecifier",
+            "src": "89:13:0"
+          }
+        ],
+        "contractDependencies": [
+          151
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 5,
+        "linearizedBaseContracts": [
+          5,
+          151
+        ],
+        "name": "AuctionFactory",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 6,
+        "src": "62:3552:0"
+      }
+    ],
+    "src": "0:3614:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:01:57.844Z"
+}

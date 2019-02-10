@@ -1,0 +1,97 @@
+{
+  "contractName": "ERC721Metadata",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820f3ac997ed6b73ad632d1a9873a9f96145e36aa7c7908d97114131fff1be23bea0029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820f3ac997ed6b73ad632d1a9873a9f96145e36aa7c7908d97114131fff1be23bea0029",
+  "sourceMap": "26:27:22:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:27:22;;;;;;;",
+  "deployedSourceMap": "26:27:22:-;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\ncontract ERC721Metadata {\n}",
+  "sourcePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/token/ERC721Metadata.sol",
+  "ast": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/token/ERC721Metadata.sol",
+    "exportedSymbols": {
+      "ERC721Metadata": [
+        148
+      ]
+    },
+    "id": 149,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 147,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:22"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 148,
+        "linearizedBaseContracts": [
+          148
+        ],
+        "name": "ERC721Metadata",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 149,
+        "src": "26:27:22"
+      }
+    ],
+    "src": "0:53:22"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jonathanaraneda/BlockchainProjects/unis_dinos/contracts/token/ERC721Metadata.sol",
+    "exportedSymbols": {
+      "ERC721Metadata": [
+        148
+      ]
+    },
+    "id": 149,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 147,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:22"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 148,
+        "linearizedBaseContracts": [
+          148
+        ],
+        "name": "ERC721Metadata",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 149,
+        "src": "26:27:22"
+      }
+    ],
+    "src": "0:53:22"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-25T04:01:57.847Z"
+}
