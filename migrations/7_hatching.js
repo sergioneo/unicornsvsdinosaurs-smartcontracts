@@ -14,9 +14,7 @@ module.exports = function (deployer, network, accounts) {
     deployer.deploy(GeneMagic);
 
     deployer.deploy(Beasts).then(function () {
-        return deployer.deploy([
-            [SaleClockAuction, Beasts.address, 9000],
-            [SiringClockAuction, Beasts.address, 9000]
-        ]);
+        deployer.deploy([SiringClockAuction, Beasts.address, 9000]);
+        deployer.deploy([SaleClockAuction, Beasts.address, 9000]);
     });
 };
