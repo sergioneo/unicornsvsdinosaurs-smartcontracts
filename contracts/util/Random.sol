@@ -40,7 +40,7 @@ contract Random {
         return arr[uint256(keccak256(toBytes(block.timestamp)))%5 +1];
     }
 
-    function toBytes(uint x) returns (bytes memory b) {
+    function toBytes(uint x) internal returns (bytes memory b) {
         b = new bytes(32);
         assembly { mstore(add(b, 32), x) }
     }

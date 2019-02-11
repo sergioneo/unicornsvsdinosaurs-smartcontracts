@@ -44,7 +44,7 @@ contract AccessControl {
 
     /// @dev Assigns a new address to act as the CEO. Only available to the current CEO.
     /// @param _newCEO The address of the new CEO
-    function setCEO(address _newCEO) external onlyCEO {
+    function setCEO(address payable _newCEO) external onlyCEO {
         require(_newCEO != address(0));
 
         ceoAddress = _newCEO;
@@ -52,7 +52,7 @@ contract AccessControl {
 
     /// @dev Assigns a new address to act as the CFO. Only available to the current CEO.
     /// @param _newCFO The address of the new CFO
-    function setCFO(address _newCFO) external onlyCEO {
+    function setCFO(address payable _newCFO) external onlyCEO {
         require(_newCFO != address(0));
 
         cfoAddress = _newCFO;
@@ -60,7 +60,7 @@ contract AccessControl {
 
     /// @dev Assigns a new address to act as the COO. Only available to the current CEO.
     /// @param _newCOO The address of the new COO
-    function setCOO(address _newCOO) external onlyCEO {
+    function setCOO(address payable _newCOO) external onlyCEO {
         require(_newCOO != address(0));
 
         cooAddress = _newCOO;

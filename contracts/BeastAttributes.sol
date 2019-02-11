@@ -93,7 +93,7 @@ contract BeastAttributes is BeastBase {
         }
     }
 
-    function toBytes(uint x) returns (bytes memory b) {
+    function toBytes(uint x) internal returns (bytes memory b) {
         b = new bytes(32);
         assembly { mstore(add(b, 32), x) }
     }

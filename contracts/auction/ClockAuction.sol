@@ -55,7 +55,7 @@ contract ClockAuction is Pausable, ClockAuctionBase {
         uint256 _startingPrice,
         uint256 _endingPrice,
         uint256 _duration,
-        address _seller
+        address payable _seller
     )
         external
         whenNotPaused
