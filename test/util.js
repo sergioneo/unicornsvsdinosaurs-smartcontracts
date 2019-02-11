@@ -1,7 +1,7 @@
 require("babel-polyfill");
 
 // this web3 is injected:
-web3.BigNumber.config({ EXPONENTIAL_AT: 100 });
+//web3.BigNumber.config({ EXPONENTIAL_AT: 100 });
 
 const promisify = inner =>
     new Promise((resolve, reject) =>
@@ -51,7 +51,8 @@ const mineNBlocks = async n => {
 // modified from: https://ethereum.stackexchange.com/questions/4027/how-do-you-get-the-balance-of-an-account-using-truffle-ether-pudding
 const getBalance = async addr => {
     const res = await promisify(cb => web3.eth.getBalance(addr, cb));
-    return new web3.BigNumber(res);
+    //return new web3.BigNumber(res);
+    return new web3.utils.toBN(res);
 };
 
 const getGasPrice = () => {
@@ -128,7 +129,8 @@ const restoreSnapshot = async function () {
 let lastBalance;
 // First call stores the balance sum, second call prints the difference
 const measureGas = async accounts => {
-    let balanceSum = new web3.BigNumber(0);
+    //let balanceSum = new web3.BigNumber(0);
+    let balanceSum = new web3.utils.toBN(0);
     // only checks the first 8 accounts
     for (let i = 0; i <= 7; i++) {
         balanceSum = balanceSum.add(await getBalance(accounts[i]));
