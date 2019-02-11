@@ -36,7 +36,7 @@ contract BeastAttributes is BeastBase {
     ];
 
     // Return Skill Value based on Attribute ID for specific beast
-    function skillValue(uint _attributeID, uint _tokenId) public returns (uint) {
+    function skillValue(uint _attributeID, uint _tokenId) public view returns (uint) {
         Beast storage _beast = beasts[_tokenId];
         if (_attributeID == 1) {
             return _beast.attrs.strength;
@@ -93,7 +93,7 @@ contract BeastAttributes is BeastBase {
         }
     }
 
-    function toBytes(uint x) internal returns (bytes memory b) {
+    function toBytes(uint x) internal pure returns (bytes memory b) {
         b = new bytes(32);
         assembly { mstore(add(b, 32), x) }
     }

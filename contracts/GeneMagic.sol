@@ -595,12 +595,12 @@ contract GeneMagic is Ownable {
      * Returns a random number using block difficulty, time and mixes previously made as seed.
      * @return {number} The random value.
     */
-    function randomNumber(uint b) private returns (uint) {
+    function randomNumber(uint b) private view returns (uint) {
         uint forRandom = block.difficulty + now + mixesMade;
         return uint(keccak256(toBytes(forRandom)))%b;
     }
 
-    function toBytes(uint x) internal returns (bytes memory b) {
+    function toBytes(uint x) internal pure returns (bytes memory b) {
         b = new bytes(32);
         assembly { mstore(add(b, 32), x) }
     }

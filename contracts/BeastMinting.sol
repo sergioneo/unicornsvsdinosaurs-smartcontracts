@@ -49,7 +49,7 @@ contract BeastMinting is Random, BeastAuction {
         require(_owner != address(0));
         randomBoxOpenedCount++;
         // TODO: Random gens
-        uint256 randomGens = random(1000000000000000);
+        uint256 randomGens = random();
         uint256 legendId = _createBeast(0, 0, 0, randomGens, _owner);
         emit RandomBoxOpened(legendId);
     }
@@ -62,7 +62,7 @@ contract BeastMinting is Random, BeastAuction {
         require(_owner != address(0));
         legendaryRandomBoxOpenedCount++;
         // TODO: Specific gens for Legendary
-        uint256 randomGens = random(1000000000000000);
+        uint256 randomGens = random();
         uint256 legendId = _createBeast(0, 0, 0, randomGens, _owner);
         emit LegendaryRandomBoxOpened(legendId);
     }

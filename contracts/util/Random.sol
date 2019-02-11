@@ -25,7 +25,7 @@ contract Random {
 
     // return a pseudo random number between lower and upper bounds
     // given the number of previous blocks it should hash.
-    function random(uint256 upper) internal view returns (uint256 randomNumber) {
+    function random() internal view returns (uint256 randomNumber) {
         //return maxRandom() % upper;
         uint256[8] memory arr;
         arr[0] = uint256(297491009538120220672);
@@ -40,7 +40,7 @@ contract Random {
         return arr[uint256(keccak256(toBytes(block.timestamp)))%5 +1];
     }
 
-    function toBytes(uint x) internal returns (bytes memory b) {
+    function toBytes(uint x) internal pure returns (bytes memory b) {
         b = new bytes(32);
         assembly { mstore(add(b, 32), x) }
     }

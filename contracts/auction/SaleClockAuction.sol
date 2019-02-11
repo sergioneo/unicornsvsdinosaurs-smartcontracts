@@ -53,8 +53,10 @@ contract SaleClockAuction is ClockAuction {
         payable
     {
         // _bid verifies token ID size
-        address seller = tokenIdToAuction[_tokenId].seller;
-        uint256 price = _bid(_tokenId, msg.value);
+        // Commented below because we are not using it
+        //address seller = tokenIdToAuction[_tokenId].seller;
+        // Commented below because we are not using it
+        //uint256 price = _bid(_tokenId, msg.value);
         _transfer(msg.sender, _tokenId);
     }
 

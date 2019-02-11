@@ -71,7 +71,7 @@ contract ClockAuctionBase {
     ///  AuctionCreated event.
     /// @param _tokenId The ID of the token to be put on auction.
     /// @param _auction Auction to add.
-    function _addAuction(uint256 _tokenId, Auction storage _auction) internal {
+    function _addAuction(uint256 _tokenId, Auction memory _auction) internal { // este en vez de memory antes era storage
         // Require that all auctions have a duration of
         // at least one minute. (Keeps our math from getting hairy!)
         require(_auction.duration >= 1 minutes);

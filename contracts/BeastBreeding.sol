@@ -310,7 +310,7 @@ contract BeastBreeding is Random, BeastOwnership {
 
         // Call the sooper-sekret gene mixing operation.
         //uint256 childGenes = geneScience.mixGenes(matron.genes, sire.genes, matron.cooldownEndBlock - 1);
-        uint256 childGenes = random(1000000000000000);
+        uint256 childGenes = random();
 
         // Make the new beast!
         address owner = beastIndexToOwner[_matronId];
